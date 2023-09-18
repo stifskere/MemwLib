@@ -1,3 +1,4 @@
+using System.Text;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Collections;
 
@@ -15,6 +16,9 @@ public abstract class BaseEntity
 
     public override string ToString()
         => $"{Start}\r\n{(string)Headers}\r\n{Body}";
+
+    public byte[] ToArray() 
+        => Encoding.ASCII.GetBytes(ToString());
 
     public static explicit operator string(BaseEntity instance)
         => instance.ToString();

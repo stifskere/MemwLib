@@ -109,7 +109,7 @@ public class HttpServer
                     ));
                 
                 _ = entity.IsSuccessfulResponse ? SuccessfulRequests++ : FailedRequests++;
-                incomingStream.Write(Encoding.ASCII.GetBytes((string)entity));
+                incomingStream.Write(entity.ToArray());
                 incomingStream.Close();
                 connection.Close();
             }
