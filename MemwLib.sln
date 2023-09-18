@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemwLib", "MemwLib.csproj", "{AE2F4254-B95D-491B-830B-BC51F7F36318}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AE2F4254-B95D-491B-830B-BC51F7F36318}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE2F4254-B95D-491B-830B-BC51F7F36318}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE2F4254-B95D-491B-830B-BC51F7F36318}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE2F4254-B95D-491B-830B-BC51F7F36318}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
