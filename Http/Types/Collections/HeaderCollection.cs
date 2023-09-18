@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 namespace MemwLib.Http.Types.Collections;
 
 [PublicAPI]
-public partial class HeaderCollection : BaseCollection
+public sealed partial class HeaderCollection : BaseCollection
 {
     public HeaderCollection() {}
 
