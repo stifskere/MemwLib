@@ -9,7 +9,7 @@ using MemwLib.Http.Types.Logging;
 
 namespace MemwLib.Http;
 
-public class HttpServer
+public sealed class HttpServer
 {
     private readonly TcpListener _listener;
     private readonly CancellationToken _cancellationToken;

@@ -4,7 +4,7 @@ using MemwLib.Http.Types.Collections;
 
 namespace MemwLib.Http.Types.Entities;
 
-public partial class ResponseEntity : BaseEntity
+public sealed partial class ResponseEntity : BaseEntity
 {
     private string HttpVersion { get; } = "HTTP/1.1";
     [PublicAPI]

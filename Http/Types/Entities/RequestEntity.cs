@@ -5,7 +5,7 @@ using MemwLib.Http.Types.Collections;
 namespace MemwLib.Http.Types.Entities;
 
 [PublicAPI]
-public partial class RequestEntity : BaseEntity
+public sealed partial class RequestEntity : BaseEntity
 {
     [PublicAPI]
     public RequestMethodType RequestType { get; set; }
