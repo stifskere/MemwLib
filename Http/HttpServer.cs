@@ -5,19 +5,23 @@ using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http.Types;
 using MemwLib.Http.Types.Entities;
+using MemwLib.Http.Types.Logging;
 
 namespace MemwLib.Http;
 
 public class HttpServer
 {
-    private TcpListener _listener;
-    private CancellationToken _cancellationToken;
-    private Dictionary<IRequestIdentifier, RequestDelegate> _endpoints = new();
+    private readonly TcpListener _listener;
+    private readonly CancellationToken _cancellationToken;
+    private readonly Dictionary<IRequestIdentifier, RequestDelegate> _endpoints = new();
 
     [PublicAPI]
     public long SuccessfulRequests { get; private set; }
     [PublicAPI]
     public long FailedRequests { get; private set; }
+
+    [PublicAPI]
+    public event LogDelegate OnLog = _ => { };
     
     public HttpServer(IPAddress address, ushort port, CancellationToken? cancellationToken = null)
     {
@@ -81,19 +85,29 @@ public class HttpServer
                 }
                 catch (Exception error)
                 {
-                    WriteAndClose(new ResponseEntity(500, error.ToString()));
+                    WriteAndClose(new ResponseEntity(500, error.ToString()), parsedRequest.Path);
+                    OnLog(new LogMessage(LogType.Error, $"Exception thrown: {error.Message}{(error.Source != null ? $":{error.Source}" : string.Empty)}"));
                     isErrored = true;
                     break;
                 }
             }
+
+            responseEntity ??= new ResponseEntity(404);
             
             if (!isErrored)
-                WriteAndClose(responseEntity ?? new ResponseEntity(404));
+                WriteAndClose(responseEntity, parsedRequest.Path);
             
             continue;
 
-            void WriteAndClose(ResponseEntity entity)
+            void WriteAndClose(ResponseEntity entity, string? queryPath = null)
             {
+                OnLog(new LogMessage(
+                    entity.IsSuccessfulResponse 
+                        ? LogType.SuccessfulRequest 
+                        : LogType.FailedRequest, 
+                    $"[{entity.ResponseCode}] {(queryPath != null ? $"[{queryPath}]" : string.Empty)} {entity.Hint}"
+                    ));
+                
                 _ = entity.IsSuccessfulResponse ? SuccessfulRequests++ : FailedRequests++;
                 incomingStream.Write(Encoding.ASCII.GetBytes((string)entity));
                 incomingStream.Close();
