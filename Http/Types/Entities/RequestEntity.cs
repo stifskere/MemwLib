@@ -64,7 +64,7 @@ public sealed partial class RequestEntity : BaseEntity
     public override string BuildStart()
         => $"{RequestType} {Path}?{(string)Parameters} {HttpVersion}";
 
-    [GeneratedRegex(@"(OPTIONS|GET|HEAD|POST|PATCH|PUT|DELETE|TRACE|CONNECT) (\/.*)(?:\?(.+))? (HTTP\/\d+\.\d+)", RegexOptions.IgnoreCase | RegexOptions.Singleline)]
+    [GeneratedRegex(@"(OPTIONS|GET|HEAD|POST|PATCH|PUT|DELETE|TRACE|CONNECT) (\/[^?]+)(?:\?(.*))? (HTTP\/\d+\.\d+)", RegexOptions.IgnoreCase | RegexOptions.Singleline)]
     private static partial Regex StartLineRegex();
     
     [GeneratedRegex(@"HTTP\/\d+\.\d+", RegexOptions.IgnoreCase)]
