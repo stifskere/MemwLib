@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Colors.Types;
 
-namespace MemwLib.Colors;
+namespace MemwLib.Strings;
 
 public static partial class ColoredString
 {

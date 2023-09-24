@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
+using MemwLib.Colors.Types;
 
-namespace MemwLib.Colors.Types;
+namespace MemwLib.Colors;
 
 public class Rgb32 : Rgb24
 {
