@@ -28,7 +28,7 @@ public sealed partial class RequestEntity : BaseEntity
             throw new ArgumentException("entity cannot be null or empty", nameof(stringEntity));
         
         string[] lines = stringEntity.Split("\r\n");
-
+        
         {
             Match startLine = StartLineRegex().Match(lines[0]);
 
@@ -41,10 +41,31 @@ public sealed partial class RequestEntity : BaseEntity
             Fragment = startLine.Groups["fragment"].Value;
             HttpVersion = startLine.Groups["version"].Value;
         }
+        
+        if (lines.Length < 2)
+        {
+            Headers = new HeaderCollection();
+            Body = string.Empty;
+            return;
+        }
 
-        int indexOfHbSeparator = Array.IndexOf(lines, " ");
-        Headers = new HeaderCollection(indexOfHbSeparator != -1 ? string.Join("\r\n", lines.Take(1..indexOfHbSeparator)) : string.Empty);
-        Body = lines.Length >= indexOfHbSeparator ? lines[indexOfHbSeparator + 1] : string.Empty;
+
+        int separatorIndex = Array.IndexOf(lines, string.Empty);
+
+        Headers = new HeaderCollection(string.Join("\r\n", lines[1..separatorIndex]));
+        
+        string provisionalBody = string.Join("\r\n", lines[(separatorIndex + 1)..]);
+
+        if (Headers.Contains("Content-Length") && int.TryParse(Headers["Content-Length"], out int contentLength))
+        {
+            if (provisionalBody.Length < contentLength)
+                for (int i = 0, fixBodyLength = provisionalBody.Length; i < contentLength - fixBodyLength; i++)
+                    provisionalBody += ' ';
+            else
+                provisionalBody = provisionalBody[..contentLength];
+        }
+
+        Body = provisionalBody;
     }
 
     public RequestEntity(RequestMethodType type, string path, string? body = null) : this(type, path, null, body) {}
