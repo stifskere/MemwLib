@@ -2,6 +2,8 @@ using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Colors.Types;
 
+#if DEBUG
+
 namespace MemwLib.Strings;
 
 public static partial class ColoredString
@@ -162,3 +164,5 @@ public static partial class ColoredString
     [GeneratedRegex(@"\x1b\[(?:49|39)m")]
     private static partial Regex Postfix();
 }
+
+#endif
