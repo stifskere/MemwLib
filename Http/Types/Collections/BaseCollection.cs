@@ -1,18 +1,22 @@
+using System.Collections;
 using JetBrains.Annotations;
 using DisallowNull = System.Diagnostics.CodeAnalysis.DisallowNullAttribute;
 
 namespace MemwLib.Http.Types.Collections;
 
-public abstract class BaseCollection
+public abstract class BaseCollection : IEnumerable<KeyValuePair<string, string>>
 {
-    protected Dictionary<string, string> Variables = new();
+    protected readonly Dictionary<string, string> Variables = new();
 
     [PublicAPI]
     public bool Contains(string key)
         => Variables.ContainsKey(key);
-    
-    public abstract override string ToString();
 
+    [PublicAPI]
+    public int Length => Variables.Count;
+
+    public abstract override string ToString();
+    
     protected virtual bool Verify(string key, string value)
         => true;
     
@@ -34,4 +38,9 @@ public abstract class BaseCollection
             Variables[key] = value;
         }
     }
+    
+    public IEnumerator<KeyValuePair<string, string>> GetEnumerator() 
+        => Variables.GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() 
+        => GetEnumerator();
 }
