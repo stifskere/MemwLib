@@ -108,6 +108,7 @@ public sealed class HttpServer
                     $"[{entity.ResponseCode}] {(queryPath != null ? $"[{queryPath}]" : string.Empty)} {entity.Hint}"
                     ));
                 
+                entity.Headers["Content-Length"] ??= entity.Body.Length.ToString();
                 _ = entity.IsSuccessfulResponse ? SuccessfulRequests++ : FailedRequests++;
                 incomingStream.Write(entity.ToArray());
                 incomingStream.Close();
