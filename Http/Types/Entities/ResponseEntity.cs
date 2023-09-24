@@ -6,9 +6,12 @@ namespace MemwLib.Http.Types.Entities;
 
 public sealed partial class ResponseEntity : BaseEntity
 {
-    private string HttpVersion { get; } = "HTTP/1.1";
+    [PublicAPI]
+    public string HttpVersion { get; } = "HTTP/1.1";
+    
     [PublicAPI]
     public short ResponseCode { get; set; }
+    
     [PublicAPI]
     public string Hint => GetResponseCodeHint();
 
