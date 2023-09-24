@@ -15,14 +15,10 @@ public sealed partial class HeaderCollection : BaseCollection
         
         foreach (string header in collection.Split("\r\n"))
         {
-            int splitIndex = header.IndexOf(':');
+            string[] splitHeader = header.Split(": ");
 
-            if (splitIndex == -1)
-                throw new ArgumentException("Passed header collection contains invalid header");
-            
-            string[] splitHeader = { header[..splitIndex], header[(splitIndex + 1)..].TrimStart() };
-
-            this[splitHeader[0]] = splitHeader[1];
+            if (splitHeader.Length >= 2)
+                this[splitHeader[0]] = string.Join("\r\n", splitHeader[1..]);
         }
     }
     
