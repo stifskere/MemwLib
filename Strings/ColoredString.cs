@@ -54,6 +54,7 @@ public static partial class ColoredString
     }
 
     // rewrite only using get real index and removing all the conflicts in between
+    // ReSharper disable UnusedParameter.Local
     private static string InsertHandle(this string handle, Range range, Rgb24 color, ColorType colorType)
     {
         throw new NotImplementedException("Ranges are not yet implemented.");
@@ -93,7 +94,7 @@ public static partial class ColoredString
         return handle.Insert(range.End.Value, insertPostfix);
 */
 
-        Conflict? GetConflicting(Index index)
+        /*Conflict? GetConflicting(Index index)
         {
             return FindConflict(Prefix().Matches(handle), FixType.Prefix) 
                    ?? FindConflict(Postfix().Matches(handle), FixType.Postfix);
@@ -124,10 +125,10 @@ public static partial class ColoredString
                 }
             }
             return handle.Length;
-        }
+        }*/
     }
 
-    private struct Conflict
+    /*private struct Conflict
     {
         public int StartIndex { get; }
         public int EndIndex { get; }
@@ -141,13 +142,13 @@ public static partial class ColoredString
             Type = type;
             Match = match;
         }
-    }
+    }*/
     
-    private enum FixType
-    {
-        Prefix,
-        Postfix
-    }
+    // private enum FixType
+    // {
+    //     Prefix,
+    //     Postfix
+    // }
     
     private enum ColorType
     {
