@@ -53,8 +53,12 @@ public static partial class ColoredString
         }
     }
 
+    // rewrite only using get real index and removing all the conflicts in between
     private static string InsertHandle(this string handle, Range range, Rgb24 color, ColorType colorType)
     {
+        throw new NotImplementedException("Ranges are not yet implemented.");
+        
+/*
         if (range.Start.IsFromEnd)
             throw new ArgumentException("From end start values are not supported due to complexity.", nameof(range));
 
@@ -87,6 +91,7 @@ public static partial class ColoredString
             
         range = range.Start..endConflict.StartIndex;
         return handle.Insert(range.End.Value, insertPostfix);
+*/
 
         Conflict? GetConflicting(Index index)
         {
