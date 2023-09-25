@@ -21,4 +21,10 @@ public class Rgb32 : Rgb24
 
     public override uint ToUInt()
         => (uint)(R << 24 | G << 16 | B << 8 | A);
+
+    public static explicit operator uint(Rgb32 instance)
+        => instance.ToUInt();
+
+    public static explicit operator Rgb32(uint instance)
+        => new(instance);
 }
