@@ -67,7 +67,7 @@ public sealed partial class RequestEntity : BaseEntity
 
         Body = provisionalBody;
     }
-
+    
     public RequestEntity(RequestMethodType type, string path, string? body = null) : this(type, path, null, body) {}
     public RequestEntity(RequestMethodType type, string path, string? version = null, string? body = null)
     {
@@ -94,6 +94,7 @@ public sealed partial class RequestEntity : BaseEntity
 
     [GeneratedRegex(@"(?'method'OPTIONS|GET|HEAD|POST|PATCH|PUT|DELETE|TRACE|CONNECT) (?'path'\/[^?#]+)(?:\?(?'parameters'[^#]*))?(?:#(?'fragment'.*))? (?'version'HTTP\/\d+\.\d+)", RegexOptions.IgnoreCase | RegexOptions.Singleline)]
     private static partial Regex StartLineRegex();
+
     
     [GeneratedRegex(@"HTTP\/\d+\.\d+", RegexOptions.IgnoreCase)]
     private static partial Regex HttpVersionRegex();
