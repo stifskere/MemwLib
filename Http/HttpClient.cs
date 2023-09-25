@@ -9,6 +9,6 @@ public static class HttpClient
     [PublicAPI]
     public static ResponseEntity Request(RequestMethodType type, string uri)
     {
-        
+        throw new NotImplementedException();
     }
 }
