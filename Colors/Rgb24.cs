@@ -6,8 +6,10 @@ public class Rgb24
 {
     [PublicAPI]
     public byte R { get; set; }
+    
     [PublicAPI]
     public byte G { get; set; }
+    
     [PublicAPI]
     public byte B { get; set; }
 
