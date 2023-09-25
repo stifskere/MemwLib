@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http.Types;
 using MemwLib.Http.Types.Entities;
+using MemwLib.Http.Types.Identifiers;
 using MemwLib.Http.Types.Logging;
 
 namespace MemwLib.Http;
