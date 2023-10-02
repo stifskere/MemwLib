@@ -5,6 +5,7 @@ using MemwLib.Http.Types.Routes;
 
 namespace MemwLib.Http.Types.Entities;
 
+
 [PublicAPI]
 public sealed partial class RequestEntity : BaseEntity
 {
@@ -15,7 +16,7 @@ public sealed partial class RequestEntity : BaseEntity
     public PartialUri Path { get; set; }
     
     [PublicAPI]
-    public string HttpVersion { get; } = "HTTP/1.1";
+    public string HttpVersion { get; }
     
     public RequestEntity(string stringEntity)
     {
@@ -61,20 +62,17 @@ public sealed partial class RequestEntity : BaseEntity
         Body = provisionalBody;
     }
     
-    public RequestEntity(RequestMethodType type, PartialUri path, string? body = null) : this(type, path, null, body) {}
-    public RequestEntity(RequestMethodType type, PartialUri path, string? version = null, string? body = null)
+    public RequestEntity(RequestMethodType type, PartialUri path, string? body = null) : this(type, path, "HTTP/1.1", body) {}
+    public RequestEntity(RequestMethodType type, PartialUri path, string version, string? body = null)
     {
         RequestType = type;
         
         Path = path;
 
-        if (version is not null)
-        {
-            if (!HttpVersionRegex().IsMatch(version))
-                throw new ArgumentException("Invalid http version", nameof(version));
+        if (!HttpVersionRegex().IsMatch(version))
+            throw new ArgumentException("Invalid http version", nameof(version));
 
-            HttpVersion = version;
-        }
+        HttpVersion = version;
         
         Body = body ?? string.Empty;
     }

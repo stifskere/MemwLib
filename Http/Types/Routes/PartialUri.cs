@@ -42,6 +42,6 @@ public partial class PartialUri
     public static explicit operator string(PartialUri instance)
         => instance.ToString();
     
-    [GeneratedRegex(@"(?'path'/[^?#]*)?(?'params'\?[^#]+)?(?'fragment'#.+)?$", RegexOptions.Singleline)]
+    [GeneratedRegex(@"(?'path'/[^?#]*)?(?'params'\?[^#]*)?(?'fragment'#.*)?$", RegexOptions.Singleline)]
     private static partial Regex PartialUriRegex();
 }

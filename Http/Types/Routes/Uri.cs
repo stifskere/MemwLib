@@ -14,8 +14,10 @@ public partial class Uri : PartialUri
     public Uri(string content) : base(content)
     {
         Match matchedUri = UriRegex().Match(content);
-
-        Protocol = Enum.Parse<Protocol>(matchedUri.Groups["protocol"].Value, true);
+        
+        Protocol = matchedUri.Groups.ContainsKey("protocol") 
+            ? Enum.Parse<Protocol>(matchedUri.Groups["protocol"].Value, true)
+            : Protocol.Http;
         Name = matchedUri.Groups["name"].Value;
     }
 
@@ -25,6 +27,6 @@ public partial class Uri : PartialUri
     public static explicit operator string(Uri instance)
         => instance.ToString();
     
-    [GeneratedRegex(@"^(?'protocol'https?)\:\/\/(?'name'[^/]+)\/?", RegexOptions.Singleline)]
+    [GeneratedRegex(@"^(?:(?'protocol'https?)\:\/\/)?(?'name'[a-z\-0-9]+\.[a-z\-0-9.]+)\/?", RegexOptions.Singleline)]
     private static partial Regex UriRegex();
 }
