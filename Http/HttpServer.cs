@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http.Types;
 using MemwLib.Http.Types.Entities;
+using MemwLib.Http.Types.Identifiers;
 using MemwLib.Http.Types.Logging;
 
 namespace MemwLib.Http;
@@ -50,9 +51,10 @@ public sealed class HttpServer
             {
                 parsedRequest = new RequestEntity(Encoding.ASCII.GetString(incomingStreamData));
             }
-            catch
+            catch (Exception exception)
             {
                 WriteAndClose(new ResponseEntity(400));
+                OnLog(new LogMessage(LogType.Error, $"Failed to parse http content:\n{exception}"));
                 continue;
             }
 
@@ -62,12 +64,12 @@ public sealed class HttpServer
             {
                 if (!identifier.RequestType.HasFlag(parsedRequest.RequestType))
                     continue;
-
+                
                 try
                 {
                     if (identifier is RegexRequestIdentifier regexIdentifier)
                     {
-                        if (!regexIdentifier.Path.IsMatch(parsedRequest.Path))
+                        if (!regexIdentifier.Path.IsMatch(parsedRequest.Path.Route))
                             continue;
 
                         responseEntity = handler(parsedRequest);
@@ -76,7 +78,7 @@ public sealed class HttpServer
 
                     if (identifier is StringRequestIdentifier stringIdentifier)
                     {
-                        if (stringIdentifier.Path != parsedRequest.Path)
+                        if (stringIdentifier.Path != parsedRequest.Path.Route)
                             continue;
 
                         responseEntity = handler(parsedRequest);
@@ -85,7 +87,7 @@ public sealed class HttpServer
                 }
                 catch (Exception error)
                 {
-                    WriteAndClose(new ResponseEntity(500, error.ToString()), parsedRequest.Path);
+                    WriteAndClose(new ResponseEntity(500, error.ToString()), parsedRequest.Path.Route);
                     OnLog(new LogMessage(LogType.Error, $"Exception thrown: {error.Message}{(error.Source != null ? $":{error.Source}" : string.Empty)}"));
                     isErrored = true;
                     break;
@@ -95,7 +97,7 @@ public sealed class HttpServer
             responseEntity ??= new ResponseEntity(404);
             
             if (!isErrored)
-                WriteAndClose(responseEntity, parsedRequest.Path);
+                WriteAndClose(responseEntity, parsedRequest.Path.Route);
             
             continue;
 

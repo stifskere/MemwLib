@@ -26,7 +26,7 @@ public sealed partial class HeaderCollection : BaseCollection
         => HeaderVerification().IsMatch($"{key}: {value}");
 
     public override string ToString()
-        => Variables.Aggregate("", (old, iteration) => $"{old}{iteration.Key}: {iteration.Value}\r\n");
+        => Variables.Count == 0 ? string.Empty : Variables.Aggregate("", (old, iteration) => $"{old}{iteration.Key}: {iteration.Value}\r\n");
     
     [GeneratedRegex(@"^[a-zA-Z0-9\-_]+\: [\x20-\x7E]+$")]
     private static partial Regex HeaderVerification();

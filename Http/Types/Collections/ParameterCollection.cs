@@ -31,7 +31,7 @@ public sealed partial class ParameterCollection : BaseCollection
         => ParameterVerification().IsMatch($"{key}={value}");
 
     public override string ToString() 
-        => Variables.Aggregate("", (old, iteration) => $"{old}{iteration.Key}={iteration.Value}&")[..^1];
+        => Variables.Count == 0 ? string.Empty : Variables.Aggregate("", (old, iteration) => $"{old}{iteration.Key}={iteration.Value}&")[..^1];
     
     [GeneratedRegex(@"^[a-zA-Z0-9;,/\\:@+$\-_.!~*'()]+=[a-zA-Z0-9;,/\\:@+$\-_.!~*'()]+$", RegexOptions.Singleline)]
     private static partial Regex ParameterVerification();
