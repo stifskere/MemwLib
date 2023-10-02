@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 
@@ -26,6 +27,20 @@ public partial class Uri : PartialUri
 
     public static explicit operator string(Uri instance)
         => instance.ToString();
+
+    [PublicAPI]
+    public IPAddress ResolveIpAddress()
+    {
+        IPAddress[] addresses = Dns.GetHostAddresses(Name);
+
+        if (addresses.Length == 0)
+            throw new Exception($"No IP address found in DNS for: {Name}");
+
+        return addresses[0];
+    }
+
+    public static explicit operator IPAddress(Uri instance)
+        => instance.ResolveIpAddress();
     
     [GeneratedRegex(@"^(?:(?'protocol'https?)\:\/\/)?(?'name'[a-z\-0-9]+\.[a-z\-0-9.]+)\/?", RegexOptions.Singleline)]
     private static partial Regex UriRegex();

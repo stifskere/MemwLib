@@ -31,12 +31,12 @@ public sealed partial class ResponseEntity : BaseEntity
             if (!startLine.Success)
                 throw new Exception("Malformed request start");
 
-            HttpVersion = startLine.Groups[0].Value;
-            ResponseCode = short.Parse(startLine.Groups[1].Value);
+            HttpVersion = startLine.Groups[1].Value;
+            ResponseCode = short.Parse(startLine.Groups[2].Value);
         }
 
-        int indexOfHbSeparator = Array.IndexOf(lines, " ");
-        Headers = new HeaderCollection(string.Join("\r\n", lines.Skip(0).Take(1..indexOfHbSeparator)));
+        int indexOfHbSeparator = Array.IndexOf(lines, string.Empty);
+        Headers = new HeaderCollection(string.Join("\r\n", lines.Skip(0).Take(1..(indexOfHbSeparator == -1 ? lines.Length - 1 : indexOfHbSeparator))));
         Body = lines.Length >= indexOfHbSeparator ? lines[indexOfHbSeparator + 1] : string.Empty;
     }
     

@@ -2,6 +2,6 @@ namespace MemwLib.Http.Types.Routes;
 
 public enum Protocol
 {
-    Https,
-    Http
+    Https = 443,
+    Http = 80
 }

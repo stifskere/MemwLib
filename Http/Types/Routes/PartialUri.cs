@@ -17,14 +17,14 @@ public partial class PartialUri
 
     public PartialUri(string uri)
     {
-        if (!uri.StartsWith('/'))
-            uri = $"/{uri}";
-
         if (uri.EndsWith('#') || uri.EndsWith('?'))
             uri = uri[..^1];
         
         Match matchedUri = PartialUriRegex().Match(uri);
 
+        if (!matchedUri.Success)
+            throw new ArgumentException("Partial URI is not in a valid format.", nameof(uri));
+        
         Route = matchedUri.Groups["path"].Value;
         
         Parameters = matchedUri.Groups.ContainsKey("params") 
@@ -38,10 +38,10 @@ public partial class PartialUri
 
     public override string ToString()
         => $"{Route}{(Parameters.Length != 0 ? $"?{(string)Parameters}" : "")}{(string.IsNullOrEmpty(Fragment) ? "" : $"#{Fragment}")}";
-
+    
     public static explicit operator string(PartialUri instance)
         => instance.ToString();
     
-    [GeneratedRegex(@"(?'path'/[^?#]*)?(?'params'\?[^#]*)?(?'fragment'#.*)?$", RegexOptions.Singleline)]
+    [GeneratedRegex(@"^https?://[^/]*(?'path'\/[^?#{}|\\^~\[\]`]*)?(?'params'\?[^#]*)?(?'fragment'#.*)?$", RegexOptions.Singleline)]
     private static partial Regex PartialUriRegex();
 }
