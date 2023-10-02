@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Collections;
+using MemwLib.Http.Types.Routes;
 
 namespace MemwLib.Http.Types.Entities;
 
@@ -11,13 +12,7 @@ public sealed partial class RequestEntity : BaseEntity
     public RequestMethodType RequestType { get; set; }
     
     [PublicAPI]
-    public string Path { get; set; }
-    
-    [PublicAPI]
-    public ParameterCollection Parameters { get; set; } = new();
-    
-    [PublicAPI]
-    public string Fragment { get; set; } = string.Empty;
+    public PartialUri Path { get; set; }
     
     [PublicAPI]
     public string HttpVersion { get; } = "HTTP/1.1";
@@ -36,9 +31,7 @@ public sealed partial class RequestEntity : BaseEntity
                 throw new Exception("Malformed request start");
             
             RequestType = Enum.Parse<RequestMethodType>(startLine.Groups["method"].Value, true);
-            Path = startLine.Groups["path"].Value;
-            Parameters = new ParameterCollection(startLine.Groups["parameters"].Value);
-            Fragment = startLine.Groups["fragment"].Value;
+            Path = new PartialUri(startLine.Groups["path"].Value);
             HttpVersion = startLine.Groups["version"].Value;
         }
         
@@ -68,14 +61,11 @@ public sealed partial class RequestEntity : BaseEntity
         Body = provisionalBody;
     }
     
-    public RequestEntity(RequestMethodType type, string path, string? body = null) : this(type, path, null, body) {}
-    public RequestEntity(RequestMethodType type, string path, string? version = null, string? body = null)
+    public RequestEntity(RequestMethodType type, PartialUri path, string? body = null) : this(type, path, null, body) {}
+    public RequestEntity(RequestMethodType type, PartialUri path, string? version = null, string? body = null)
     {
         RequestType = type;
-
-        if (!path.StartsWith('/'))
-            throw new ArgumentException("Path should start with /", nameof(path));
-
+        
         Path = path;
 
         if (version is not null)
@@ -89,10 +79,10 @@ public sealed partial class RequestEntity : BaseEntity
         Body = body ?? string.Empty;
     }
 
-    public override string BuildStart()
-        => $"{RequestType} {Path}?{(string)Parameters} {HttpVersion}";
+    public override string BuildStart() 
+        => $"{RequestType.ToString().ToUpper()} {(string)Path} {HttpVersion}";
 
-    [GeneratedRegex(@"(?'method'OPTIONS|GET|HEAD|POST|PATCH|PUT|DELETE|TRACE|CONNECT) (?'path'\/[^?#]+)(?:\?(?'parameters'[^#]*))?(?:#(?'fragment'.*))? (?'version'HTTP\/\d+\.\d+)", RegexOptions.IgnoreCase | RegexOptions.Singleline)]
+    [GeneratedRegex(@"(?'method'OPTIONS|GET|HEAD|POST|PATCH|PUT|DELETE|TRACE|CONNECT) (?'path'\/[^ ]*) (?'version'HTTP\/\d+\.\d+)", RegexOptions.IgnoreCase | RegexOptions.Singleline)]
     private static partial Regex StartLineRegex();
 
     
