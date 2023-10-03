@@ -24,6 +24,7 @@ public sealed class HttpServer
     [PublicAPI]
     public event LogDelegate OnLog = _ => { };
     
+    
     public HttpServer(IPAddress address, ushort port, CancellationToken? cancellationToken = null)
     {
         _cancellationToken = cancellationToken ?? CancellationToken.None;

@@ -35,9 +35,22 @@ public sealed partial class ResponseEntity : BaseEntity
             ResponseCode = short.Parse(startLine.Groups[2].Value);
         }
 
-        int indexOfHbSeparator = Array.IndexOf(lines, string.Empty);
-        Headers = new HeaderCollection(string.Join("\r\n", lines.Skip(0).Take(1..(indexOfHbSeparator == -1 ? lines.Length - 1 : indexOfHbSeparator))));
-        Body = lines.Length >= indexOfHbSeparator ? lines[indexOfHbSeparator + 1] : string.Empty;
+        int separatorIndex = Array.IndexOf(lines, string.Empty);
+        
+        Headers = new HeaderCollection(string.Join("\r\n", lines.Skip(0).Take(1..(separatorIndex == -1 ? lines.Length - 1 : separatorIndex))));
+        
+        string provisionalBody = string.Join("\r\n", lines[(separatorIndex + 1)..]);
+
+        if (Headers.Contains("Content-Length") && int.TryParse(Headers["Content-Length"], out int contentLength))
+        {
+            if (provisionalBody.Length < contentLength)
+                for (int i = 0, fixBodyLength = provisionalBody.Length; i < contentLength - fixBodyLength; i++)
+                    provisionalBody += ' ';
+            else
+                provisionalBody = provisionalBody[..contentLength];
+        }
+
+        Body = provisionalBody;
     }
     
     public ResponseEntity(short responseCode) : this(responseCode, null) {}
