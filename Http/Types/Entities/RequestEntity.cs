@@ -30,8 +30,13 @@ public sealed partial class RequestEntity : BaseEntity
 
             if (!startLine.Success)
                 throw new Exception("Malformed request start");
+
+            RequestMethodType reqType = Enum.Parse<RequestMethodType>(startLine.Groups["method"].Value, true);
+
+            if (reqType.ToString().Split(',').Length > 1)
+                throw new ArgumentException("Entity bodies do not support flagged request methods.", nameof(stringEntity));
             
-            RequestType = Enum.Parse<RequestMethodType>(startLine.Groups["method"].Value, true);
+            RequestType = reqType;
             Path = new PartialUri(startLine.Groups["path"].Value);
             HttpVersion = startLine.Groups["version"].Value;
         }
