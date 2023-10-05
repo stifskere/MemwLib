@@ -19,6 +19,8 @@ public partial class PartialUri
     {
         if (uri.EndsWith('#') || uri.EndsWith('?'))
             uri = uri[..^1];
+
+        Console.WriteLine(uri);
         
         Match matchedUri = PartialUriRegex().Match(uri);
 
@@ -42,6 +44,6 @@ public partial class PartialUri
     public static explicit operator string(PartialUri instance)
         => instance.ToString();
     
-    [GeneratedRegex(@"^https?://[^/]*(?'path'\/[^?#{}|\\^~\[\]`]*)?(?'params'\?[^#]*)?(?'fragment'#.*)?$", RegexOptions.Singleline)]
+    [GeneratedRegex(@"(^https?://[^/]*)?(?'path'\/[^?#{}|\\^~\[\]`]*)?(?'params'\?[^#]*)?(?'fragment'#.*)?$", RegexOptions.Singleline)]
     private static partial Regex PartialUriRegex();
 }
