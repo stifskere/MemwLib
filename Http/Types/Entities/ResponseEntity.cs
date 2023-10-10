@@ -70,7 +70,7 @@ public sealed partial class ResponseEntity : BaseEntity
         Body = body ?? string.Empty;
     }
     
-    public override string BuildStart()
+    protected override string BuildStart()
         => $"{HttpVersion} {ResponseCode} {Hint}";
 
     private string GetResponseCodeHint()

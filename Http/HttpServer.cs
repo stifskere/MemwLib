@@ -70,14 +70,12 @@ public sealed class HttpServer
             {
                 parsedRequest = new RequestEntity(Encoding.ASCII.GetString(incomingStreamData));
             }
-            catch (Exception exception)
+            catch
             {
                 WriteAndClose(new ResponseEntity(400));
-                OnLog(new LogMessage(LogType.Error, $"Failed to parse http content:\n{exception}"));
+                OnLog(new LogMessage(LogType.FailedRequest, "Client sent a malformed request."));
                 continue;
             }
-
-            bool isErrored = false;
             
             foreach ((IRequestIdentifier identifier, RequestDelegate handler) in _endpoints)
             {
@@ -106,29 +104,26 @@ public sealed class HttpServer
                 }
                 catch (Exception error)
                 {
-                    WriteAndClose(new ResponseEntity(500, error.ToString()), parsedRequest.Path.Route);
+                    responseEntity = new ResponseEntity(500, error.ToString());
                     OnLog(new LogMessage(LogType.Error, $"Exception thrown: {error.Message}{(error.Source != null ? $":{error.Source}" : string.Empty)}"));
-                    isErrored = true;
                     break;
                 }
             }
 
             responseEntity ??= new ResponseEntity(404);
             
-            if (!isErrored)
-                WriteAndClose(responseEntity, parsedRequest.Path.Route);
+            WriteAndClose(responseEntity);
+            
+            OnLog(new LogMessage(responseEntity.IsSuccessfulResponse
+                ? LogType.SuccessfulRequest
+                : LogType.FailedRequest, 
+                $"{parsedRequest.Path.Route} returned {responseEntity.ResponseCode} {responseEntity.Hint}"));
+            
             
             continue;
 
-            void WriteAndClose(ResponseEntity entity, string? queryPath = null)
+            void WriteAndClose(ResponseEntity entity)
             {
-                OnLog(new LogMessage(
-                    entity.IsSuccessfulResponse 
-                        ? LogType.SuccessfulRequest 
-                        : LogType.FailedRequest, 
-                    $"[{entity.ResponseCode}] {(queryPath != null ? $"[{queryPath}]" : string.Empty)} {entity.Hint}"
-                    ));
-                
                 entity.Headers["Content-Length"] ??= entity.Body.Length.ToString();
                 _ = entity.IsSuccessfulResponse ? SuccessfulRequests++ : FailedRequests++;
                 incomingStream.Write(entity.ToArray());

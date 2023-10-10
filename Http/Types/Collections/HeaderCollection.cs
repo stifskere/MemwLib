@@ -3,11 +3,17 @@ using JetBrains.Annotations;
 
 namespace MemwLib.Http.Types.Collections;
 
+//TODO: redo implementation to always verify.
+
+/// <summary>Collection implementation for HTTP headers.</summary>
 [PublicAPI]
 public sealed partial class HeaderCollection : BaseCollection
 {
+    /// <summary>Constructor for empty collection.</summary>
     public HeaderCollection() {}
 
+    /// <summary>Parses http formatted HTTP headers to a manageable collection.</summary>
+    /// <param name="collection">The formatted HTTP headers collection.</param>
     public HeaderCollection(string collection)
     {
         if (string.IsNullOrEmpty(collection))
@@ -22,9 +28,11 @@ public sealed partial class HeaderCollection : BaseCollection
         }
     }
     
+    /// <inheritdoc cref="BaseCollection.Verify"/>
     protected override bool Verify(string key, string value)
         => HeaderVerification().IsMatch($"{key}: {value}");
 
+    /// <inheritdoc cref="BaseCollection.ToString"/>
     public override string ToString()
         => Variables.Count == 0 ? string.Empty : Variables.Aggregate("", (old, iteration) => $"{old}{iteration.Key}: {iteration.Value}\r\n");
     

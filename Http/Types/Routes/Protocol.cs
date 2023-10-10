@@ -10,14 +10,10 @@ namespace MemwLib.Http.Types.Routes;
 public enum Protocol
 {
     /// <summary>The HTTPS protocol, using port 443.</summary>
-    /// <remarks>
-    /// <see href="https://developer.mozilla.org/en-US/docs/Glossary/HTTPS">HTTPS on MDN</see>
-    /// </remarks>
+    /// <see href="https://developer.mozilla.org/en-US/docs/Glossary/HTTPS"/>
     Https = 443,
     
     /// <summary>The HTTP protocol, using port 80.</summary>
-    /// <remarks>
-    /// <see href="https://developer.mozilla.org/en-US/docs/Glossary/HTTP">HTTP on MDN</see>
-    /// </remarks>
+    /// <see href="https://developer.mozilla.org/en-US/docs/Glossary/HTTP"/>
     Http = 80
 }

@@ -24,7 +24,7 @@ public static class HttpRequests
     {
         (CompleteUri uri, RequestEntity entity) = request.Build();
         
-        using TcpClient client = new(uri.Name, uri.Port);
+        using TcpClient client = new(uri.HostName, uri.Port);
 
         using MemoryStream tempStream = new();
         
@@ -39,7 +39,7 @@ public static class HttpRequests
             await using SslStream httpsStream = new SslStream(client.GetStream(), false);
             await httpsStream.AuthenticateAsClientAsync(new SslClientAuthenticationOptions
             {
-                TargetHost = uri.Name,
+                TargetHost = uri.HostName,
                 ClientCertificates = new X509CertificateCollection(new []{Cert}),
                 AllowRenegotiation = true
             });

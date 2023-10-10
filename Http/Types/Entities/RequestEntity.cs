@@ -82,7 +82,7 @@ public sealed partial class RequestEntity : BaseEntity
         Body = body ?? string.Empty;
     }
 
-    public override string BuildStart() 
+    protected override string BuildStart() 
         => $"{RequestType.ToString().ToUpper()} {(string)Path} {HttpVersion}";
 
     [GeneratedRegex(@"(?'method'OPTIONS|GET|HEAD|POST|PATCH|PUT|DELETE|TRACE|CONNECT) (?'path'\/[^ ]*) (?'version'HTTP\/\d+\.\d+)", RegexOptions.IgnoreCase | RegexOptions.Singleline)]
