@@ -2,59 +2,114 @@ using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Colors;
 
-#if DEBUG
-
 namespace MemwLib.Strings;
 
+/// <summary>Static class to hold ANSI colored strings extension methods.</summary>
 public static partial class ColoredString
 {
+#if DEBUG
+    
+    /// <summary>
+    /// Adds an ANSI color modifier for foreground at the start and end of the specified
+    /// range and moves the last conflicting modifier to the end of the range.
+    /// </summary>
+    /// <param name="handle">The string to add color to.</param>
+    /// <param name="color">The color to set as an RGB24 instance.</param>
+    /// <param name="start">The start of the range.</param>
+    /// <param name="end">The end of the range.</param>
+    /// <returns>The colored string.</returns>
+    /// <exception cref="NotImplementedException">Method is not implemented, will always throw.</exception>
+    /// <remarks>
+    /// Beware of the added modifiers, might alter any algorithm
+    /// regarding string length, use only for output.
+    /// </remarks>
     [PublicAPI]
     public static string SetForeground(this string handle, int start, int end, Rgb24 color)
         => handle.SetForeground(start..end, color);
-    
+
+    /// <summary>
+    /// Adds an ANSI color modifier for foreground at the start and end of the specified
+    /// range and moves the last conflicting modifier to the end of the range.
+    /// </summary>
+    /// <param name="handle">The string to add color to.</param>
+    /// <param name="color">The color to set as an RGB24 instance.</param>
+    /// <param name="range">The range where the color will be set.</param>
+    /// <returns>The colored string.</returns>
+    /// <exception cref="NotImplementedException">Method is not implemented, will always throw.</exception>
+    /// <remarks>
+    /// Beware of the added modifiers, might alter any algorithm
+    /// regarding string length, use only for output.
+    /// </remarks>
     [PublicAPI]
     public static string SetForeground(this string handle, Range range, Rgb24 color) 
         => handle.InsertHandle(range, color, ColorType.Foreground);
-
+    
+#endif
+    
+    /// <summary>
+    /// Inserts ANSI foreground color at the start and end
+    /// of the string, and removes all of ANSI modifiers in the range.
+    /// </summary>
+    /// <param name="handle">The string to add color to.</param>
+    /// <param name="color">The color to set as an RGB24 instance.</param>
+    /// <returns>The colored string.</returns>
+    /// <remarks>
+    /// Beware of the added modifiers, might alter any algorithm
+    /// regarding string length, use only for output.
+    /// </remarks>
     [PublicAPI]
     public static string SetForeground(this string handle, Rgb24 color)
         => handle.InsertHandle(color, ColorType.Foreground);
     
+#if DEBUG
+    
+    /// <summary>
+    /// Adds an ANSI color modifier for background at the start and end of the specified
+    /// range and moves the last conflicting modifier to the end of the range.
+    /// </summary>
+    /// <inheritdoc cref="SetForeground(string, int, int, MemwLib.Colors.Rgb24)"/>
     [PublicAPI]
     public static string SetBackground(this string handle, int start, int end, Rgb24 color)
         => handle.SetBackground(start..end, color);
     
+    /// <summary>
+    /// Adds an ANSI color modifier for background at the start and end of the specified
+    /// range and moves the last conflicting modifier to the end of the range.
+    /// </summary>
+    /// <inheritdoc cref="SetForeground(string, Range, MemwLib.Colors.Rgb24)"/>
     [PublicAPI]
     public static string SetBackground(this string handle, Range range, Rgb24 color) 
         => handle.InsertHandle(range, color, ColorType.Background);
-
+    
+#endif
+    
+    /// <summary>
+    /// Inserts ANSI background color at the start and end
+    /// of the string, and removes all of ANSI modifiers in the range.
+    /// </summary>
+    /// <inheritdoc cref="SetForeground(string, MemwLib.Colors.Rgb24)"/>
     [PublicAPI]
     public static string SetBackground(this string handle, Rgb24 color)
         => handle.InsertHandle(color, ColorType.Background);
     
     private static string InsertHandle(this string handle, Rgb24 color, ColorType colorType)
     {
-        RemoveFix(Prefix());
-        RemoveFix(Postfix());
+        int rest = 0;
+        foreach (Match match in Prefix().Matches(handle).Concat(Postfix().Matches(handle)))
+        {
+            int parsedType = int.Parse(match.Groups[0].Value);
+                
+            if ((int)colorType != parsedType && (int)colorType != parsedType + 1) 
+                continue;
+                
+            handle = handle[..(match.Index - rest)] + handle[(match.Index + (match.Length - 1) - rest)..];
+            rest += match.Length;
+        }
         
         return $"\x1b[{(int)colorType};2;{color.R:D3};{color.G:D3};{color.B:D3}m{handle}\x1b[{(int)colorType + 1}m";
-        
-        void RemoveFix(Regex regex)
-        {
-            int rest = 0;
-            foreach (Match match in regex.Matches(handle))
-            {
-                int parsedType = int.Parse(match.Groups[0].Value);
-                
-                if ((int)colorType != parsedType && (int)colorType != parsedType + 1) 
-                    continue;
-                
-                handle = handle[..(match.Index - rest)] + handle[(match.Index + (match.Length - 1) - rest)..];
-                rest += match.Length;
-            }
-        }
     }
 
+    #if DEBUG
     // rewrite only using get real index and removing all the conflicts in between
     // ReSharper disable UnusedParameter.Local
     private static string InsertHandle(this string handle, Range range, Rgb24 color, ColorType colorType)
@@ -151,18 +206,17 @@ public static partial class ColoredString
     //     Prefix,
     //     Postfix
     // }
+#endif
     
     private enum ColorType
     {
         Background = 48,
         Foreground = 38
     }
-
+    
     [GeneratedRegex(@"\x1b\[(48|38);2(?:;\d{1,3}){3}")]
     private static partial Regex Prefix();
     
     [GeneratedRegex(@"\x1b\[(?:49|39)m")]
     private static partial Regex Postfix();
 }
-
-#endif

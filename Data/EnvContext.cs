@@ -1,39 +1,98 @@
 using System.Collections;
 using System.Collections.Immutable;
+using System.Data;
 using System.Text;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 
 namespace MemwLib.Data;
 
+/// <summary>Environment context is a Dictionary&lt;string, string&gt; encapsulated class to manage environment variables.</summary>
 public sealed partial class EnvContext : IEnumerable<KeyValuePair<string, string>>
 {
     private readonly Dictionary<string, string> _variables = new();
+    
     private readonly ImmutableDictionary<string, string> _env = Environment.GetEnvironmentVariables()
         .Cast<DictionaryEntry>()
         .ToImmutableDictionary(kvp => (string)kvp.Key, kvp => (string)kvp.Value!);
     
+    /// <summary>The amount of variables this context has.</summary>
     [PublicAPI]
-    public int Length => _variables.Count;
+    public int Count => _variables.Count;
     
+    /// <summary>Value index operator.</summary>
+    /// <param name="key">The key assigned to the value to get.</param>
+    /// <returns>The value assigned to the key parameter.</returns>
+    /// <exception cref="KeyNotFoundException">The property is retrieved and key does not exist in the collection.</exception>
     [PublicAPI]
     public string this[string key] => _variables[key];
 
-    public EnvContext(Stream data, bool closeOnFinish = false) : this(data, 0, (int)data.Length, closeOnFinish) {}
+    /// <summary>Creates a new instance of EnvContext<see href="https://hexdocs.pm/dotenvy/dotenv-file-format.html">, for accepted format guide see this</see>.</summary>
+    /// <param name="useSystemEnv">Lets you decide whether to add the system environment variables or not.</param>
+    [PublicAPI]
+    public EnvContext(bool useSystemEnv = false)
+    {
+        if (!useSystemEnv) 
+            return;
+        
+        foreach ((string key, string value) in _env)
+            _variables.Add(key, value);
+    }
     
-    public EnvContext(Stream data, int offset, int  length, bool closeOnFinish = false)
+    /// <summary>Adds variables from a stream of data reading the remaining length in the stream.</summary>
+    /// <param name="data">Stream to read from.</param>
+    /// <param name="closeOnFinish">Whether to close the stream after finished reading.</param>
+    /// <exception cref="ArgumentException">The sum of offset and count is larger than the stream length.</exception>
+    /// <exception cref="IOException">An I/O exception occurred in the underlying device.</exception>
+    /// <exception cref="ConstraintException">There is a conflicting key between the data parameter and the instance.</exception>
+    /// <exception cref="FormatException">The data is not well formatted <see href="https://hexdocs.pm/dotenvy/dotenv-file-format.html">, for environment variables</see>.</exception>
+    [UsedImplicitly]
+    public EnvContext AddVariablesFrom(Stream data, bool closeOnFinish = false)
+        => AddVariablesFrom(data, data.Length, closeOnFinish);
+    
+    /// <summary>Adds variables from a stream of data till the specified length.</summary>
+    /// <param name="data">Stream to read from.</param>
+    /// <param name="length">The length to read from the stream</param>
+    /// <param name="closeOnFinish">Whether to close the stream after finished reading.</param>
+    /// <exception cref="ArgumentException">The sum of offset and count is larger than the stream length.</exception>
+    /// <exception cref="IOException">An I/O exception occurred in the underlying device.</exception>
+    /// <exception cref="ConstraintException">There is a conflicting key between the data parameter and the instance.</exception>
+    /// <exception cref="FormatException">The data is not well formatted <see href="https://hexdocs.pm/dotenvy/dotenv-file-format.html">, for environment variables</see>.</exception>
+    [UsedImplicitly]
+    public EnvContext AddVariablesFrom(Stream data, long length, bool closeOnFinish = false)
     {
         byte[] buffer = new byte[length];
-        int len = data.Read(buffer, offset, length);
+        int len = data.Read(buffer, 0, (int)length);
         FillFromData(Encoding.ASCII.GetString(buffer, 0, len));
         
         if (closeOnFinish)
             data.Close();
+
+        return this;
     }
     
-    public EnvContext(string data)
-        => FillFromData(data);
-
+    /// <summary>Add environment variables from a formatted string.</summary>
+    /// <param name="data">The string to parse from.</param>
+    /// <exception cref="ConstraintException">There is a conflicting key between the data parameter and the instance.</exception>
+    /// <exception cref="FormatException">The data is not well formatted for environment variables <see href="https://hexdocs.pm/dotenvy/dotenv-file-format.html"/></exception>
+    [PublicAPI]
+    public EnvContext AddVariablesFrom(string data)
+    {
+        FillFromData(data);
+        return this;
+    }
+    
+    /// <summary>Checks if there is a value assigned to a key.</summary>
+    /// <param name="key">The key that should be assigned to the value.</param>
+    /// <returns>true if the value exists, otherwise false.</returns>
+    [PublicAPI, MustUseReturnValue]
+    public bool Contains(string key)
+        => _variables.ContainsKey(key);
+    
+    /// <inheritdoc cref="IEnumerable.GetEnumerator"/>
+    public IEnumerator<KeyValuePair<string, string>> GetEnumerator() => _variables.GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    
     private void FillFromData(string data)
     {
         foreach (Match match in EntryRegex().Matches(data))
@@ -49,13 +108,6 @@ public sealed partial class EnvContext : IEnumerable<KeyValuePair<string, string
         }
     }
     
-    public IEnumerator<KeyValuePair<string, string>> GetEnumerator() => _variables.GetEnumerator();
-    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-    [PublicAPI]
-    public bool Contains(string key)
-        => _variables.ContainsKey(key);
-
     [GeneratedRegex(@"(?'key'[a-zA-Z_]+[a-zA-Z0-9_]*) *= *(?'value'(?(?=(?:\x22{3,}|\'{3,}))(?:\x22{3,}|\'{3,})(?:\n|.)+?(?:\x22{3,}|\'{3,})|(?(?=(?:\x22|\'){1,2})(?:\x22|\'){1}[^\x22'\n]+(?:\x22|\'){1}|[^\x22'\n]+)))")]
     private static partial Regex EntryRegex();
 

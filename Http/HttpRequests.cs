@@ -9,15 +9,16 @@ using MemwLib.Http.Types.Routes;
 
 namespace MemwLib.Http;
 
+/// <summary>Class that statically holds HTTP request methods.</summary>
 public static class HttpRequests
 {
-    private static X509Certificate _cert;
+    private static readonly X509Certificate Cert 
+        = new("./cert.pem", "./key.pem");
     
-    static HttpRequests()
-    {
-        _cert = new X509Certificate("./cert.pem", "./key.pem");
-    }
-    
+    /// <summary>Sends an HTTP request based on the request builder parameter.</summary>
+    /// <param name="request">The request data.</param>
+    /// <returns>A response from the server</returns>
+    /// <exception cref="SocketException">An error occurred while trying to access the socket.</exception>
     [PublicAPI]
     public static async Task<ResponseEntity> CreateRequest(RequestBuilder request)
     {
@@ -39,7 +40,7 @@ public static class HttpRequests
             await httpsStream.AuthenticateAsClientAsync(new SslClientAuthenticationOptions
             {
                 TargetHost = uri.Name,
-                ClientCertificates = new X509CertificateCollection(new []{_cert}),
+                ClientCertificates = new X509CertificateCollection(new []{Cert}),
                 AllowRenegotiation = true
             });
             await httpsStream.WriteAsync(entity.ToArray());
