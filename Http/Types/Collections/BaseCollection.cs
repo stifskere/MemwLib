@@ -30,6 +30,7 @@ public abstract class BaseCollection : IEnumerable<KeyValuePair<string, string>>
     /// <param name="key">The key of the collection item.</param>
     /// <param name="value">The value of the collection item.</param>
     /// <returns>true if the pair is valid, otherwise false.</returns>
+    /// <remarks>This method should not be exposed.</remarks>
     protected virtual bool Verify(string key, string value)
         => true;
     

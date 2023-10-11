@@ -5,10 +5,13 @@ using MemwLib.Http.Types.Routes;
 
 namespace MemwLib.Http.Types.Entities;
 
+// TODO: do not support flags in the RequestEntity constructor.
 
+/// <summary>BaseEntity implementation for HTTP requests.</summary>
 [PublicAPI]
 public sealed partial class RequestEntity : BaseEntity
 {
+    /// <summary>The request method </summary>
     [PublicAPI]
     public RequestMethodType RequestType { get; set; }
     
