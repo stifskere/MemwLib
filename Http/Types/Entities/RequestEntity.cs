@@ -5,22 +5,40 @@ using MemwLib.Http.Types.Routes;
 
 namespace MemwLib.Http.Types.Entities;
 
-// TODO: do not support flags in the RequestEntity constructor.
-
 /// <summary>BaseEntity implementation for HTTP requests.</summary>
 [PublicAPI]
 public sealed partial class RequestEntity : BaseEntity
 {
-    /// <summary>The request method </summary>
+    private RequestMethodType _requestType;
+
+    /// <summary>The request method for this HTTP request entity.</summary>
+    /// <remarks>This does not support flags.</remarks>
+    /// <exception cref="ArgumentException">Throws when flags were set for this property.</exception>
     [PublicAPI]
-    public RequestMethodType RequestType { get; set; }
+    public RequestMethodType RequestType
+    {
+        get => _requestType;
+        set
+        {
+            if (value.ToString().Split(',').Length > 1)
+                throw new ArgumentException("Request method does not support flags.", nameof(value));
+
+            _requestType = value;
+        }
+    }
     
+    /// <summary>The request location as a PartialUri instance.</summary>
     [PublicAPI]
     public PartialUri Path { get; set; }
     
+    /// <summary>The HTTP protocol version for this request.</summary>
     [PublicAPI]
     public string HttpVersion { get; }
     
+    /// <summary>String constructor, parses an ASCII string into an instance of RequestEntity.</summary>
+    /// <param name="stringEntity">The entity to parse.</param>
+    /// <exception cref="ArgumentException">The string entity is null or empty.</exception>
+    /// <exception cref="FormatException">The request was not well formatted.</exception>
     public RequestEntity(string stringEntity)
     {
         if (string.IsNullOrEmpty(stringEntity))
@@ -32,14 +50,9 @@ public sealed partial class RequestEntity : BaseEntity
             Match startLine = StartLineRegex().Match(lines[0]);
 
             if (!startLine.Success)
-                throw new Exception("Malformed request start");
-
-            RequestMethodType reqType = Enum.Parse<RequestMethodType>(startLine.Groups["method"].Value, true);
-
-            if (reqType.ToString().Split(',').Length > 1)
-                throw new ArgumentException("Entity bodies do not support flagged request methods.", nameof(stringEntity));
+                throw new FormatException("Malformed request start");
             
-            RequestType = reqType;
+            RequestType = Enum.Parse<RequestMethodType>(startLine.Groups["method"].Value, true);
             Path = new PartialUri(startLine.Groups["path"].Value);
             HttpVersion = startLine.Groups["version"].Value;
         }
@@ -70,7 +83,19 @@ public sealed partial class RequestEntity : BaseEntity
         Body = provisionalBody;
     }
     
+    /// <summary>Parameterized constructor for request entity.</summary>
+    /// <param name="type">The method for this request.</param>
+    /// <param name="path">The path for this request as a PartialUri instance.</param>
+    /// <param name="body">The body for this request.</param>
     public RequestEntity(RequestMethodType type, PartialUri path, string? body = null) : this(type, path, "HTTP/1.1", body) {}
+    
+    /// <summary>Parameterized constructor for request entity.</summary>
+    /// <param name="type">The method for this request.</param>
+    /// <param name="path">The path for this request as a PartialUri instance.</param>
+    /// <param name="body">The body for this request.</param>
+    /// <param name="version">the version of the standard this request follows.</param>
+    /// <exception cref="FormatException">The HTTP version is invalid.</exception>
+    /// <remarks>The version doesn't change the functionality, it's just parsed as string to be sent with the entity.</remarks>
     public RequestEntity(RequestMethodType type, PartialUri path, string version, string? body = null)
     {
         RequestType = type;
@@ -78,13 +103,14 @@ public sealed partial class RequestEntity : BaseEntity
         Path = path;
 
         if (!HttpVersionRegex().IsMatch(version))
-            throw new ArgumentException("Invalid http version", nameof(version));
+            throw new FormatException("Invalid http version");
 
         HttpVersion = version;
         
         Body = body ?? string.Empty;
     }
 
+    /// <inheritdoc cref="BaseEntity.BuildStart()"/>
     protected override string BuildStart() 
         => $"{RequestType.ToString().ToUpper()} {(string)Path} {HttpVersion}";
 

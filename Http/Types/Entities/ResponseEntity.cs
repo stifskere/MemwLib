@@ -1,23 +1,35 @@
+using System.Data;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Collections;
 
 namespace MemwLib.Http.Types.Entities;
 
+/// <summary>BaseEntity implementation for HTTP responses.</summary>
 public sealed partial class ResponseEntity : BaseEntity
 {
+    /// <summary>The HTTP protocol version for this request.</summary>
     [PublicAPI]
     public string HttpVersion { get; } = "HTTP/1.1";
     
+    /// <summary>The response code for this request.</summary>
+    /// <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">Status codes on MDN.</see>
     [PublicAPI]
     public short ResponseCode { get; set; }
     
+    /// <summary>The corresponding hint for the response code.</summary>
+    /// <exception cref="ConstraintException">The response code is not valid.</exception>
     [PublicAPI]
     public string Hint => GetResponseCodeHint();
 
+    /// <summary>Returns true if the response code is 100-399 otherwise false.</summary>
     [PublicAPI] 
     public bool IsSuccessfulResponse => ResponseCode < 400;
     
+    /// <summary>Parser constructor for </summary>
+    /// <param name="stringEntity"></param>
+    /// <exception cref="ArgumentException"></exception>
+    /// <exception cref="Exception"></exception>
     public ResponseEntity(string stringEntity)
     {
         if (string.IsNullOrEmpty(stringEntity))
@@ -116,7 +128,7 @@ public sealed partial class ResponseEntity : BaseEntity
             503 => "Service Unavailable",
             504 => "Gateway Timeout",
             505 => "HTTP Version Not Supported",
-            _ => throw new Exception("Unknown response code"),
+            _ => throw new ConstraintException("Unknown response code")
         };
     
     [GeneratedRegex(@"HTTP\/\d+\.\d+", RegexOptions.IgnoreCase, "en-US")]
