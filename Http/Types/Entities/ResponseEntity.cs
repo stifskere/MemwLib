@@ -26,10 +26,10 @@ public sealed partial class ResponseEntity : BaseEntity
     [PublicAPI] 
     public bool IsSuccessfulResponse => ResponseCode < 400;
     
-    /// <summary>Parser constructor for </summary>
-    /// <param name="stringEntity"></param>
-    /// <exception cref="ArgumentException"></exception>
-    /// <exception cref="Exception"></exception>
+    /// <summary>String constructor, parses an ASCII string into an instance of ResponseEntity</summary>
+    /// <param name="stringEntity">The entity to parse.</param>
+    /// <exception cref="ArgumentException">The entity is null or empty.</exception>
+    /// <exception cref="FormatException">The request was not well formatted.</exception>
     public ResponseEntity(string stringEntity)
     {
         if (string.IsNullOrEmpty(stringEntity))
@@ -41,7 +41,7 @@ public sealed partial class ResponseEntity : BaseEntity
             Match startLine = StartLineRegex().Match(lines[0]);
 
             if (!startLine.Success)
-                throw new Exception("Malformed request start");
+                throw new FormatException("Malformed request start");
 
             HttpVersion = startLine.Groups[1].Value;
             ResponseCode = short.Parse(startLine.Groups[2].Value);
@@ -64,10 +64,19 @@ public sealed partial class ResponseEntity : BaseEntity
 
         Body = provisionalBody;
     }
-    
-    public ResponseEntity(short responseCode) : this(responseCode, null) {}
+
+    /// <summary>Parameterized constructor for ResponseEntity.</summary>
+    /// <param name="responseCode">The response code for this entity.</param>
+    /// <param name="body">The request body for this entity.</param>
     public ResponseEntity(short responseCode, string? body = null) : this(responseCode, null, body) {}
-    public ResponseEntity(short responseCode, string? version = null, string? body = null)
+    
+    /// <inheritdoc cref="ResponseEntity(short, string?)"/>
+    /// <param name="version">the version of the standard this request follows.</param>
+    /// <exception cref="FormatException">The HTTP version is invalid.</exception>
+    /// <remarks>The version doesn't change the functionality, it's just parsed as string to be sent with the entity.</remarks>
+#pragma warning disable CS1573
+    public ResponseEntity(short responseCode, string? version, string? body)
+#pragma warning restore CS1573
     {
         ResponseCode = responseCode;
 
@@ -82,9 +91,11 @@ public sealed partial class ResponseEntity : BaseEntity
         Body = body ?? string.Empty;
     }
     
+    /// <inheritdoc cref="BaseEntity.BuildStart"/>
     protected override string BuildStart()
         => $"{HttpVersion} {ResponseCode} {Hint}";
 
+    // NOTE: THIS IS ABSTRACTED AS METHOD FOR CODE NAVIGATION.
     private string GetResponseCodeHint()
         => ResponseCode switch
         {

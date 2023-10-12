@@ -84,19 +84,18 @@ public sealed partial class RequestEntity : BaseEntity
     }
     
     /// <summary>Parameterized constructor for request entity.</summary>
-    /// <param name="type">The method for this request.</param>
-    /// <param name="path">The path for this request as a PartialUri instance.</param>
-    /// <param name="body">The body for this request.</param>
+    /// <param name="type">The method for this entity.</param>
+    /// <param name="path">The path for this entity as a PartialUri instance.</param>
+    /// <param name="body">The body for this entity.</param>
     public RequestEntity(RequestMethodType type, PartialUri path, string? body = null) : this(type, path, "HTTP/1.1", body) {}
     
-    /// <summary>Parameterized constructor for request entity.</summary>
-    /// <param name="type">The method for this request.</param>
-    /// <param name="path">The path for this request as a PartialUri instance.</param>
-    /// <param name="body">The body for this request.</param>
+    /// <inheritdoc cref="RequestEntity(RequestMethodType, PartialUri, string?)"/>
     /// <param name="version">the version of the standard this request follows.</param>
     /// <exception cref="FormatException">The HTTP version is invalid.</exception>
     /// <remarks>The version doesn't change the functionality, it's just parsed as string to be sent with the entity.</remarks>
+#pragma warning disable CS1573
     public RequestEntity(RequestMethodType type, PartialUri path, string version, string? body = null)
+#pragma warning restore CS1573
     {
         RequestType = type;
         
@@ -110,7 +109,7 @@ public sealed partial class RequestEntity : BaseEntity
         Body = body ?? string.Empty;
     }
 
-    /// <inheritdoc cref="BaseEntity.BuildStart()"/>
+    /// <inheritdoc cref="BaseEntity.BuildStart"/>
     protected override string BuildStart() 
         => $"{RequestType.ToString().ToUpper()} {(string)Path} {HttpVersion}";
 

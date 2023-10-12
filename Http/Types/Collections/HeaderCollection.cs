@@ -11,7 +11,7 @@ public sealed partial class HeaderCollection : BaseCollection
     /// <summary>Constructor for empty collection.</summary>
     public HeaderCollection() {}
 
-    /// <summary>Parses http formatted HTTP headers to a manageable collection.</summary>
+    /// <summary>String constructor, Parses http formatted HTTP headers to a manageable collection.</summary>
     /// <param name="collection">The formatted HTTP headers collection.</param>
     /// <exception cref="FormatException">The header collection is empty or was not correctly formatted.</exception>
     /// <exception cref="ConstraintException">There is a duplicated key in the collection.</exception>

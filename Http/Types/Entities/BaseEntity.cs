@@ -19,6 +19,7 @@ public abstract class BaseEntity
 
     /// <summary>Protected method to build the first line of the entity.</summary>
     /// <returns>The built first line of the entity as string.</returns>
+    /// <remarks>This method should not be exposed.</remarks>
     protected abstract string BuildStart();
 
     /// <summary>ToString override to build the entity as a String.</summary>

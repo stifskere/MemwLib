@@ -11,15 +11,15 @@ public sealed partial class ParameterCollection : BaseCollection
     /// <summary>Constructor for empty collection.</summary>
     public ParameterCollection() {}
 
-    /// <summary>Parses formatted HTTP URI request parameters to a manageable collection.</summary>
+    /// <summary>String constructor, Parses formatted HTTP URI request parameters to a manageable collection.</summary>
     /// <param name="collection">The formatted HTTP URI request parameters.</param>
-    /// <exception cref="FormatException">The parameter collection is empty or was not correctly formatted.</exception>
     /// <exception cref="ConstraintException">There is a duplicated key in the collection.</exception>
     public ParameterCollection(string collection)
     {
+ 
         MatchCollection matches;
         if (string.IsNullOrEmpty(collection) || (matches = ParameterVerification().Matches(collection)).Count == 0)
-            throw new FormatException("The parameters were not correctly formatted.");
+            return;
         
         foreach (Match parameter in matches)
         {
