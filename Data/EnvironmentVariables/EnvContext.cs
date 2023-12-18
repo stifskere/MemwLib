@@ -5,14 +5,14 @@ using System.Text;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 
-namespace MemwLib.Data;
+namespace MemwLib.Data.EnvironmentVariables;
 
 /// <summary>Environment context is a Dictionary&lt;string, string&gt; encapsulated class to manage environment variables.</summary>
 public sealed partial class EnvContext : IEnumerable<KeyValuePair<string, string>>
 {
     private readonly Dictionary<string, string> _variables = new();
     
-    private readonly ImmutableDictionary<string, string> _env = Environment.GetEnvironmentVariables()
+    private readonly ImmutableDictionary<string, string> _env = System.Environment.GetEnvironmentVariables()
         .Cast<DictionaryEntry>()
         .ToImmutableDictionary(kvp => (string)kvp.Key, kvp => (string)kvp.Value!);
     

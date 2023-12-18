@@ -71,5 +71,5 @@ public class RequestBuilder
     }
     
     internal (CompleteUri uri, RequestEntity entity) Build()
-        => (_uri, new RequestEntity(_type, _uri, _body));
+        => (_uri, new RequestEntity(_type, new PartialUri(_uri), _body));
 }

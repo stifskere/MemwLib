@@ -42,11 +42,21 @@ public partial class PartialUri
         Parameters = matchedUri.Groups.ContainsKey("params") 
             ? new ParameterCollection(matchedUri.Groups["params"].Value) 
             : new ParameterCollection();
-
+        
         Fragment = matchedUri.Groups.ContainsKey("fragment")
             ? matchedUri.Groups["fragment"].Value
             : null;
     }
+
+    /// <summary>Constructor from CompleteURI to avoid polymorphism issues.</summary>
+    /// <param name="uri">The URI to cast from.</param>
+    public PartialUri(CompleteUri uri)
+    {
+        Route = uri.Route;
+        Parameters = uri.Parameters;
+        Fragment = uri.Fragment;
+    }
+    
 
     /// <summary>Constructs the URI contained in the instance as a String.</summary>
     /// <returns>The current instance as a String.</returns>
@@ -59,6 +69,6 @@ public partial class PartialUri
     public static explicit operator string(PartialUri instance)
         => instance.ToString();
     
-    [GeneratedRegex(@"(?'path'\/[^?#{}|\\^~\[\]`]*)?(?'params'\?[^#]*)?(?'fragment'#.*)?$", RegexOptions.Singleline)]
+    [GeneratedRegex(@"(?:https?:\/\/[^/]*)?(?'path'\/[^?#{}|\\^~\[\]\/][^?#{}|\^~[\]]*)?(?'params'\?[^#]*)?(?'fragment'#.*)?$", RegexOptions.Singleline)]
     private static partial Regex PartialUriRegex();
 }

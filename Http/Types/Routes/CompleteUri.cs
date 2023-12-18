@@ -52,7 +52,7 @@ public partial class CompleteUri : PartialUri
         _port = name.Length == 2 ? ushort.Parse(name[1]) : null;
             
     }
-
+    
     /// <summary>Constructs the URI contained in the instance as a String.</summary>
     /// <returns>The current instance as a String.</returns>
     public override string ToString()

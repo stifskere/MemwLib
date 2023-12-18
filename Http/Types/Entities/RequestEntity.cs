@@ -100,7 +100,7 @@ public sealed partial class RequestEntity : BaseEntity
         RequestType = type;
         
         Path = path;
-
+        
         if (!HttpVersionRegex().IsMatch(version))
             throw new FormatException("Invalid http version");
 

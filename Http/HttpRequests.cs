@@ -1,6 +1,5 @@
 using System.Net.Security;
 using System.Net.Sockets;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Builders;
@@ -12,8 +11,6 @@ namespace MemwLib.Http;
 /// <summary>Class that statically holds HTTP request methods.</summary>
 public static class HttpRequests
 {
-    private static readonly X509Certificate Cert 
-        = new("./cert.pem", "./key.pem");
     
     /// <summary>Sends an HTTP request based on the request builder parameter.</summary>
     /// <param name="request">The request data.</param>
@@ -23,7 +20,8 @@ public static class HttpRequests
     public static async Task<ResponseEntity> CreateRequest(RequestBuilder request)
     {
         (CompleteUri uri, RequestEntity entity) = request.Build();
-        
+
+        entity.Headers["Host"] = $"{uri.HostName}:{uri.Port}";
         using TcpClient client = new(uri.HostName, uri.Port);
 
         using MemoryStream tempStream = new();
@@ -39,10 +37,9 @@ public static class HttpRequests
             await using SslStream httpsStream = new SslStream(client.GetStream(), false);
             await httpsStream.AuthenticateAsClientAsync(new SslClientAuthenticationOptions
             {
-                TargetHost = uri.HostName,
-                ClientCertificates = new X509CertificateCollection(new []{Cert}),
-                AllowRenegotiation = true
+                TargetHost = uri.HostName
             });
+            
             await httpsStream.WriteAsync(entity.ToArray());
             await httpsStream.CopyToAsync(tempStream);
         }
