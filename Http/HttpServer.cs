@@ -1,10 +1,13 @@
 using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Runtime.Versioning;
 using System.Text;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
+using MemwLib.CoreUtils;
 using MemwLib.Http.Types;
+using MemwLib.Http.Types.Attributes;
 using MemwLib.Http.Types.Entities;
 using MemwLib.Http.Types.Identifiers;
 using MemwLib.Http.Types.Logging;
@@ -18,6 +21,7 @@ public sealed class HttpServer
     private readonly TcpListener _listener;
     private readonly CancellationToken _cancellationToken;
     private readonly Dictionary<IRequestIdentifier, RequestDelegate> _endpoints = new();
+    private readonly List<MiddleWareDelegate> _globalMiddleware = new();
 
     /// <summary>
     /// Contains the count of successful requests
@@ -79,27 +83,79 @@ public sealed class HttpServer
             
             foreach ((IRequestIdentifier identifier, RequestDelegate handler) in _endpoints)
             {
-                if (!identifier.RequestType.HasFlag(parsedRequest.RequestType))
-                    continue;
-                
                 try
                 {
                     if (identifier is RegexRequestIdentifier regexIdentifier)
                     {
-                        if (!regexIdentifier.Path.IsMatch(parsedRequest.Path.Route))
+                        Match match = regexIdentifier.Route.Match(parsedRequest.Path.Route);
+                        
+                        if (!match.Success)
                             continue;
+                        
+                        parsedRequest.CapturedGroups.Add(match.Groups);
+                    }
+                    
+                    if (identifier is StringRequestIdentifier stringIdentifier 
+                        && stringIdentifier.Route != parsedRequest.Path.Route)
+                        continue;
 
-                        responseEntity = handler(parsedRequest);
+                    if (identifier is MixedIdentifier mixedIdentifier)
+                    {
+                        if (!mixedIdentifier.Equals(parsedRequest.Path.Route))
+                            continue;
+                        
+                        parsedRequest.CapturedGroups 
+                            = mixedIdentifier.GetRegexGroups(parsedRequest.Path.Route);
+                    }
+                    
+                    if (!TypeUtils.TargetEnumHasFlags(identifier.RequestMethod, parsedRequest.RequestType))
+                    {
+                        responseEntity 
+                            = new ResponseEntity(405, $"Cannot {parsedRequest.RequestType.ToString().ToUpper()}: {parsedRequest.Path}");
                         break;
                     }
+                    
+                    IResponsible next;
+                    
+                    RunMiddleware(_globalMiddleware);
+                    RunMiddlewareFromAttributes(handler.Method.DeclaringType?.GetCustomAttributes<UsesMiddlewareAttribute>());
+                    RunMiddlewareFromAttributes(handler.Method.GetCustomAttributes<UsesMiddlewareAttribute>());
+                    
+                    responseEntity ??= handler(parsedRequest);
+                    break;
 
-                    if (identifier is StringRequestIdentifier stringIdentifier)
+                    void RunMiddleware(IEnumerable<MiddleWareDelegate>? middleWarePieces)
                     {
-                        if (stringIdentifier.Path != parsedRequest.Path.Route)
-                            continue;
+                        if (middleWarePieces is null)
+                            return;
 
-                        responseEntity = handler(parsedRequest);
-                        break;
+                        foreach (MiddleWareDelegate middleware in middleWarePieces)
+                        {
+                            next = middleware(parsedRequest);
+
+                            if (next is not ResponseEntity resEntity)
+                                continue;
+
+                            responseEntity = resEntity;
+                            break;
+                        }
+                    }
+                    
+                    void RunMiddlewareFromAttributes(IEnumerable<UsesMiddlewareAttribute>? middlewarePieces)
+                    {
+                        if (middlewarePieces is null)
+                            return; 
+                        
+                        foreach (UsesMiddlewareAttribute middleware in middlewarePieces)
+                        {
+                            next = middleware.Target(parsedRequest);
+
+                            if (next is not ResponseEntity resEntity) 
+                                continue;
+                        
+                            responseEntity = resEntity;
+                            break;
+                        }
                     }
                 }
                 catch (Exception error)
@@ -133,6 +189,17 @@ public sealed class HttpServer
         }
     }
 
+    /// <summary>Adds a global middleware piece that will be run before every endpoint.</summary>
+    /// <param name="handler">The middleware piece to execute.</param>
+    /// <returns>The same server instance for sake of chaining declarations.</returns>
+    /// <remarks>This middleware will run before any other individual middleware, and will be called in order of declaration.</remarks>
+    [PublicAPI]
+    public HttpServer AddGlobalMiddleware(MiddleWareDelegate handler)
+    {
+        _globalMiddleware.Add(handler);
+        return this;
+    }
+    
     /// <summary>Registers an endpoint to this server that runs the handler if the method and route match.</summary>
     /// <param name="requestMethod">The request method flags that will trigger this handler.</param>
     /// <param name="regexPattern">The regex pattern for matching the route to trigger this handler.</param>
@@ -143,8 +210,10 @@ public sealed class HttpServer
     /// </remarks>
     [PublicAPI]
     public void AddEndpoint(RequestMethodType requestMethod, Regex regexPattern, RequestDelegate handler)
-        => _endpoints.Add(new RegexRequestIdentifier {RequestType = requestMethod, Path = regexPattern}, handler);
-
+    {
+        _endpoints.Add(new RegexRequestIdentifier { RequestMethod = requestMethod, Route = regexPattern }, handler);
+    }
+    
     /// <summary>Registers an endpoint to this server that runs the handler if the method and route match.</summary>
     /// <param name="requestMethod">The request method flags that will trigger this handler.</param>
     /// <param name="path">The literal path for matching the route to trigger this handler.</param>
@@ -155,5 +224,38 @@ public sealed class HttpServer
     /// </remarks>
     [PublicAPI]
     public void AddEndpoint(RequestMethodType requestMethod, string path, RequestDelegate handler)
-        => _endpoints.Add(new StringRequestIdentifier { RequestType = requestMethod, Path = path }, handler);
+    {
+        _endpoints.Add(new StringRequestIdentifier { RequestMethod = requestMethod, Route = path }, handler);
+    }
+
+    /// <summary>Adds a route group defined by a RouteGroupAttribute.</summary>
+    /// <typeparam name="TGroup">The group class type.</typeparam>
+    /// <remarks>The target type must not be internal in order to get all the members from it.</remarks>
+    [PublicAPI]
+    public void AddGroup<TGroup>()
+        => AddGroup(typeof(TGroup));
+    
+    /// <summary>Adds a route group defined by a RouteGroupAttribute.</summary>
+    /// <param name="type">The group class type.</param>
+    /// <remarks>The target type must not be internal in order to get all the members from it.</remarks>
+    [PublicAPI]
+    public void AddGroup(Type type)
+    {
+        RouteGroupAttribute? prefix = type.GetCustomAttribute<RouteGroupAttribute>();
+        
+        foreach (MethodInfo method in type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.ExactBinding))
+        {
+            GroupMemberAttribute? postFix = method.GetCustomAttribute<GroupMemberAttribute>();
+
+            if (postFix is null)
+                return;
+            
+            _endpoints.Add(new MixedIdentifier
+            {
+                Prefix = prefix is not null ? prefix.AsRegex ? new Regex(prefix.Route!) : prefix.Route : null, 
+                Postfix = postFix.AsRegex ? new Regex(postFix.Route) : postFix.Route,
+                RequestMethod = postFix.RequestMethod
+            }, (RequestDelegate)Delegate.CreateDelegate(typeof(RequestDelegate), method));
+        }
+    }
 }

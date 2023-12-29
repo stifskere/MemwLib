@@ -1,6 +1,8 @@
+using System.Text.RegularExpressions;
+
 namespace MemwLib.Http.Types.Identifiers;
 
 internal interface IRequestIdentifier
 {
-    public RequestMethodType RequestType { get; init; }
+    public RequestMethodType RequestMethod { get; init; }
 }

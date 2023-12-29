@@ -1,3 +1,4 @@
+using System.Dynamic;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Collections;
@@ -11,6 +12,9 @@ public sealed partial class RequestEntity : BaseEntity
 {
     private RequestMethodType _requestType;
 
+    /// <summary>Session parameters passed by middleware.</summary>
+    public SessionParameterCollection SessionParameters { get; internal set; } = new();
+    
     /// <summary>The request method for this HTTP request entity.</summary>
     /// <remarks>This does not support flags.</remarks>
     /// <exception cref="ArgumentException">Throws when flags were set for this property.</exception>
@@ -32,8 +36,15 @@ public sealed partial class RequestEntity : BaseEntity
     public PartialUri Path { get; set; }
     
     /// <summary>The HTTP protocol version for this request.</summary>
+    /// <remarks>Due to implementation the http version doesn't modify behavior YET.</remarks>
     [PublicAPI]
     public string HttpVersion { get; }
+
+    /// <summary>
+    /// If your route declaration contained RegEx,
+    /// you can access RegEx capture groups trough this property.
+    /// </summary>
+    public HttpRegexGroupCollection CapturedGroups { get; internal set; } = new();
     
     /// <summary>String constructor, parses an ASCII string into an instance of RequestEntity.</summary>
     /// <param name="stringEntity">The entity to parse.</param>
@@ -108,7 +119,7 @@ public sealed partial class RequestEntity : BaseEntity
         
         Body = body ?? string.Empty;
     }
-
+    
     /// <inheritdoc cref="BaseEntity.BuildStart"/>
     protected override string BuildStart() 
         => $"{RequestType.ToString().ToUpper()} {(string)Path} {HttpVersion}";

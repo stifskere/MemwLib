@@ -5,17 +5,13 @@ using JetBrains.Annotations;
 namespace MemwLib.Http.Types.Collections;
 
 /// <summary>Collection implementation for HTTP headers.</summary>
+/// <remarks>The constructor for this collection is internal.</remarks>
 [PublicAPI]
-public sealed partial class HeaderCollection : BaseCollection
+public sealed partial class HeaderCollection : ParsingCollection
 {
-    /// <summary>Constructor for empty collection.</summary>
-    public HeaderCollection() {}
-
-    /// <summary>String constructor, Parses http formatted HTTP headers to a manageable collection.</summary>
-    /// <param name="collection">The formatted HTTP headers collection.</param>
-    /// <exception cref="FormatException">The header collection is empty or was not correctly formatted.</exception>
-    /// <exception cref="ConstraintException">There is a duplicated key in the collection.</exception>
-    public HeaderCollection(string collection)
+    internal HeaderCollection() {}
+    
+    internal HeaderCollection(string collection)
     {
         MatchCollection matches;
         if (string.IsNullOrEmpty(collection) || (matches = HeaderVerification().Matches(collection)).Count == 0)
@@ -33,11 +29,11 @@ public sealed partial class HeaderCollection : BaseCollection
         }
     }
     
-    /// <inheritdoc cref="BaseCollection.Verify"/>
+    /// <inheritdoc cref="ParsingCollection.Verify"/>
     protected override bool Verify(string key, string value)
         => HeaderVerification().IsMatch($"{key}: {value}");
 
-    /// <inheritdoc cref="BaseCollection.ToString"/>
+    /// <inheritdoc cref="ParsingCollection.ToString"/>
     public override string ToString()
         => Variables.Count == 0 ? string.Empty : Variables.Aggregate("", (old, iteration) => $"{old}{iteration.Key}: {iteration.Value}\r\n");
     

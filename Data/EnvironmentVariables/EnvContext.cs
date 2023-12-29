@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Immutable;
 using System.Data;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
+using MemwLib.CoreUtils.Meta;
+using MemwLib.Data.EnvironmentVariables.Attributes;
 
 namespace MemwLib.Data.EnvironmentVariables;
 
@@ -12,7 +15,7 @@ public sealed partial class EnvContext : IEnumerable<KeyValuePair<string, string
 {
     private readonly Dictionary<string, string> _variables = new();
     
-    private readonly ImmutableDictionary<string, string> _env = System.Environment.GetEnvironmentVariables()
+    private readonly ImmutableDictionary<string, string> _env = Environment.GetEnvironmentVariables()
         .Cast<DictionaryEntry>()
         .ToImmutableDictionary(kvp => (string)kvp.Key, kvp => (string)kvp.Value!);
     
@@ -92,6 +95,51 @@ public sealed partial class EnvContext : IEnumerable<KeyValuePair<string, string
     /// <inheritdoc cref="IEnumerable.GetEnumerator"/>
     public IEnumerator<KeyValuePair<string, string>> GetEnumerator() => _variables.GetEnumerator();
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
+    /// <summary>
+    /// Convert the current instance to a TInstance instance
+    /// filling properties dynamically using reflections.
+    /// </summary>
+    /// <typeparam name="TInstance">The type that this instance must be converted to.</typeparam>
+    /// <param name="caseSensitive">Define if the field naming is case sensitive or not.</param>
+    /// <param name="flags">The meta binding flags to search for properties in the TInstance type.</param>
+    /// <returns>A new instance of TInstance filled with the parameters found defined in the class.</returns>
+    /// <remarks>
+    /// This doesn't assume types as for standard,
+    /// you will need to manually convert the string to the desired type
+    /// </remarks>
+    [PublicAPI, MustUseReturnValue]
+    public TInstance ToType<TInstance>(bool caseSensitive, BindingFlags flags = BindingFlags.Default) where TInstance : new()
+    {
+        TInstance instance = new();
+
+        IDictionary<string, string> variablesToSeek =
+            this.ToDictionary<KeyValuePair<string, string>, string, string>(
+                caseSensitive 
+                    ? p => p.Key
+                    : p => p.Key.ToLower(),
+                p => p.Value
+            );
+        
+        MetaSearch.ProcessProperties<TInstance>(flags)
+            .Exclude(properties => properties
+                .Where(p => p.GetCustomAttribute<EnvironmentIgnoreAttribute>() is not null)
+            )
+            .Do(property =>
+            {
+                EnvironmentVariableAttribute? altNameAttr = 
+                    property.GetCustomAttribute<EnvironmentVariableAttribute>();
+
+                string nameToSeek = caseSensitive 
+                    ? altNameAttr?.Name ?? property.Name
+                    : altNameAttr?.Name.ToLower() ?? property.Name.ToLower();
+                
+                if (variablesToSeek.TryGetValue(nameToSeek, out string? propertyValue))
+                    property.SetValue(instance, propertyValue);
+            });
+
+        return instance;
+    }
     
     private void FillFromData(string data)
     {

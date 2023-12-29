@@ -3,8 +3,6 @@ using JetBrains.Annotations;
 
 namespace MemwLib.Data.ArgumentParser.Options;
 
-// TODO: definitively change ShortPrefix for an string non auto property back.
-
 /// <summary>Base options for command line argument parsing.</summary>
 [PublicAPI]
 public abstract class ArgumentParseOptions

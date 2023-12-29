@@ -6,9 +6,10 @@ using MemwLib.Http.Types.Collections;
 namespace MemwLib.Http.Types.Entities;
 
 /// <summary>BaseEntity implementation for HTTP responses.</summary>
-public sealed partial class ResponseEntity : BaseEntity
+public sealed partial class ResponseEntity : BaseEntity, IResponsible
 {
     /// <summary>The HTTP protocol version for this request.</summary>
+    /// <remarks>Due to implementation the http version doesn't modify behavior YET.</remarks>
     [PublicAPI]
     public string HttpVersion { get; } = "HTTP/1.1";
     
