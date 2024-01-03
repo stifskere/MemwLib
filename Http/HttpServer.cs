@@ -1,56 +1,66 @@
-using System.Net;
+using System.Net.Security;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Runtime.Versioning;
+using System.Security.Authentication;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.CoreUtils;
 using MemwLib.Http.Types;
 using MemwLib.Http.Types.Attributes;
+using MemwLib.Http.Types.Content.Implementations;
 using MemwLib.Http.Types.Entities;
 using MemwLib.Http.Types.Identifiers;
 using MemwLib.Http.Types.Logging;
+using MemwLib.Http.Types.SSL;
 
 namespace MemwLib.Http;
 
 /// <summary>HTTP server that behaves like express.js and means easier use.</summary>
-[UnsupportedOSPlatform("browser")]
+[UnsupportedOSPlatform("browser"), PublicAPI]
 public sealed class HttpServer
 {
     private readonly TcpListener _listener;
     private readonly CancellationToken _cancellationToken;
     private readonly Dictionary<IRequestIdentifier, RequestDelegate> _endpoints = new();
     private readonly List<MiddleWareDelegate> _globalMiddleware = new();
-
+    private X509Certificate _serverCertificate;
+    
+    /// <summary>Whether this server instance is on development or production mode.</summary>
+    public ServerStates State { get; set; }
+    
     /// <summary>
     /// Contains the count of successful requests
     /// that returned 100-299 this server handled.
     /// </summary>
-    [PublicAPI]
     public long SuccessfulRequests { get; private set; }
     
     /// <summary>
     /// Contains the count of failed requests
     /// that returned 300-599 this server handled.
     /// </summary>
-    [PublicAPI]
     public long FailedRequests { get; private set; }
 
     /// <summary>Event that will be fired each time this server logged something.</summary>
-    [PublicAPI]
     public event LogDelegate OnLog = _ => { };
     
     /// <summary>Default constructor for HttpServer.</summary>
-    /// <param name="address">The IP address where to start this server.</param>
-    /// <param name="port">The port where to start the server in the specified IP.</param>
+    /// <param name="config">Tells the server how it should behave.</param>
     /// <param name="cancellationToken">Token to stop the server on cancellation.</param>
     /// <inheritdoc cref="TcpListener.Start()"/>
     /// <exception cref="OutOfMemoryException">There is not enough memory available to start this server.</exception>
-    public HttpServer(IPAddress address, ushort port, CancellationToken? cancellationToken = null)
+    public HttpServer(HttpServerConfig? config = null, CancellationToken? cancellationToken = null)
     {
+        config ??= new HttpServerConfig();
+        
+        _serverCertificate = config.Certificate is not null 
+            ? new X509Certificate(config.Certificate.CertificatePath, config.Certificate.CertificatePassword) 
+            : CertificateManager.GenerateOrRetrieveCertificate();
+        State = config.ServerState;
         _cancellationToken = cancellationToken ?? CancellationToken.None;
-        _listener = new TcpListener(address, port);
+        _listener = new TcpListener(config.Address, config.Port);
         _listener.Start();
         new Thread(ThreadHandler).Start();
     }
@@ -60,19 +70,40 @@ public sealed class HttpServer
         while (!_cancellationToken.IsCancellationRequested)
         {
             TcpClient connection = _listener.AcceptTcpClient();
-            NetworkStream incomingStream = connection.GetStream();
+            using SslStream incomingStream = new SslStream(connection.GetStream(), false);
 
-            while (!incomingStream.DataAvailable) { }
+            try
+            {
+                incomingStream.AuthenticateAsServer(_serverCertificate, false, SslProtocols.Tls13, true);
+            }
+            catch (AuthenticationException)
+            {
+                OnLog(new LogMessage(LogType.Error, "SSL Authentication failure."));
+            }
+            catch (IOException)
+            {
+                OnLog(new LogMessage(LogType.Error, "Error trying to retrieve uncached request."));
+            }
             
-            byte[] incomingStreamData = new byte[connection.Available];
-            _ = incomingStream.Read(incomingStreamData, 0, incomingStreamData.Length);
+            StreamReader reader = new(incomingStream);
+
+            StringBuilder incomingData = new();
+            char[] buffer = new char[connection.Available];
+
+            int bytesRead;
+            do
+            {
+                bytesRead = reader.Read(buffer, 0, buffer.Length);
+                if (bytesRead > 0)
+                    incomingData.Append(buffer, 0, bytesRead);
+            } while (bytesRead > 0 && connection.Available != 0);
             
             ResponseEntity? responseEntity = null;
             RequestEntity parsedRequest;
 
             try
             {
-                parsedRequest = new RequestEntity(Encoding.ASCII.GetString(incomingStreamData));
+                parsedRequest = new RequestEntity(incomingData.ToString());
             }
             catch
             {
@@ -108,10 +139,10 @@ public sealed class HttpServer
                             = mixedIdentifier.GetRegexGroups(parsedRequest.Path.Route);
                     }
                     
-                    if (!TypeUtils.TargetEnumHasFlags(identifier.RequestMethod, parsedRequest.RequestType))
+                    if (!TypeUtils.TargetEnumHasFlags(identifier.RequestMethod, parsedRequest.RequestMethod))
                     {
-                        responseEntity 
-                            = new ResponseEntity(405, $"Cannot {parsedRequest.RequestType.ToString().ToUpper()}: {parsedRequest.Path}");
+                        responseEntity = new ResponseEntity(405, 
+                            new MethodNotAllowedBody(parsedRequest.RequestMethod, parsedRequest.Path.Route));
                         break;
                     }
                     
@@ -160,7 +191,7 @@ public sealed class HttpServer
                 }
                 catch (Exception error)
                 {
-                    responseEntity = new ResponseEntity(500, error.ToString());
+                    responseEntity = new ResponseEntity(500, new ExceptionBody(error, State == ServerStates.Development));
                     OnLog(new LogMessage(LogType.Error, $"Exception thrown: {error.Message}{(error.Source != null ? $":{error.Source}" : string.Empty)}"));
                     break;
                 }
@@ -181,6 +212,7 @@ public sealed class HttpServer
             void WriteAndClose(ResponseEntity entity)
             {
                 entity.Headers["Content-Length"] ??= entity.Body.Length.ToString();
+                entity.Headers["Content-Type"] ??= entity.Body.ContentType;
                 _ = entity.IsSuccessfulResponse ? SuccessfulRequests++ : FailedRequests++;
                 incomingStream.Write(entity.ToArray());
                 incomingStream.Close();
@@ -188,12 +220,11 @@ public sealed class HttpServer
             }
         }
     }
-
+    
     /// <summary>Adds a global middleware piece that will be run before every endpoint.</summary>
     /// <param name="handler">The middleware piece to execute.</param>
     /// <returns>The same server instance for sake of chaining declarations.</returns>
     /// <remarks>This middleware will run before any other individual middleware, and will be called in order of declaration.</remarks>
-    [PublicAPI]
     public HttpServer AddGlobalMiddleware(MiddleWareDelegate handler)
     {
         _globalMiddleware.Add(handler);
@@ -208,10 +239,10 @@ public sealed class HttpServer
     /// If two regex pattern conflict, the one that's added
     /// first will run while leaving the remaining useless.
     /// </remarks>
-    [PublicAPI]
-    public void AddEndpoint(RequestMethodType requestMethod, Regex regexPattern, RequestDelegate handler)
+    public HttpServer AddEndpoint(RequestMethodType requestMethod, Regex regexPattern, RequestDelegate handler)
     {
         _endpoints.Add(new RegexRequestIdentifier { RequestMethod = requestMethod, Route = regexPattern }, handler);
+        return this;
     }
     
     /// <summary>Registers an endpoint to this server that runs the handler if the method and route match.</summary>
@@ -222,24 +253,22 @@ public sealed class HttpServer
     /// If two path conflicts or is the same as another,
     /// the one that's added first will run while leaving the remaining useless.
     /// </remarks>
-    [PublicAPI]
-    public void AddEndpoint(RequestMethodType requestMethod, string path, RequestDelegate handler)
+    public HttpServer AddEndpoint(RequestMethodType requestMethod, string path, RequestDelegate handler)
     {
         _endpoints.Add(new StringRequestIdentifier { RequestMethod = requestMethod, Route = path }, handler);
+        return this;
     }
 
     /// <summary>Adds a route group defined by a RouteGroupAttribute.</summary>
     /// <typeparam name="TGroup">The group class type.</typeparam>
     /// <remarks>The target type must not be internal in order to get all the members from it.</remarks>
-    [PublicAPI]
-    public void AddGroup<TGroup>()
+    public HttpServer AddGroup<TGroup>()
         => AddGroup(typeof(TGroup));
     
     /// <summary>Adds a route group defined by a RouteGroupAttribute.</summary>
     /// <param name="type">The group class type.</param>
     /// <remarks>The target type must not be internal in order to get all the members from it.</remarks>
-    [PublicAPI]
-    public void AddGroup(Type type)
+    public HttpServer AddGroup(Type type)
     {
         RouteGroupAttribute? prefix = type.GetCustomAttribute<RouteGroupAttribute>();
         
@@ -248,7 +277,7 @@ public sealed class HttpServer
             GroupMemberAttribute? postFix = method.GetCustomAttribute<GroupMemberAttribute>();
 
             if (postFix is null)
-                return;
+                return this;
             
             _endpoints.Add(new MixedIdentifier
             {
@@ -257,5 +286,7 @@ public sealed class HttpServer
                 RequestMethod = postFix.RequestMethod
             }, (RequestDelegate)Delegate.CreateDelegate(typeof(RequestDelegate), method));
         }
+
+        return this;
     }
 }

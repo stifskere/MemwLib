@@ -4,7 +4,7 @@ namespace MemwLib.Http.Types.Attributes;
 
 /// <summary>Defines a route group of static members for HTTP routes.</summary>
 [AttributeUsage(AttributeTargets.Class), UsedImplicitly]
-public class RouteGroupAttribute : Attribute
+public sealed class RouteGroupAttribute : Attribute
 {
     internal string? Route { get; }
     

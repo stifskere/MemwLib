@@ -1,6 +1,8 @@
 using System.Text;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Collections;
+using MemwLib.Http.Types.Content;
+using HeaderCollection = MemwLib.Http.Types.Collections.HeaderCollection;
 
 namespace MemwLib.Http.Types.Entities;
 
@@ -15,7 +17,7 @@ public abstract class BaseEntity
     
     /// <summary>The body corresponding to this HTTP entity.</summary>
     [PublicAPI]
-    public string Body { get; set; } = string.Empty;
+    public BodyConverter Body { get; set; } = BodyConverter.Empty;
 
     /// <summary>Protected method to build the first line of the entity.</summary>
     /// <returns>The built first line of the entity as string.</returns>

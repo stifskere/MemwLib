@@ -1,4 +1,6 @@
 
+using MemwLib.CoreUtils.Collections;
+
 namespace MemwLib.Http.Types.Collections;
 
 /// <summary>

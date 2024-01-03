@@ -2,6 +2,8 @@ using System.Data;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Collections;
+using MemwLib.Http.Types.Content;
+using HeaderCollection = MemwLib.Http.Types.Collections.HeaderCollection;
 
 namespace MemwLib.Http.Types.Entities;
 
@@ -63,20 +65,20 @@ public sealed partial class ResponseEntity : BaseEntity, IResponsible
                 provisionalBody = provisionalBody[..contentLength];
         }
 
-        Body = provisionalBody;
+        Body = new BodyConverter(provisionalBody);
     }
 
     /// <summary>Parameterized constructor for ResponseEntity.</summary>
     /// <param name="responseCode">The response code for this entity.</param>
     /// <param name="body">The request body for this entity.</param>
-    public ResponseEntity(short responseCode, string? body = null) : this(responseCode, null, body) {}
+    public ResponseEntity(short responseCode, IBody? body = null) : this(responseCode, null, body) {}
     
-    /// <inheritdoc cref="ResponseEntity(short, string?)"/>
+    /// <inheritdoc cref="ResponseEntity(short, IBody?)"/>
     /// <param name="version">the version of the standard this request follows.</param>
     /// <exception cref="FormatException">The HTTP version is invalid.</exception>
     /// <remarks>The version doesn't change the functionality, it's just parsed as string to be sent with the entity.</remarks>
 #pragma warning disable CS1573
-    public ResponseEntity(short responseCode, string? version, string? body)
+    public ResponseEntity(short responseCode, string? version, IBody? body)
 #pragma warning restore CS1573
     {
         ResponseCode = responseCode;
@@ -89,7 +91,7 @@ public sealed partial class ResponseEntity : BaseEntity, IResponsible
             HttpVersion = version;
         }
 
-        Body = body ?? string.Empty;
+        Body = new BodyConverter(body);
     }
     
     /// <inheritdoc cref="BaseEntity.BuildStart"/>

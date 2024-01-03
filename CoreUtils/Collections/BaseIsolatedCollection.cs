@@ -1,7 +1,7 @@
 using System.Collections;
 using JetBrains.Annotations;
 
-namespace MemwLib.Http.Types.Collections;
+namespace MemwLib.CoreUtils.Collections;
 
 /// <summary>Abstract class to define isolated implementations.</summary>
 /// <typeparam name="TKey">The type of the keys for this collection instance.</typeparam>

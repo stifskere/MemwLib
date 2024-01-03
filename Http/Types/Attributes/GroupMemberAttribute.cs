@@ -2,15 +2,11 @@ using JetBrains.Annotations;
 
 namespace MemwLib.Http.Types.Attributes;
 
-// TODO: IMPLEMENT SSL REQUESTS.
-// TODO: Make an IBody interface for possible response bodies, and possible request body retrieval.
-// TODO: Improve middleware documentation.
 // TODO: Http versions matter!
-// TODO: I want middleware also typed within declaration functions.
 
 /// <summary>Defines a group member that forms part of a route group.</summary>
 [AttributeUsage(AttributeTargets.Method), UsedImplicitly]
-public class GroupMemberAttribute : Attribute
+public sealed class GroupMemberAttribute : Attribute
 {
     internal string Route { get; }
     

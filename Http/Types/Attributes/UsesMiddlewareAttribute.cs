@@ -9,8 +9,12 @@ namespace MemwLib.Http.Types.Attributes;
 /// The group middleware will be executed first,
 /// then all of the member middleware, everything will be executed from first to last.
 /// </remarks>
+/// <example>
+/// Please refer to MiddlewareDelegate
+/// documentation for more information in the allowed method signatures.
+/// </example>
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, AllowMultiple = true), PublicAPI]
-public class UsesMiddlewareAttribute : Attribute
+public sealed class UsesMiddlewareAttribute : Attribute
 {
     internal MiddleWareDelegate Target { get; }
 

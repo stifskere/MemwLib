@@ -1,11 +1,12 @@
 using JetBrains.Annotations;
+using MemwLib.CoreUtils.Collections;
 
 namespace MemwLib.Http.Types.Collections;
 
 /// <summary>A collection implementation for session parameters passed from middleware.</summary>
 /// <remarks>The constructor for this collection is internal.</remarks>
 [PublicAPI]
-public class SessionParameterCollection : BaseIsolatedCollection<string, object>
+public sealed class SessionParameterCollection : BaseIsolatedCollection<string, object>
 {
     internal SessionParameterCollection() {}
     

@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Collections;
+using ParameterCollection = MemwLib.Http.Types.Collections.ParameterCollection;
 
 namespace MemwLib.Http.Types.Routes;
 
