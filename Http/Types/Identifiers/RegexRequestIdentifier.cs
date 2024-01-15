@@ -4,6 +4,7 @@ namespace MemwLib.Http.Types.Identifiers;
 
 internal class RegexRequestIdentifier : IRequestIdentifier
 {
-    public required RequestMethodType RequestType { get; init; }
-    public required Regex Path { get; init; }
+    public required RequestMethodType RequestMethod { get; init; }
+
+    public required Regex Route { get; init; }
 }

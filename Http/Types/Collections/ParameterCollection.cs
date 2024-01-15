@@ -1,38 +1,42 @@
+using System.Data;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 
 namespace MemwLib.Http.Types.Collections;
 
+/// <summary>Collection implementation for HTTP URI parameters.</summary>
+/// <remarks>The constructor for this collection is internal.</remarks>
 [PublicAPI]
-public sealed partial class ParameterCollection : BaseCollection
+public sealed partial class ParameterCollection : ParsingCollection
 {
-    public ParameterCollection() {}
-
-    public ParameterCollection(string collection)
+    internal ParameterCollection() {}
+    
+    internal ParameterCollection(string collection)
     {
-        if (string.IsNullOrEmpty(collection))
+        MatchCollection matches;
+        if (string.IsNullOrEmpty(collection) || (matches = ParameterVerification().Matches(collection)).Count == 0)
             return;
         
-        if (collection.StartsWith('?'))
-            collection = collection[1..];
-        
-        foreach (string parameter in collection.Split('&'))
+        foreach (Match parameter in matches)
         {
-            string[] splitParameter = parameter.Split('=');
-            
-            if (splitParameter.Length != 2)
-                throw new ArgumentException("Passed parameter collection contains invalid parameter");
-            
-            this[splitParameter[0]] = splitParameter[1];
+            string key = parameter.Groups["key"].Value,
+                value = parameter.Groups["value"].Value;
+
+            if (Contains(key))
+                throw new ConstraintException("There is a duplicated key in this collection of parameters.");
+
+            this[key] = value;
         }
     }
     
+    /// <inheritdoc cref="ParsingCollection.Verify"/>
     protected override bool Verify(string key, string value) 
         => ParameterVerification().IsMatch($"{key}={value}");
 
+    /// <inheritdoc cref="ParsingCollection.ToString"/>
     public override string ToString() 
         => Variables.Count == 0 ? string.Empty : Variables.Aggregate("", (old, iteration) => $"{old}{iteration.Key}={iteration.Value}&")[..^1];
     
-    [GeneratedRegex(@"^[a-zA-Z0-9;,/\\:@+$\-_.!~*'()]+=[a-zA-Z0-9;,/\\:@+$\-_.!~*'()]+$", RegexOptions.Singleline)]
+    [GeneratedRegex(@"(?'key'[a-zA-Z0-9;,/\\:@+$\-_.!~*'()]+)=(?'value'[a-zA-Z0-9;,/\\:@+$\-_.!~*'()]+)", RegexOptions.Singleline)]
     private static partial Regex ParameterVerification();
 }
