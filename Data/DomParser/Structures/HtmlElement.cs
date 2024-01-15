@@ -1,3 +1,5 @@
+#if DEBUG
+
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Data.DomParser.Collections;
@@ -29,7 +31,7 @@ public partial class HtmlElement
             _tagName = value;
         } 
     }
-
+    
     /// <summary>Contains the attributes of this element</summary>
     /// <example>The value means the following &lt;name {key}="{value}"/&gt;</example>
     public Dictionary<string, string> Attributes { get; } = new();
@@ -46,11 +48,26 @@ public partial class HtmlElement
     
     /// <summary>Initializes an element with the name and possible attributes.</summary>
     /// <param name="tagName">The name of the tag.</param>
-    public HtmlElement(string tagName)
+    /// <param name="attributes">The attributes this element must have.</param>
+    public HtmlElement(string tagName, params (string, string)[] attributes)
     {
         TagName = tagName;
+
+        foreach ((string key, string value) in attributes)
+            Attributes.Add(key, value);
     }
     
+    /// <inheritdoc cref="Object.ToString"/>
+    public override string ToString() 
+        => $"<{TagName}" +
+           $"{(Attributes.Count != 0
+               ? " " + Attributes.Aggregate(string.Empty, (result, pair) => result + $"{pair.Key}=\"{pair.Value}\" ") 
+               : string.Empty)}" +
+           $"{(InnerHtml.IsEmpty ? "/>\n" : $">\n{InnerHtml}</{TagName}>\n")}";
+    
+
     [GeneratedRegex(@"^[a-z\-]+$")]
     internal static partial Regex ValidTagRegex();
 }
+
+#endif

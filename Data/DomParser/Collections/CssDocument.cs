@@ -1,3 +1,5 @@
+#if DEBUG
+
 namespace MemwLib.Data.DomParser.Collections;
 
 /// <summary>
@@ -8,3 +10,5 @@ public class CssDocument
 {
     
 }
+
+#endif

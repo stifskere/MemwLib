@@ -2,8 +2,6 @@ using JetBrains.Annotations;
 
 namespace MemwLib.Http.Types.Attributes;
 
-// TODO: Http versions matter!
-
 /// <summary>Defines a group member that forms part of a route group.</summary>
 [AttributeUsage(AttributeTargets.Method), UsedImplicitly]
 public sealed class GroupMemberAttribute : Attribute

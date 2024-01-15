@@ -7,7 +7,7 @@ namespace MemwLib.CoreUtils.Collections;
 /// <typeparam name="TKey">The type of the keys for this collection instance.</typeparam>
 /// <typeparam name="TValue">The type of the values for this collection instance.</typeparam>
 [PublicAPI]
-public abstract class BaseIsolatedCollection<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>> where TKey : notnull
+public abstract class BaseIsolatedCollection<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>, ICountable where TKey : notnull
 {
     /// <summary>Collection default dictionary</summary>
     /// <remarks>This should not be exposed.</remarks>
@@ -15,6 +15,9 @@ public abstract class BaseIsolatedCollection<TKey, TValue> : IEnumerable<KeyValu
     
     /// <summary>How many variables exist in this collection.</summary>
     public virtual int Length => Variables.Count;
+
+    /// <inheritdoc cref="ICountable.IsEmpty"/>
+    public virtual bool IsEmpty => Length == 0;
 
     /// <summary>Initializes an empty instance.</summary>
     protected BaseIsolatedCollection() {}

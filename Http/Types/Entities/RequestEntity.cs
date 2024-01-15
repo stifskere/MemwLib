@@ -1,7 +1,9 @@
+using System.Text;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Collections;
 using MemwLib.Http.Types.Content;
+using MemwLib.Http.Types.Exceptions;
 using MemwLib.Http.Types.Routes;
 using HeaderCollection = MemwLib.Http.Types.Collections.HeaderCollection;
 
@@ -47,52 +49,63 @@ public sealed partial class RequestEntity : BaseEntity
     /// </summary>
     public HttpRegexGroupCollection CapturedGroups { get; internal set; } = new();
     
-    /// <summary>String constructor, parses an ASCII string into an instance of RequestEntity.</summary>
-    /// <param name="stringEntity">The entity to parse.</param>
-    /// <exception cref="ArgumentException">The string entity is null or empty.</exception>
-    /// <exception cref="FormatException">The request was not well formatted.</exception>
-    public RequestEntity(string stringEntity)
+    /// <summary>Stream constructor, reads a stream into an instance of RequestEntity.</summary>
+    /// <param name="reader">The entity to parse.</param>
+    /// <exception cref="ParseException{T}">There was an error while parsing this stream.</exception>
+    /// <remarks>The reader must be positioned at the first line of the content.</remarks>
+    public RequestEntity(StreamReader reader)
     {
-        if (string.IsNullOrEmpty(stringEntity))
-            throw new ArgumentException("entity cannot be null or empty", nameof(stringEntity));
-        
-        string[] lines = stringEntity.Split("\r\n");
-        
-        {
-            Match startLine = StartLineRegex().Match(lines[0]);
+        string? target = reader.ReadLine();
 
-            if (!startLine.Success)
-                throw new FormatException("Malformed request start");
-            
-            RequestMethod = Enum.Parse<RequestMethodType>(startLine.Groups["method"].Value, true);
-            Path = new PartialUri(startLine.Groups["path"].Value);
-            HttpVersion = startLine.Groups["version"].Value;
+        if (string.IsNullOrEmpty(target))
+            throw new ParseException<RequestEntity>();
+
+        {
+            string[] splitTarget = target.Split(' ');
+
+            RequestMethod = (RequestMethodType)Enum.Parse(typeof(RequestMethodType), splitTarget[0], true);
+            Path = new PartialUri(splitTarget[1]);
+            HttpVersion = splitTarget[2];
+        }
+
+        Headers = new HeaderCollection();
+        
+        while (!string.IsNullOrEmpty(target = reader.ReadLine()))
+        {
+            string[] splitTarget = target.Split(": ");
+
+            if (splitTarget.Length != 2)
+                throw new ParseException<RequestEntity>();
+
+            Headers[splitTarget[0]] = splitTarget[1];
         }
         
-        if (lines.Length < 2)
+        if (!Headers.Contains("Content-Length"))
         {
-            Headers = new HeaderCollection();
             Body = BodyConverter.Empty;
             return;
         }
 
+        if (!int.TryParse(Headers["Content-Length"], out int bodyLength))
+            throw new ParseException<RequestEntity>();
 
-        int separatorIndex = Array.IndexOf(lines, string.Empty);
+        byte[] body = new byte[bodyLength];
 
-        Headers = new HeaderCollection(string.Join("\r\n", lines[1..separatorIndex]));
-        
-        string provisionalBody = string.Join("\r\n", lines[(separatorIndex + 1)..]);
-
-        if (Headers.Contains("Content-Length") && int.TryParse(Headers["Content-Length"], out int contentLength))
+        int index = 0;
+        while (bodyLength-- > 0)
         {
-            if (provisionalBody.Length < contentLength)
-                for (int i = 0, fixBodyLength = provisionalBody.Length; i < contentLength - fixBodyLength; i++)
-                    provisionalBody += ' ';
-            else
-                provisionalBody = provisionalBody[..contentLength];
+            int read = reader.Read();
+
+            if (read == -1)
+            {
+                Headers["Content-Length"] = index.ToString();
+                break;
+            }
+
+            body[index++] = (byte)read;
         }
 
-        Body = new BodyConverter(provisionalBody);
+        Body = new BodyConverter(Encoding.ASCII.GetString(body));
     }
     
     /// <summary>Parameterized constructor for request entity.</summary>

@@ -10,7 +10,7 @@ namespace MemwLib.Http.Types.Entities;
 public abstract class BaseEntity
 {
     private string Start => BuildStart();
-    
+
     /// <summary>The header collection corresponding to this HTTP entity.</summary>
     [PublicAPI]
     public HeaderCollection Headers { get; set; } = new();

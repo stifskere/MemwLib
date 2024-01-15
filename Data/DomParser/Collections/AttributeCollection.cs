@@ -1,3 +1,6 @@
+#if DEBUG
+
+using JetBrains.Annotations;
 using MemwLib.CoreUtils.Collections;
 using MemwLib.Data.DomParser.Exceptions;
 using MemwLib.Data.DomParser.Structures;
@@ -5,6 +8,7 @@ using MemwLib.Data.DomParser.Structures;
 namespace MemwLib.Data.DomParser.Collections;
 
 /// <summary>Represents a collection of attributes for an HTMLElement</summary>
+[PublicAPI]
 public class AttributeCollection : BaseIsolatedCollection<string, string>
 {
     /// <inheritdoc cref="BaseIsolatedCollection{TKey,TValue}.Set"/>
@@ -17,3 +21,5 @@ public class AttributeCollection : BaseIsolatedCollection<string, string>
         base.Set(key, value);
     }
 }
+
+#endif

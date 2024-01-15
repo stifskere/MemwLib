@@ -10,7 +10,7 @@ public class LogMessage
     public DateTimeOffset Date { get; init; } = DateTimeOffset.Now;
     
     /// <summary>The log type as LogType enumerable.</summary>
-    public  LogType Type { get; init; }
+    public LogType Type { get; init; }
     
     /// <summary>The message corresponding to the log.</summary>
     public string Message { get; init; }

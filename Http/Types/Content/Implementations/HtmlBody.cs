@@ -2,10 +2,13 @@ using JetBrains.Annotations;
 
 namespace MemwLib.Http.Types.Content.Implementations;
 
+#if DEBUG
+
 /// <summary>Body implementation for handling a request body as HTML.</summary>
 [PublicAPI]
 public class HtmlBody : IBody
 {
+    /// <inheritdoc cref="IBody.ContentType"/>
     public string ContentType => "text/html";
     
     /// <inheritdoc cref="IBody.ParseImpl"/>
@@ -25,3 +28,5 @@ public class HtmlBody : IBody
         
     }
 }
+
+#endif

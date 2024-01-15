@@ -1,3 +1,5 @@
+#if DEBUG
+
 namespace MemwLib.Data.DomParser.Exceptions;
 
 /// <summary>
@@ -14,3 +16,5 @@ public class InvalidElementException : Exception
         Message = message;
     }
 }
+
+#endif

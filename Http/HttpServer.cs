@@ -1,15 +1,16 @@
+using System.Diagnostics;
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Runtime.Versioning;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.CoreUtils;
 using MemwLib.Http.Types;
 using MemwLib.Http.Types.Attributes;
+using MemwLib.Http.Types.Configuration;
 using MemwLib.Http.Types.Content.Implementations;
 using MemwLib.Http.Types.Entities;
 using MemwLib.Http.Types.Identifiers;
@@ -26,7 +27,7 @@ public sealed class HttpServer
     private readonly CancellationToken _cancellationToken;
     private readonly Dictionary<IRequestIdentifier, RequestDelegate> _endpoints = new();
     private readonly List<MiddleWareDelegate> _globalMiddleware = new();
-    private X509Certificate _serverCertificate;
+    private X509Certificate? _serverCertificate;
     
     /// <summary>Whether this server instance is on development or production mode.</summary>
     public ServerStates State { get; set; }
@@ -55,13 +56,22 @@ public sealed class HttpServer
     {
         config ??= new HttpServerConfig();
         
-        _serverCertificate = config.Certificate is not null 
-            ? new X509Certificate(config.Certificate.CertificatePath, config.Certificate.CertificatePassword) 
-            : CertificateManager.GenerateOrRetrieveCertificate();
+        if (config is { SslBehavior: SslBehavior.DoNotUseCertificateIfNotFound, SslCertificate: not null })
+                _serverCertificate = new X509Certificate(config.SslCertificate.CertificatePath,
+                    config.SslCertificate.CertificatePassword);
+        
+        if (config.SslBehavior == SslBehavior.AlwaysFindAndUseCertificate)
+            _serverCertificate = config.SslCertificate is not null 
+                ? new X509Certificate(config.SslCertificate.CertificatePath, config.SslCertificate.CertificatePassword) 
+                : CertificateManager.GenerateOrRetrieveCertificate();
+        
         State = config.ServerState;
+        
         _cancellationToken = cancellationToken ?? CancellationToken.None;
+        
         _listener = new TcpListener(config.Address, config.Port);
         _listener.Start();
+        
         new Thread(ThreadHandler).Start();
     }
 
@@ -70,44 +80,35 @@ public sealed class HttpServer
         while (!_cancellationToken.IsCancellationRequested)
         {
             TcpClient connection = _listener.AcceptTcpClient();
-            using SslStream incomingStream = new SslStream(connection.GetStream(), false);
+            using Stream incomingStream = _serverCertificate is not null
+                ? new SslStream(connection.GetStream(), false)
+                : connection.GetStream();
 
             try
             {
-                incomingStream.AuthenticateAsServer(_serverCertificate, false, SslProtocols.Tls13, true);
+                if (incomingStream is SslStream sslStream)
+                {
+                    Debug.Assert(_serverCertificate is not null);
+                    
+                    sslStream.AuthenticateAsServer(_serverCertificate, false, SslProtocols.Tls13, true);
+                }
             }
-            catch (AuthenticationException)
+            catch (Exception)
             {
-                OnLog(new LogMessage(LogType.Error, "SSL Authentication failure."));
+                OnLog(new LogMessage(LogType.Error, "There was some problem while authenticating with the SSL protocol."));
+                continue;
             }
-            catch (IOException)
-            {
-                OnLog(new LogMessage(LogType.Error, "Error trying to retrieve uncached request."));
-            }
-            
-            StreamReader reader = new(incomingStream);
-
-            StringBuilder incomingData = new();
-            char[] buffer = new char[connection.Available];
-
-            int bytesRead;
-            do
-            {
-                bytesRead = reader.Read(buffer, 0, buffer.Length);
-                if (bytesRead > 0)
-                    incomingData.Append(buffer, 0, bytesRead);
-            } while (bytesRead > 0 && connection.Available != 0);
             
             ResponseEntity? responseEntity = null;
             RequestEntity parsedRequest;
 
             try
             {
-                parsedRequest = new RequestEntity(incomingData.ToString());
+                parsedRequest = new RequestEntity(new StreamReader(incomingStream));
             }
             catch
             {
-                WriteAndClose(new ResponseEntity(400));
+                WriteAndClose(new ResponseEntity(ResponseCodes.BadRequest));
                 OnLog(new LogMessage(LogType.FailedRequest, "Client sent a malformed request."));
                 continue;
             }
@@ -141,7 +142,7 @@ public sealed class HttpServer
                     
                     if (!TypeUtils.TargetEnumHasFlags(identifier.RequestMethod, parsedRequest.RequestMethod))
                     {
-                        responseEntity = new ResponseEntity(405, 
+                        responseEntity = new ResponseEntity(ResponseCodes.MethodNotAllowed, 
                             new MethodNotAllowedBody(parsedRequest.RequestMethod, parsedRequest.Path.Route));
                         break;
                     }
@@ -191,20 +192,20 @@ public sealed class HttpServer
                 }
                 catch (Exception error)
                 {
-                    responseEntity = new ResponseEntity(500, new ExceptionBody(error, State == ServerStates.Development));
+                    responseEntity = new ResponseEntity(ResponseCodes.InternalServerError, new ExceptionBody(error, State == ServerStates.Development));
                     OnLog(new LogMessage(LogType.Error, $"Exception thrown: {error.Message}{(error.Source != null ? $":{error.Source}" : string.Empty)}"));
                     break;
                 }
             }
 
-            responseEntity ??= new ResponseEntity(404);
+            responseEntity ??= new ResponseEntity(ResponseCodes.NotFound);
             
             WriteAndClose(responseEntity);
             
             OnLog(new LogMessage(responseEntity.IsSuccessfulResponse
                 ? LogType.SuccessfulRequest
                 : LogType.FailedRequest, 
-                $"{parsedRequest.Path.Route} returned {responseEntity.ResponseCode} {responseEntity.Hint}"));
+                $"{parsedRequest.Path.Route} returned {responseEntity.ResponseCode.GetCode()} {responseEntity.ResponseCode.GetName()}"));
             
             
             continue;

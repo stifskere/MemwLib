@@ -1,4 +1,6 @@
-namespace MemwLib.Data.DomParser.Collections;
+#if DEBUG
+
+namespace MemwLib.Data.DomParser.Structures;
 
 /// <summary>
 /// This class represents a css ruleset, where you can
@@ -8,3 +10,5 @@ public class CssRuleset
 {
     
 }
+
+#endif
