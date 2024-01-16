@@ -20,3 +20,9 @@ public delegate void LogDelegate(LogMessage message);
 /// so you might want to simply return null after the call to the next function.
 /// </remarks>
 public delegate IResponsible MiddleWareDelegate(RequestEntity request);
+
+/// <summary>Delegate used to implement response code interception logic.</summary>
+/// <param name="response">The anterior response.</param>
+/// <returns>The response that the server should send.</returns>
+/// <remarks>Changing the response code won't trigger other interceptors.</remarks>
+public delegate IResponsible InterceptorDelegate(ResponseEntity response);

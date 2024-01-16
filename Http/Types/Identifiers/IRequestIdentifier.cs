@@ -4,5 +4,5 @@ namespace MemwLib.Http.Types.Identifiers;
 
 internal interface IRequestIdentifier
 {
-    public RequestMethodType RequestMethod { get; init; }
+    public RequestMethodType RequestMethod { get; }
 }

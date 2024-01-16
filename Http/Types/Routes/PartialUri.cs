@@ -1,7 +1,6 @@
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Collections;
-using ParameterCollection = MemwLib.Http.Types.Collections.ParameterCollection;
 
 namespace MemwLib.Http.Types.Routes;
 
@@ -37,8 +36,9 @@ public partial class PartialUri
 
         if (!matchedUri.Success)
             throw new FormatException("Partial URI is not in a valid format.");
-        
-        Route = matchedUri.Groups["path"].Value;
+
+        string provRoute = matchedUri.Groups["path"].Value;
+        Route = string.IsNullOrEmpty(provRoute) ? "/" : provRoute;
         
         Parameters = matchedUri.Groups.ContainsKey("params") 
             ? new ParameterCollection(matchedUri.Groups["params"].Value) 
@@ -70,6 +70,6 @@ public partial class PartialUri
     public static explicit operator string(PartialUri instance)
         => instance.ToString();
     
-    [GeneratedRegex(@"(?:https?:\/\/[^/]*)?(?'path'\/[^?#{}|\\^~\[\]\/][^?#{}|\^~[\]]*)?(?'params'\?[^#]*)?(?'fragment'#.*)?$", RegexOptions.Singleline)]
+    [GeneratedRegex(@"(?:https?:\/\/[^\/]+)?.?(?'path'\/[^?#{}|\\^~\[\]\/][^?#{}|\^~[\]]*)?(?'params'\?[^#]*)?(?'fragment'#.*)?$", RegexOptions.Singleline)]
     private static partial Regex PartialUriRegex();
 }

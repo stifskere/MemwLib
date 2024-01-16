@@ -7,7 +7,6 @@ using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
-using MemwLib.CoreUtils;
 using MemwLib.Http.Types;
 using MemwLib.Http.Types.Attributes;
 using MemwLib.Http.Types.Configuration;
@@ -27,6 +26,7 @@ public sealed class HttpServer
     private readonly CancellationToken _cancellationToken;
     private readonly Dictionary<IRequestIdentifier, RequestDelegate> _endpoints = new();
     private readonly List<MiddleWareDelegate> _globalMiddleware = new();
+    private readonly Dictionary<ResponseCodes, List<InterceptorDelegate>> _codeInterceptors = new();
     private X509Certificate? _serverCertificate;
     
     /// <summary>Whether this server instance is on development or production mode.</summary>
@@ -140,7 +140,7 @@ public sealed class HttpServer
                             = mixedIdentifier.GetRegexGroups(parsedRequest.Path.Route);
                     }
                     
-                    if (!TypeUtils.TargetEnumHasFlags(identifier.RequestMethod, parsedRequest.RequestMethod))
+                    if ((identifier.RequestMethod & parsedRequest.RequestMethod) != parsedRequest.RequestMethod)
                     {
                         responseEntity = new ResponseEntity(ResponseCodes.MethodNotAllowed, 
                             new MethodNotAllowedBody(parsedRequest.RequestMethod, parsedRequest.Path.Route));
@@ -199,6 +199,18 @@ public sealed class HttpServer
             }
 
             responseEntity ??= new ResponseEntity(ResponseCodes.NotFound);
+
+            if (_codeInterceptors.TryGetValue(responseEntity.ResponseCode, out List<InterceptorDelegate>? interceptor))
+            {
+                foreach (InterceptorDelegate handler in interceptor)
+                {
+                    if (handler(responseEntity) is not ResponseEntity interceptorResponse) 
+                        continue;
+                    
+                    responseEntity = interceptorResponse;
+                    break;
+                }
+            }
             
             WriteAndClose(responseEntity);
             
@@ -288,6 +300,27 @@ public sealed class HttpServer
             }, (RequestDelegate)Delegate.CreateDelegate(typeof(RequestDelegate), method));
         }
 
+        return this;
+    }
+
+    /// <summary>
+    /// Lets you intercept a response code and do/respond
+    /// something else before the sent response.
+    /// </summary>
+    /// <param name="code">The response code to intercept.</param>
+    /// <param name="handler">What will this handler do when intercepted.</param>
+    /// <returns>The same instance to act as a constructor.</returns>
+    /// <remarks>
+    /// The interceptors will run in declaration order,
+    /// if the response code changes, it won't trigger other code interceptors.
+    /// </remarks>
+    public HttpServer AddResponseListener(ResponseCodes code, InterceptorDelegate handler)
+    {
+        if (!_codeInterceptors.ContainsKey(code))
+            _codeInterceptors[code] = new List<InterceptorDelegate>();
+        
+        _codeInterceptors[code].Add(handler);
+            
         return this;
     }
 }

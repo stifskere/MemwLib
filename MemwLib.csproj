@@ -5,18 +5,20 @@
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-        <Version>2.0.0</Version>
+        <Version>2.1.0</Version>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>MemwLib</Title>
         <Authors>Memw1</Authors>
         <RepositoryUrl>https://github.com/stifskere/MemwLib</RepositoryUrl>
-        <RepositoryType>GitHub</RepositoryType>
+        <RepositoryType>Git</RepositoryType>
         <Description>This is a library made for convenient implementations that microsoft did not add to C#, or are not good enough.</Description>
         <PackageIcon>icon.png</PackageIcon>
         <PackageTags>Utils HTTP HTTPS Data Colors Strings</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
     <ItemGroup>
         <None Include="icon.png" Pack="true" PackagePath=""/>
+        <None Include="README.md" Pack="true" PackagePath=""/>
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
