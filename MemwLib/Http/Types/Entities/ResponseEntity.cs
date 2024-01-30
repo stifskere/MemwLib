@@ -26,17 +26,19 @@ public sealed partial class ResponseEntity : BaseEntity, IResponsible
     /// <param name="reader">The entity to parse.</param>
     /// <exception cref="ParseException{T}">There was an error while parsing this stream.</exception>
     /// <remarks>The reader must be positioned at the first line of the content.</remarks>
-    // TODO: requires abstraction
+    // TODO: requires abstraction, implement timeout
     public ResponseEntity(StreamReader reader)
     {
-        string? target = reader.ReadLine();
-
-        if (string.IsNullOrEmpty(target))
-            throw new ParseException<RequestEntity>();
-
+        string? target;
+        
+        while ((target = reader.ReadLine()) == null) { }
+        
         {
             string[] splitTarget = target.Split(' ');
 
+            if (splitTarget.Length != 3)
+                throw new ParseException<ResponseEntity>();
+            
             HttpVersion = splitTarget[0];
             ResponseCode = (ResponseCodes)Enum.Parse(typeof(ResponseCodes), splitTarget[1], true);
         }

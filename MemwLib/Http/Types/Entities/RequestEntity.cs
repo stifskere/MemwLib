@@ -53,16 +53,19 @@ public sealed partial class RequestEntity : BaseEntity
     /// <param name="reader">The entity to parse.</param>
     /// <exception cref="ParseException{T}">There was an error while parsing this stream.</exception>
     /// <remarks>The reader must be positioned at the first line of the content.</remarks>
+    // TODO: requires abstraction, implement timeout
     public RequestEntity(StreamReader reader)
     {
-        string? target = reader.ReadLine();
-
-        if (string.IsNullOrEmpty(target))
-            throw new ParseException<RequestEntity>();
+        string? target;
+        
+        while ((target = reader.ReadLine()) == null) { }
 
         {
             string[] splitTarget = target.Split(' ');
 
+            if (splitTarget.Length != 3)
+                throw new ParseException<RequestEntity>();
+            
             RequestMethod = (RequestMethodType)Enum.Parse(typeof(RequestMethodType), splitTarget[0], true);
             Path = new PartialUri(splitTarget[1]);
             HttpVersion = splitTarget[2];

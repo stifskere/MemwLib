@@ -1,7 +1,6 @@
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Authentication;
-using System.Text;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Configuration;
 using MemwLib.Http.Types.Entities;
@@ -24,37 +23,29 @@ public static class HttpRequests
         {
             Headers = config.Headers
         };
-
+        
         request.Headers["Host"] = target.HostName;
         using TcpClient client = new(target.HostName, target.Port);
-
-        ResponseEntity result;
         
         if (target.Protocol == Protocol.Http)
         {
             await using NetworkStream httpStream = client.GetStream();
             await httpStream.WriteAsync(request.ToArray());
             await httpStream.FlushAsync();
-
-            result = new ResponseEntity(new StreamReader(httpStream));
-        }
-        else
-        {
-            await using SslStream httpsStream = new SslStream(client.GetStream(), true);
-            await httpsStream.AuthenticateAsClientAsync(new SslClientAuthenticationOptions
-            {
-                TargetHost = target.HostName,
-                EnabledSslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13
-            });
             
-            await httpsStream.WriteAsync(request.ToArray());
-            await httpsStream.FlushAsync();
-
-            result = new ResponseEntity(new StreamReader(httpsStream));
+            return new ResponseEntity(new StreamReader(httpStream));
         }
-        
-        client.Close();
-        
-        return result;
+
+        await using SslStream httpsStream = new SslStream(client.GetStream(), false);
+        await httpsStream.AuthenticateAsClientAsync(new SslClientAuthenticationOptions
+        {
+            TargetHost = target.HostName,
+            EnabledSslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13
+        });
+            
+        await httpsStream.WriteAsync(request.ToArray());
+        await httpsStream.FlushAsync();
+            
+        return new ResponseEntity(new StreamReader(httpsStream));
     }
 }
