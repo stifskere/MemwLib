@@ -1,5 +1,7 @@
 using JetBrains.Annotations;
 
+#if DEBUG
+
 namespace MemwLib.Data.Json.Exceptions;
 
 /// <summary>Thrown when a constraint for JSON format was broken.</summary>
@@ -15,3 +17,5 @@ public class InvalidJsonConstraintException : Exception
         Message = message;
     }
 }
+
+#endif

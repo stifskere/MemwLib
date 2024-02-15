@@ -1,7 +1,7 @@
+#if DEBUG
+
 using JetBrains.Annotations;
 using MemwLib.Cron.Types.Exceptions;
-
-#if DEBUG
 
 namespace MemwLib.Cron.Types.Jobs;
 

@@ -1,3 +1,5 @@
+#if DEBUG
+
 using JetBrains.Annotations;
 using MemwLib.Data.Json.Enums;
 
@@ -19,3 +21,5 @@ public class JsonObjectAttribute : Attribute
         Behavior = behavior;
     }
 }
+
+#endif

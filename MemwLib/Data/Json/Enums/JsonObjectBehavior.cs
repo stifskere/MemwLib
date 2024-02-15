@@ -1,5 +1,7 @@
 using JetBrains.Annotations;
 
+#if DEBUG
+
 namespace MemwLib.Data.Json.Enums;
 
 /// <summary>Enum used to define the behavior of a type acting as a json object.</summary>
@@ -24,3 +26,5 @@ public enum JsonObjectBehavior
     /// </remarks>
     AllProperties = 1 << 1
 }
+
+#endif

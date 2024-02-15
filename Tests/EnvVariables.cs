@@ -1,4 +1,3 @@
-using System.Reflection;
 using MemwLib.Data.EnvironmentVariables;
 using MemwLib.Data.EnvironmentVariables.Attributes;
 using NUnit.Framework;

@@ -5,180 +5,90 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cc06ee4-83f2-4050-8377-acb1506728bc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MemwLib/Http/Types/Content/Implementations/StreamBody.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/Http/Types/Content/Implementations/UrlEncodedBody.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/Http/Types/Routes/UriHelpers.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/MemwLib.2.1.0.nuspec" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/MemwLib.2.2.0.nuspec" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.AssemblyInfo.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.AssemblyInfoInputs.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.GlobalUsings.g.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.assets.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.csproj.AssemblyReference.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.sourcelink.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/ref/MemwLib.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/refint/MemwLib.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/EnvVariables.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/Json.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.csproj.CopyComplete" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.genruntimeconfig.cache" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.sourcelink.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/ref/Tests.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/refint/Tests.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Tests/obj/rider.project.model.nuget.info" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/MemwLib/MemwLib.2.1.0.nupkg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/MemwLib/MemwLib.2.2.0.nupkg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/MemwLib/net7.0/MemwLib.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/CoverletSourceRootsMapping" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/MemwLib.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/MemwLib.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/MemwLib.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Tests.dll" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Tests.pdb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.idea.MemwLib/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.AssemblyInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.AssemblyInfoInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.GlobalUsings.g.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.assets.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.csproj.AssemblyReference.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/.NETCoreApp,Version=v7.0.AssemblyAttributes.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.AssemblyInfo.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.AssemblyInfoInputs.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.GlobalUsings.g.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.assets.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.csproj.AssemblyReference.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/testhost.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bin/AnyCPU_Release/Tests/net7.0/CoverletSourceRootsMapping" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.MemwLib/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MemwLib/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/CoreUtils/StringUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/CoreUtils/StringUtils.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/Cron/CronManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Cron/CronManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Cron/Types/Delegates.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Cron/Types/Delegates.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Cron/Types/Exceptions/CronAlreadyExistsException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Cron/Types/Exceptions/CronAlreadyExistsException.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Cron/Types/Exceptions/CronParseException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Cron/Types/Exceptions/CronParseException.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/Cron/Types/Jobs/CronJob.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Cron/Types/Jobs/CronJob.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Cron/Types/Jobs/ReturningCronJob.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Cron/Types/Jobs/ReturningCronJob.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Data/EnvironmentVariables/EnvContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Data/EnvironmentVariables/EnvContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Data/HtmlDocument/Collections/AttributeCollection.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Data/HtmlDocument/Collections/CssDocument.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Data/HtmlDocument/Collections/HtmlNode.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Data/HtmlDocument/Exceptions/InvalidElementException.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Data/HtmlDocument/Structures/CssRuleset.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Data/HtmlDocument/Structures/HtmlElement.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/Data/Json/Attributes/JsonObjectAttribute.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Data/Json/Attributes/JsonObjectAttribute.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/Data/Json/Enums/JsonObjectBehavior.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Data/Json/Enums/JsonObjectBehavior.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/Data/Json/Exceptions/InvalidJsonConstraintException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Data/Json/Exceptions/InvalidJsonConstraintException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/Data/Json/Exceptions/InvalidJsonSequenceException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Data/Json/Exceptions/InvalidJsonSequenceException.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/Data/Json/Exceptions/InvalidJsonTargetTypeException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Data/Json/Exceptions/InvalidJsonTargetTypeException.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/Data/Json/Exceptions/UnexpectedJsonEoiException.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Data/Json/Exceptions/UnexpectedJsonEoiException.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/Data/Json/JsonParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Data/Json/JsonParser.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/Data/Json/JsonTokenHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Data/Json/JsonTokenHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Http/HttpRequests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Http/HttpRequests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Http/HttpServer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Http/HttpServer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Http/Types/Collections/HttpRegexMatchCollection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Http/Types/Collections/HttpRegexMatchCollection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Http/Types/Collections/ParameterCollection.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Http/Types/Collections/ParameterCollection.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Http/Types/Content/Implementations/HtmlBody.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Http/Types/Entities/BaseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Http/Types/Entities/BaseEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Http/Types/Entities/RequestEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Http/Types/Entities/RequestEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Http/Types/Entities/ResponseEntity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Http/Types/Entities/ResponseEntity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Http/Types/Identifiers/IRequestIdentifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Http/Types/Identifiers/IRequestIdentifier.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Http/Types/Identifiers/StringRequestIdentifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Http/Types/Identifiers/StringRequestIdentifier.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Http/Types/Routes/CompleteUri.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Http/Types/Routes/CompleteUri.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Http/Types/Routes/PartialUri.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Http/Types/Routes/PartialUri.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/MemwLib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/MemwLib.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Http.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Http.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/MemwLib/MemwLib.2.1.0.nupkg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/MemwLib/net7.0/MemwLib.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/MemwLib/net7.0/MemwLib.deps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/MemwLib/net7.0/MemwLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/MemwLib/net7.0/MemwLib.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/MemwLib/net7.0/MemwLib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/CoverletSourceRootsMapping" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/JetBrains.Annotations.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/JetBrains.Annotations.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/MemwLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/MemwLib/net7.0/MemwLib.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/MemwLib.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/MemwLib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/MemwLib/net7.0/MemwLib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/Microsoft.TestPlatform.CommunicationUtilities.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Microsoft.TestPlatform.CommunicationUtilities.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/Microsoft.TestPlatform.CoreUtilities.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Microsoft.TestPlatform.CoreUtilities.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/Microsoft.TestPlatform.CrossPlatEngine.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Microsoft.TestPlatform.CrossPlatEngine.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/Microsoft.TestPlatform.PlatformAbstractions.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Microsoft.TestPlatform.PlatformAbstractions.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/Microsoft.TestPlatform.Utilities.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Microsoft.TestPlatform.Utilities.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/Microsoft.VisualStudio.TestPlatform.Common.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Microsoft.VisualStudio.TestPlatform.Common.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/NUnit3.TestAdapter.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/NUnit3.TestAdapter.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/NUnit3.TestAdapter.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/NUnit3.TestAdapter.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/Newtonsoft.Json.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Newtonsoft.Json.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/NuGet.Frameworks.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/NuGet.Frameworks.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/Tests.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Tests.deps.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/Tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/Tests.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/Tests.runtimeconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Tests.runtimeconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/cs/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/cs/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/cs/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/cs/Microsoft.TestPlatform.CoreUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/cs/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/cs/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/cs/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/cs/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/cs/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/cs/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/de/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/de/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/de/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/de/Microsoft.TestPlatform.CoreUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/de/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/de/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/de/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/de/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/de/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/de/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/es/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/es/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/es/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/es/Microsoft.TestPlatform.CoreUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/es/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/es/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/es/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/es/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/es/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/es/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/fr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/fr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/fr/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/fr/Microsoft.TestPlatform.CoreUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/fr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/fr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/fr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/fr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/fr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/fr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/it/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/it/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/it/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/it/Microsoft.TestPlatform.CoreUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/it/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/it/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/it/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/it/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/it/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/it/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ja/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ja/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ja/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ja/Microsoft.TestPlatform.CoreUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ja/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ja/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ja/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ja/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ja/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ja/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ko/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ko/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ko/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ko/Microsoft.TestPlatform.CoreUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ko/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ko/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ko/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ko/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ko/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ko/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/nunit.engine.api.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/nunit.engine.api.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/nunit.engine.core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/nunit.engine.core.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/nunit.engine.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/nunit.engine.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/nunit.framework.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/nunit.framework.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/pl/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/pl/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/pl/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/pl/Microsoft.TestPlatform.CoreUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/pl/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/pl/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/pl/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/pl/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/pl/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/pl/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/pt-BR/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/pt-BR/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/pt-BR/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/pt-BR/Microsoft.TestPlatform.CoreUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/pt-BR/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/pt-BR/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/pt-BR/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/pt-BR/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/pt-BR/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/pt-BR/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ru/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ru/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ru/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ru/Microsoft.TestPlatform.CoreUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ru/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ru/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ru/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ru/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/ru/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/ru/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/testcentric.engine.metadata.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/testcentric.engine.metadata.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/testhost.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/testhost.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/testhost.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/tr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/tr/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/tr/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/tr/Microsoft.TestPlatform.CoreUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/tr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/tr/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/tr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/tr/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/tr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/tr/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/zh-Hans/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/zh-Hans/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/zh-Hans/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/zh-Hans/Microsoft.TestPlatform.CoreUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/zh-Hans/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/zh-Hans/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/zh-Hans/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/zh-Hant/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/zh-Hant/Microsoft.TestPlatform.CommunicationUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/zh-Hant/Microsoft.TestPlatform.CoreUtilities.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/zh-Hant/Microsoft.TestPlatform.CoreUtilities.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/zh-Hant/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/zh-Hant/Microsoft.TestPlatform.CrossPlatEngine.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.Common.resources.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/Tests/net7.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/zh-Hant/Microsoft.VisualStudio.TestPlatform.ObjectModel.resources.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/MemwLib.2.2.0.nuspec" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/MemwLib.2.2.0.nuspec" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/ref/MemwLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/ref/MemwLib.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/refint/MemwLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/refint/MemwLib.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/MemwLib.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/MemwLib.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/MemwLib.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/MemwLib.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/EnvVariables.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/EnvVariables.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Json.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Json.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.AssemblyInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.assets.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.csproj.AssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.csproj.FileListAbsolute.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.genruntimeconfig.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.genruntimeconfig.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.sourcelink.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/ref/Tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/ref/Tests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/refint/Tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/refint/Tests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Tests.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Tests.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Tests.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Tests.csproj.nuget.g.props" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Tests.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Tests.csproj.nuget.g.targets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AnyCPU_Debug/MemwLib/MemwLib.2.2.0.nupkg" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/MemwLib/MemwLib.2.2.0.nupkg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AnyCPU_Debug/MemwLib/net7.0/MemwLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/MemwLib/net7.0/MemwLib.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AnyCPU_Debug/MemwLib/net7.0/MemwLib.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/MemwLib/net7.0/MemwLib.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AnyCPU_Debug/MemwLib/net7.0/MemwLib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/MemwLib/net7.0/MemwLib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/CoverletSourceRootsMapping" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/CoverletSourceRootsMapping" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/MemwLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/MemwLib.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/MemwLib.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/MemwLib.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/MemwLib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/MemwLib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Tests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Tests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/AnyCPU_Debug/Tests/net7.0/Tests.pdb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,42 +101,8 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/4f115105ac3746e2ab2b709cf9737229ae3400/cc/79d50030/020000B4pdb114.il" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/18f8ea476e7b40658bbc34407490d15b4ba8/5e/ade36f40/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/285e4b1f3ced4a4e84e13b0e8686f6bf3b8000/46/39bba74d/ExpandoObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/4f115105ac3746e2ab2b709cf9737229ae3400/74/a74a56e4/IComparable`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/791afe8791d94b989d3fcccc49524698134fc8/10/3723b612/SocketWire.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/791afe8791d94b989d3fcccc49524698134fc8/21/690e776d/LifetimeDefinition.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/791afe8791d94b989d3fcccc49524698134fc8/b5/95c0bbc1/Application.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e12cb799db4240bf94c8c13953fa8f42210c00/e6/37f7475b/X509Certificate2.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/15288497bd83d362218f87d97a4bec3dd2a362cce3e9a374872f4f8c4a050d/ResourceSet.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/16916fdf3d68385fcb881467be91b4852b15f47456e873e3f9ff8f930af7682/ResourceManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/20d976c499bf5225291d3cef9eab724a01c7a7ae9df38b7fde9d0fbf22889cf/Byte.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/27ebb9dba057336696da6e2e2c8b7cd73c515b284a6ab731c1e0e31b5deb/Type.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3215652588da5f97f7f3196ced277f547b464f93cd2917bc1aa15a16349c364/System.Runtime.InteropServices.JavaScript.notsupported.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4774ae73bdb316f17cf3d25ff767d676a25fd4fb611ac5886e1334b2f186e/MemberInfo.Internal.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4da343189477f16e6d869a29ff95e4baedcf9d7b745c6ff51c1d5dc09e811/TypeForwardedFromAttribute.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4eed6e619e84073a21dd849c6c4c4ec371f6be7b02bda06df4111091c45bdd/Enum.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4f115105ac3746e2ab2b709cf9737229ae3400/_749c6/IEquatable.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4f115105ac3746e2ab2b709cf9737229ae3400/_c41ab/IDictionary.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/4f115105ac3746e2ab2b709cf9737229ae3400/_e9155/IEnumerable.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/52e312627586f8369e625824b6d54be431fe7ffe58df8a5b4a173291a1e360f8/String.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/59ebdcbd67a328809b109545bba2bfbaeb4e2fafbba1ddf1c681d313e266948/PropertyInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/5d7b85eaf78e52cfe42e1a1c8a61d78d2cf4bc36da11e8484868bf2d66de27/System.SR.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/76a3a8469bbd169723c61a671be2c7b69a5bcff10faec98bba53b51d8a40b3/KeyValuePair.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/81c09ca1c5b4df2d7d7f26cee735be644dc762c592815a03babcd228489/String.Comparison.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/82f3bb64e8c52af0a0175218c6cd371f393f871ffe1482a2ffd51e7efaeddbb5/Task.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/836f2fdf1aa569e8a7b5b495929c6ea2765cecb353ed47f8f771dbbca2e66/System.SR.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/95a0becdae6bc1a9f75dd8c3ce603c58d9fd9a5b791e62946f549bd320fa2f/DictionaryEntry.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/988459b66dccae2acdc95860b1e7e912c65c13673bb58a3e11caf11710fd5231/SR.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/a421bf72ce1bd97d2cd3e8739d53f71ff6052294923c475677806b3df7381/ThrowHelper.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/aa7c6fbb19b15d579a6f2debd49ddb12d463bff89469140e8c4491757d7f1e/Socket.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/bf9021a960b74107a7e141aa06bc9d8a0a53c929178c2fb95b1597be8af8dc/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c03ecbf882ec617b54fbd5b46063c091a895e6f24a14a0411120ddd7f0ea7b/Dictionary.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/c7484d15b3295758c19562e4c55fd4fd091453d0aa72c6c3d6ecf01dcc7ee4/AttributeUsageAttribute.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d81d50aa37afb114327ac8c4d01d3b613a33760a32bdc25f64bc5165e552e4/Int32.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/e3fc1075cd684b159c3a98878984def09f7164d5c7979c99e87a7b2534889/Annotations.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/fd495755bc5b3363eba9fd4b7bbd653483c3b258d07289d887a6a83bb7e1071/TargetInvocationException.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -247,37 +123,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;228ee118-0669-4cc6-8942-28111318e5fa.executor&quot;: &quot;Debug&quot;,
-    &quot;44bffaae-e5b0-4409-8d45-a15f99d4cdf1.executor&quot;: &quot;Debug&quot;,
-    &quot;6980b5fb-4837-4c8f-aae0-eb1630b010ce.executor&quot;: &quot;Debug&quot;,
-    &quot;98bbdbfb-f3bd-470f-a148-3cc032fb51e2.executor&quot;: &quot;Debug&quot;,
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;HTTP Request.All in rest-api.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.All in rest-api_1.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;f14014a0-6a4a-469d-b792-16cf07d048bc.executor&quot;: &quot;Debug&quot;,
-    &quot;fb9b5273-3a70-43bf-8dc8-dfef9d4ac5b7.executor&quot;: &quot;Debug&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propDebugger&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "228ee118-0669-4cc6-8942-28111318e5fa.executor": "Debug",
+    "44bffaae-e5b0-4409-8d45-a15f99d4cdf1.executor": "Debug",
+    "6980b5fb-4837-4c8f-aae0-eb1630b010ce.executor": "Debug",
+    "6c9ac85d-7a8a-48af-b03d-5738a2a366c3.executor": "Debug",
+    "7d8267c8-52d7-4965-885b-37dafd2680ba.executor": "Debug",
+    "98bbdbfb-f3bd-470f-a148-3cc032fb51e2.executor": "Debug",
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "HTTP Request.All in rest-api.executor": "Run",
+    "HTTP Request.All in rest-api_1.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "f14014a0-6a4a-469d-b792-16cf07d048bc.executor": "Debug",
+    "fb9b5273-3a70-43bf-8dc8-dfef9d4ac5b7.executor": "Debug",
+    "git-widget-placeholder": "dev",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;/home/memw/.config/JetBrains/Rider2023.3/resharper-host/DecompilerCache&quot;,
-      &quot;/home/memw/.config/JetBrains/Rider2023.3/resharper-host/SourcesCache&quot;,
-      &quot;/home/memw/.local/share/Symbols/src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "/home/memw/.config/JetBrains/Rider2023.3/resharper-host/DecompilerCache",
+      "/home/memw/.config/JetBrains/Rider2023.3/resharper-host/SourcesCache",
+      "/home/memw/.local/share/Symbols/src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunDashboard">
     <option name="excludedTypes">
       <set>
@@ -285,7 +163,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="228ee118-0669-4cc6-8942-28111318e5fa">
+  <component name="RunManager" selected="HTTP Request.All in rest-api_1">
     <configuration name="All in rest-api_1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/rest-api_1.http">
       <method v="2" />
     </configuration>
@@ -414,43 +292,43 @@
           <option name="timeStamp" value="11" />
         </breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Tests/Http.cs</url>
-          <line>38</line>
-          <properties documentPath="$PROJECT_DIR$/Tests/Http.cs" initialLine="38" containingFunctionPresentation="Lambda expression inside Method 'Setup'">
+          <url>file://$PROJECT_DIR$/MemwLib/Data/Json/JsonTokenHandler.cs</url>
+          <line>225</line>
+          <properties documentPath="C:\Users\10047563\Desktop\ProjectsRider\MemwLib\MemwLib\Data\Json\JsonTokenHandler.cs" initialLine="227" containingFunctionPresentation="Method 'CheckObject'">
             <startOffsets>
-              <option value="1101" />
+              <option value="7741" />
             </startOffsets>
             <endOffsets>
-              <option value="1163" />
+              <option value="7802" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Tests/Http.cs</url>
-          <line>37</line>
-          <properties documentPath="$PROJECT_DIR$/Tests/Http.cs" initialLine="37" containingFunctionPresentation="Lambda expression inside Method 'Setup'">
-            <startOffsets>
-              <option value="1022" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1084" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="14" />
+          <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/MemwLib/Data/Json/JsonTokenHandler.cs</url>
-          <line>158</line>
-          <properties documentPath="$PROJECT_DIR$/MemwLib/Data/Json/JsonTokenHandler.cs" initialLine="158" containingFunctionPresentation="Method 'CheckObject'">
+          <line>226</line>
+          <properties documentPath="C:\Users\10047563\Desktop\ProjectsRider\MemwLib\MemwLib\Data\Json\JsonTokenHandler.cs" initialLine="228" containingFunctionPresentation="Method 'CheckObject'">
             <startOffsets>
-              <option value="5336" />
+              <option value="7835" />
             </startOffsets>
             <endOffsets>
-              <option value="5365" />
+              <option value="7848" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="17" />
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/MemwLib/Data/Json/JsonTokenHandler.cs</url>
+          <line>227</line>
+          <properties documentPath="C:\Users\10047563\Desktop\ProjectsRider\MemwLib\MemwLib\Data\Json\JsonTokenHandler.cs" initialLine="229" containingFunctionPresentation="Method 'CheckObject'">
+            <startOffsets>
+              <option value="7877" />
+            </startOffsets>
+            <endOffsets>
+              <option value="7883" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="44" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

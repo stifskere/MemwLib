@@ -47,26 +47,25 @@
     ]
   },
   "packageFolders": {
-    "/home/memw/.nuget/packages/": {}
+    "C:\\Users\\10047563\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "2.2.0",
     "restore": {
-      "projectUniqueName": "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/MemwLib.csproj",
+      "projectUniqueName": "C:\\Users\\10047563\\Desktop\\ProjectsRider\\MemwLib\\MemwLib\\MemwLib.csproj",
       "projectName": "MemwLib",
-      "projectPath": "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/MemwLib.csproj",
-      "packagesPath": "/home/memw/.nuget/packages/",
-      "outputPath": "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/obj/",
+      "projectPath": "C:\\Users\\10047563\\Desktop\\ProjectsRider\\MemwLib\\MemwLib\\MemwLib.csproj",
+      "packagesPath": "C:\\Users\\10047563\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\10047563\\Desktop\\ProjectsRider\\MemwLib\\MemwLib\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/memw/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\10047563\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.bepinex.dev/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net7.0": {
@@ -108,6 +107,10 @@
           {
             "name": "Microsoft.NETCore.App.Ref",
             "version": "[7.0.14, 7.0.14]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[7.0.14, 7.0.14]"
           }
         ],
         "frameworkReferences": {
@@ -115,7 +118,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/home/memw/.dotnet/sdk/8.0.100/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\10047563\\.dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

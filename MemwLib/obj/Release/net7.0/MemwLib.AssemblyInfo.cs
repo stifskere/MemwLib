@@ -11,11 +11,11 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("Memw1")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("This is a library made for convenient implementations that microsoft did not add " +
     "to C#, or are not good enough.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("2.2.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("2.2.0+cd93b4d2d375795eb23aedc149796663072175aa")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("2.2.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("MemwLib")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MemwLib")]
 [assembly: System.Reflection.AssemblyVersionAttribute("2.2.0.0")]

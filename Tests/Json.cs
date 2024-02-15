@@ -1,3 +1,5 @@
+#if DEBUG
+
 using MemwLib.Data.Json;
 using MemwLib.Data.Json.Attributes;
 using MemwLib.Data.Json.Enums;
@@ -89,7 +91,7 @@ public class Json
         Assert.Multiple(() =>
         {
             Assert.That(JsonParser.IsValidJson(InvalidJson), Is.False);
-            Assert.That(JsonParser.IsValidJson(PayloadWithoutFormat, true), Is.True);
+            Assert.That(JsonParser.IsValidJson(PayloadWithoutFormat), Is.True);
         });
     }
 }
@@ -107,3 +109,5 @@ file class Person
 
     [JsonProperty("children")] public Person[]? Children { get; set; }
 }
+
+#endif

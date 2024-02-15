@@ -790,7 +790,7 @@
             <returns>An instance of TResult constructed based on the payload provided.</returns>
             <remarks>For collections only List&lt;T&gt; and T[] are supported.</remarks>
         </member>
-        <member name="M:MemwLib.Data.Json.JsonParser.IsValidJson(System.String,System.Boolean)">
+        <member name="M:MemwLib.Data.Json.JsonParser.IsValidJson(System.String)">
             <summary>Simply checks if a JSON payload is valid or invalid.</summary>
             <param name="payload">the JSON payload to check.</param>
             <returns>Whether the payload is valid or invalid.</returns>

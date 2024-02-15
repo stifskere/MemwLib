@@ -1,3 +1,5 @@
+#if DEBUG
+
 using MemwLib.CoreUtils;
 using MemwLib.Data.Json.Exceptions;
 
@@ -127,20 +129,16 @@ internal static class JsonTokenHandler
     {
         public static bool VerifyJson(string payload, bool throwOnError)
         {
-            bool isValid = false;
             payload = payload.Trim();
+            int iterator = 0;
             
-            for (int iterator = 0; iterator < payload.Length; iterator++)
-            {
-                if (payload.IsEnclosedBy('{', '}'))
-                    isValid = CheckObject(ref payload, ref iterator, throwOnError);
-                else if (payload.IsEnclosedBy('[', ']'))
-                    isValid = CheckList(ref payload, ref iterator, throwOnError);
-                else
-                    isValid = CheckPrimitive(ref payload, ref iterator, throwOnError);
-            }
-
-            return isValid;
+            if (payload.IsEnclosedBy('{', '}'))
+                return CheckObject(ref payload, ref iterator, throwOnError);
+            
+            if (payload.IsEnclosedBy('[', ']'))
+                return CheckList(ref payload, ref iterator, throwOnError);
+            
+            return CheckPrimitive(ref payload, ref iterator, throwOnError);
         }
         
         private static bool CheckObject(ref string payload, ref int iterator, bool throwOnError)
@@ -150,7 +148,7 @@ internal static class JsonTokenHandler
 
             while (iterator < payload.Length)
             {
-                if (payload[iterator] == ' ')
+                if (payload[iterator] is ' ' or '\n' or '\r')
                 {
                     iterator++;
                     continue;
@@ -159,7 +157,7 @@ internal static class JsonTokenHandler
                 if (payload[iterator] == '}')
                 {
                     iterator++;
-                    break;
+                    return true;
                 }
                 
                 if (isKey)
@@ -204,7 +202,7 @@ internal static class JsonTokenHandler
                     
                     iterator++;
                     
-                    while (iterator < payload.Length && payload[iterator] == ' ')
+                    while (iterator < payload.Length && payload[iterator] is ' ' or '\n' or '\r')
                         iterator++;
                     
                     switch (payload[iterator])
@@ -213,12 +211,14 @@ internal static class JsonTokenHandler
                         {
                             if (!CheckObject(ref payload, ref iterator, throwOnError))
                                 return false;
+                            iterator++;
                             break;
                         }
                         case '[':
                         {
                             if (!CheckList(ref payload, ref iterator, throwOnError))
                                 return false;
+                            iterator++;
                             break;
                         }
                         default:
@@ -229,6 +229,9 @@ internal static class JsonTokenHandler
                         }
                     }
 
+                    if (payload[iterator] == '}')
+                        return true;
+                    
                     iterator++;
                     isKey = true;
                 }
@@ -253,11 +256,11 @@ internal static class JsonTokenHandler
                             ? throw new UnexpectedJsonEoiException(payload[iterator], new []{ "number", "\"", "true", "false", "null", "]", "[", "{" }, iterator) 
                             : false;
                     
-                    iterator++;
                     return true;
                 }
 
-                if (needsToFindComa && payload[iterator] != ' ' && payload[iterator] != ',')
+                if (needsToFindComa && payload[iterator] != ' ' && payload[iterator] != '\r' 
+                    && payload[iterator] != '\n' && payload[iterator] != ',')
                     return throwOnError
                         ? throw new UnexpectedJsonEoiException(payload[iterator], ",", iterator)
                         : false;
@@ -362,3 +365,5 @@ internal static class JsonTokenHandler
         });
     }
 }
+
+#endif

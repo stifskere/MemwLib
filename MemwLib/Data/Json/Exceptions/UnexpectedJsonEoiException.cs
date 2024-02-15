@@ -1,5 +1,7 @@
 using JetBrains.Annotations;
 
+#if DEBUG
+
 namespace MemwLib.Data.Json.Exceptions;
 
 /// <summary>Thrown when an unexpected character was found.</summary>
@@ -18,3 +20,5 @@ public class UnexpectedJsonEoiException : Exception
         Message = $"Invalid character found '{found}' in index {index}, expected: {string.Join(" or ", expected.Select(c => c.Length == 1 ? $"'{c}'" : $"\"{c}\""))}.";
     }
 }
+
+#endif

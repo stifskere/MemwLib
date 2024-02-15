@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "EeDHkV979zSRigl71tOJIYob4yrswejPkJUYMFGRf8T6vkYlxAtZVKDmBbhTIXQzLWi+wAa+mP9mZy14P28lAg==",
+  "dgSpecHash": "99xFSou9vcHz12RVGWlhtsybcC+EdSqVO2rLQ9IZaZnSLOcPQj6cumqAAzpel2BPuOs+Z70tlL/ySKalyoFEIw==",
   "success": true,
-  "projectFilePath": "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/MemwLib.csproj",
+  "projectFilePath": "C:\\Users\\10047563\\Desktop\\ProjectsRider\\MemwLib\\MemwLib\\MemwLib.csproj",
   "expectedPackageFiles": [
-    "/home/memw/.nuget/packages/jetbrains.annotations/2023.2.0/jetbrains.annotations.2023.2.0.nupkg.sha512",
-    "/home/memw/.nuget/packages/microsoft.netcore.app.ref/7.0.14/microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
-    "/home/memw/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.14/microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512"
+    "C:\\Users\\10047563\\.nuget\\packages\\jetbrains.annotations\\2023.2.0\\jetbrains.annotations.2023.2.0.nupkg.sha512",
+    "C:\\Users\\10047563\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.14\\microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\10047563\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.14\\microsoft.windowsdesktop.app.ref.7.0.14.nupkg.sha512",
+    "C:\\Users\\10047563\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.14\\microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512"
   ],
   "logs": []
 }

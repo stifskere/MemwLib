@@ -1,3 +1,5 @@
+#if DEBUG
+
 using System.Collections;
 using System.Globalization;
 using System.Reflection;
@@ -6,6 +8,8 @@ using MemwLib.CoreUtils;
 using MemwLib.Data.Json.Attributes;
 using MemwLib.Data.Json.Enums;
 using MemwLib.Data.Json.Exceptions;
+
+
 
 namespace MemwLib.Data.Json;
 
@@ -69,8 +73,8 @@ public static class JsonParser
     /// <summary>Simply checks if a JSON payload is valid or invalid.</summary>
     /// <param name="payload">the JSON payload to check.</param>
     /// <returns>Whether the payload is valid or invalid.</returns>
-    public static bool IsValidJson(string payload, bool test = false)
-        => JsonTokenHandler.Validators.VerifyJson(payload, test);
+    public static bool IsValidJson(string payload)
+        => JsonTokenHandler.Validators.VerifyJson(payload, false);
 
     /// <summary>Converts an object to a string JSON object as JavaScript's JSON.stringify.</summary>
     /// <param name="payload"></param>
@@ -143,3 +147,5 @@ public static class JsonParser
             : result;
     }
 }
+
+#endif

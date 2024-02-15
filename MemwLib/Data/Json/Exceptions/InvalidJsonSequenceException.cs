@@ -1,3 +1,5 @@
+#if DEBUG
+
 namespace MemwLib.Data.Json.Exceptions;
 
 /// <summary>Thrown when an invalid sequence start or end is found</summary>
@@ -17,3 +19,5 @@ public class InvalidJsonSequenceException : Exception
         Message = $"Invalid sequence enclosing for JSON, expected to start with '{start}' and end with '{end}'";
     }
 }
+
+#endif

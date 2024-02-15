@@ -1,3 +1,5 @@
+#if DEBUG
+
 namespace MemwLib.Data.Json.Exceptions;
 
 /// <summary>Thrown when the target type for a JSON payload didn't match.</summary>
@@ -12,3 +14,5 @@ public class InvalidJsonTargetTypeException : Exception
         Message = $"Invalid JSON object for target type <{name}>";
     }
 }
+
+#endif
