@@ -6,7 +6,7 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         
-        <Version>2.1.0</Version>
+        <Version>2.2.0</Version>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>MemwLib</Title>
         <Authors>Memw1</Authors>
@@ -17,13 +17,14 @@
         <PackageIcon>icon.png</PackageIcon>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         
-        <BaseIntermediateOutputPath>../obj</BaseIntermediateOutputPath>
-        <OutputPath>../build/MemwLib</OutputPath>
+        <OutputPath>$(SolutionDir)/bin/$(Platform)_$(Configuration)/$(MSBuildProjectName)</OutputPath>
     </PropertyGroup>
+    
     <ItemGroup>
         <None Include="../icon.png" Pack="true"  PackagePath="/" />
         <None Include="../README.md" Pack="true" PackagePath="/" />
     </ItemGroup>
+    
     <ItemGroup>
       <PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
     </ItemGroup>

@@ -1,0 +1,168 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/memw/Desktop/ProjectsRider/MemwLib/Tests/Tests.csproj": {}
+  },
+  "projects": {
+    "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/MemwLib.csproj": {
+      "version": "2.2.0",
+      "restore": {
+        "projectUniqueName": "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/MemwLib.csproj",
+        "projectName": "MemwLib",
+        "projectPath": "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/MemwLib.csproj",
+        "packagesPath": "/home/memw/.nuget/packages/",
+        "outputPath": "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/memw/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.bepinex.dev/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "JetBrains.Annotations": {
+              "target": "Package",
+              "version": "[2023.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[7.0.14, 7.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[7.0.14, 7.0.14]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/memw/.dotnet/sdk/8.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/memw/Desktop/ProjectsRider/MemwLib/Tests/Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/memw/Desktop/ProjectsRider/MemwLib/Tests/Tests.csproj",
+        "projectName": "Tests",
+        "projectPath": "/home/memw/Desktop/ProjectsRider/MemwLib/Tests/Tests.csproj",
+        "packagesPath": "/home/memw/.nuget/packages/",
+        "outputPath": "/home/memw/Desktop/ProjectsRider/MemwLib/Tests/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/memw/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.bepinex.dev/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/MemwLib.csproj": {
+                "projectPath": "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/MemwLib.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[17.5.0, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.13.3, )"
+            },
+            "NUnit.Analyzers": {
+              "target": "Package",
+              "version": "[3.6.1, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[4.4.2, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[7.0.14, 7.0.14]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[7.0.14, 7.0.14]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/home/memw/.dotnet/sdk/8.0.100/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

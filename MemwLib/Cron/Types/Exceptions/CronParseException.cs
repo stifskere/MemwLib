@@ -1,5 +1,7 @@
 using JetBrains.Annotations;
 
+#if DEBUG
+
 namespace MemwLib.Cron.Types.Exceptions;
 
 /// <summary>Exception thrown when there was an error while parsing a cron expression.</summary>
@@ -19,3 +21,5 @@ internal sealed class CronParseException : Exception
         Message = message;
     }
 }
+
+#endif

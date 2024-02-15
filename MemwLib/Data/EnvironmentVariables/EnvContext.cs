@@ -109,7 +109,7 @@ public sealed partial class EnvContext : IEnumerable<KeyValuePair<string, string
     /// you will need to manually convert the string to the desired type
     /// </remarks>
     [PublicAPI, MustUseReturnValue]
-    public TInstance ToType<TInstance>(bool caseSensitive, BindingFlags flags = BindingFlags.Default) where TInstance : new()
+    public TInstance ToType<TInstance>(bool caseSensitive, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance) where TInstance : new()
     {
         TInstance instance = new();
 
@@ -123,7 +123,7 @@ public sealed partial class EnvContext : IEnumerable<KeyValuePair<string, string
         
         MetaSearch.ProcessProperties<TInstance>(flags)
             .Exclude(properties => properties
-                .Where(p => p.GetCustomAttribute<EnvironmentIgnoreAttribute>() is not null)
+                .Where(p => p.GetCustomAttribute<EnvironmentIgnoreAttribute>() is null)
             )
             .Do(property =>
             {

@@ -1,0 +1,2180 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MemwLib</name>
+    </assembly>
+    <members>
+        <member name="T:MemwLib.Colors.Rgb24">
+            <summary>24-bit RGB representation.</summary>
+        </member>
+        <member name="P:MemwLib.Colors.Rgb24.R">
+            <summary>The red value of this instance.</summary>
+        </member>
+        <member name="P:MemwLib.Colors.Rgb24.G">
+            <summary>The green value of this instance.</summary>
+        </member>
+        <member name="P:MemwLib.Colors.Rgb24.B">
+            <summary>The blue value of this instance.</summary>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb24.#ctor(System.Byte,System.Byte,System.Byte)">
+            <summary>The RGB values constructor.</summary>
+            <param name="r">the red value.</param>
+            <param name="g">the green value.</param>
+            <param name="b">the blue value.</param>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb24.#ctor(System.UInt32)">
+            <summary>The unsigned integer value constructor.</summary>
+            <param name="color">The decimal representation of the color.</param>
+            <exception cref="T:System.ArgumentException">The color exceeds the 0xFFFFFF value.</exception>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb24.#ctor(MemwLib.Colors.Rgb32)">
+            <summary>Rgb32 cast constructor, constructs an instance of RGB24 from an instance of RGB32.</summary>
+            <param name="color">The instance to cast from.</param>
+        </member>
+        <member name="P:MemwLib.Colors.Rgb24.AsUint">
+            <summary>Obtain the color decimal value as an unsigned integer instance.</summary>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb24.op_Explicit(MemwLib.Colors.Rgb24)~System.UInt32">
+            <summary>Cast an instance of RGB24 to an instance of unsigned integer.</summary>
+            <param name="instance">The instance to cast.</param>
+            <returns>The casted instance as unsigned integer.</returns>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb24.op_Explicit(System.UInt32)~MemwLib.Colors.Rgb24">
+            <summary>Cast an instance of unsigned integer to an instance of RGB24</summary>
+            <param name="instance">The instance to cast.</param>
+            <returns>The casted instance as RGB24.</returns>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Pink">
+            <summary>Represents the color Pink as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Crimson">
+            <summary>Represents the color Crimson as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Red">
+            <summary>Represents the color Red as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Maroon">
+            <summary>Represents the color Maroon as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Brown">
+            <summary>Represents the color Brown as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.MistyRose">
+            <summary>Represents the color MistyRose as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Salmon">
+            <summary>Represents the color Salmon as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Coral">
+            <summary>Represents the color Coral as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.OrangeRed">
+            <summary>Represents the color OrangeRed as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Chocolate">
+            <summary>Represents the color Chocolate as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Orange">
+            <summary>Represents the color Orange as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Gold">
+            <summary>Represents the color Gold as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Ivory">
+            <summary>Represents the color Ivory as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Yellow">
+            <summary>Represents the color Yellow as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Olive">
+            <summary>Represents the color Olive as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.YellowGreen">
+            <summary>Represents the color YellowGreen as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.LawnGreen">
+            <summary>Represents the color LawnGreen as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Chartreuse">
+            <summary>Represents the color Chartreuse as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Lime">
+            <summary>Represents the color Lime as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Green">
+            <summary>Represents the color Green as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.SpringGreen">
+            <summary>Represents the color SpringGreen as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Aquamarine">
+            <summary>Represents the color Aquamarine as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Turquoise">
+            <summary>Represents the color Turquoise as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Azure">
+            <summary>Represents the color Azure as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.AquaCyan">
+            <summary>Represents the color AquaCyan as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Teal">
+            <summary>Represents the color Teal as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Lavender">
+            <summary>Represents the color Lavender as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Blue">
+            <summary>Represents the color Blue as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Navy">
+            <summary>Represents the color Navy as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.BlueViolet">
+            <summary>Represents the color BlueViolet as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Indigo">
+            <summary>Represents the color Indigo as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.DarkViolet">
+            <summary>Represents the color DarkViolet as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Plum">
+            <summary>Represents the color Plum as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Magenta">
+            <summary>Represents the color Magenta as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Purple">
+            <summary>Represents the color Purple as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.RedViolet">
+            <summary>Represents the color RedViolet as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Tan">
+            <summary>Represents the color Tan as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Beige">
+            <summary>Represents the color Beige as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.SlateGray">
+            <summary>Represents the color SlateGray as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.DarkSlateGray">
+            <summary>Represents the color DarkSlateGray as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.White">
+            <summary>Represents the color White as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.SmokeWhite">
+            <summary>Represents the color SmokeWhite as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.LightGray">
+            <summary>Represents the color LightGray as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Silver">
+            <summary>Represents the color Silver as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.DarkGray">
+            <summary>Represents the color DarkGray as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Gray">
+            <summary>Represents the color Gray as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.DimGray">
+            <summary>Represents the color DimGray as RGB24.</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb24.Black">
+            <summary>Represents the color Black as RGB24.</summary>
+        </member>
+        <member name="T:MemwLib.Colors.Rgb32">
+            <summary>32-bit RGBA representation</summary>
+        </member>
+        <member name="P:MemwLib.Colors.Rgb32.A">
+            <summary>The opacity value of this instance.</summary>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb32.#ctor(System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>The RGBA values constructor</summary>
+            <inheritdoc cref="M:MemwLib.Colors.Rgb24.#ctor(System.Byte,System.Byte,System.Byte)"/>
+            <param name="a">The opacity value.</param>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb32.#ctor(System.UInt32)">
+            <inheritdoc cref="M:MemwLib.Colors.Rgb24.#ctor(System.UInt32)"/>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb32.#ctor(MemwLib.Colors.Rgb24)">
+            <summary>Rgb24 cast constructor, constructs an instance of RGB32 from an instance of RGB24.</summary>
+            <param name="color">The instance to cast from.</param>
+        </member>
+        <member name="P:MemwLib.Colors.Rgb32.AsUint">
+            <inheritdoc cref="P:MemwLib.Colors.Rgb24.AsUint"/>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb32.op_Explicit(MemwLib.Colors.Rgb32)~System.UInt32">
+            <summary>Cast an instance of RGB32 to an instance of unsigned integer.</summary>
+            <inheritdoc cref="M:MemwLib.Colors.Rgb24.op_Explicit(MemwLib.Colors.Rgb24)~System.UInt32"/>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb32.op_Explicit(System.UInt32)~MemwLib.Colors.Rgb32">
+            <summary>Cast an instance of unsigned integer to an instance of RGB32</summary>
+            <inheritdoc cref="M:MemwLib.Colors.Rgb24.op_Explicit(System.UInt32)~MemwLib.Colors.Rgb24"/>
+            <returns>The casted instance as RGB32.</returns>
+        </member>
+        <member name="T:MemwLib.Colors.Rgb48">
+            <summary>48-bit RGB representation.</summary>
+        </member>
+        <member name="P:MemwLib.Colors.Rgb48.R">
+            <inheritdoc cref="P:MemwLib.Colors.Rgb24.R"/>
+        </member>
+        <member name="P:MemwLib.Colors.Rgb48.G">
+            <inheritdoc cref="P:MemwLib.Colors.Rgb24.G"/>
+        </member>
+        <member name="P:MemwLib.Colors.Rgb48.B">
+            <inheritdoc cref="P:MemwLib.Colors.Rgb24.B"/>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb48.#ctor(System.UInt16,System.UInt16,System.UInt16)">
+            <inheritdoc cref="M:MemwLib.Colors.Rgb24.#ctor(System.Byte,System.Byte,System.Byte)"/>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb48.#ctor(System.UInt64)">
+            <summary>The unsigned integer value constructor.</summary>
+            <param name="color">The decimal representation of the color.</param>
+            <exception cref="T:System.ArgumentException">The color exceeds the 0xFFFFFFFFFFFF value.</exception>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb48.#ctor(MemwLib.Colors.Rgb64)">
+            <summary>Rgb64 cast constructor, constructs an instance of RGB48 from an instance of RGB64.</summary>
+            <param name="color">The instance to cast from.</param>
+        </member>
+        <member name="P:MemwLib.Colors.Rgb48.AsUlong">
+            <summary>Obtain the color decimal value as an unsigned long integer instance.</summary>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb48.op_Explicit(MemwLib.Colors.Rgb48)~System.UInt64">
+            <summary>Cast an instance of RGB48 to an instance of unsigned long integer.</summary>
+            <param name="instance">The instance to cast.</param>
+            <returns>The casted instance as unsigned long integer.</returns>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb48.op_Explicit(System.UInt64)~MemwLib.Colors.Rgb48">
+            <summary>Cast an instance of unsigned long integer to an instance of RGB48</summary>
+            <param name="instance">The instance to cast.</param>
+            <returns>The casted instance as RGB48.</returns>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Pink">
+            <summary>Represents the color Pink as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Crimson">
+            <summary>Represents the color Crimson as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Red">
+            <summary>Represents the color Red as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Maroon">
+            <summary>Represents the color Maroon as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Brown">
+            <summary>Represents the color Brown as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.MistyRose">
+            <summary>Represents the color MistyRose as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Salmon">
+            <summary>Represents the color Salmon as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Coral">
+            <summary>Represents the color Coral as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.OrangeRed">
+            <summary>Represents the color OrangeRed as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Chocolate">
+            <summary>Represents the color Chocolate as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Orange">
+            <summary>Represents the color Orange as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Gold">
+            <summary>Represents the color Gold as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Ivory">
+            <summary>Represents the color Ivory as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Yellow">
+            <summary>Represents the color Yellow as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Olive">
+            <summary>Represents the color Olive as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.YellowGreen">
+            <summary>Represents the color YellowGreen as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.LawnGreen">
+            <summary>Represents the color LawnGreen as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Chartreuse">
+            <summary>Represents the color Chartreuse as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Lime">
+            <summary>Represents the color Lime as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Green">
+            <summary>Represents the color Green as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.SpringGreen">
+            <summary>Represents the color SpringGreen as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Aquamarine">
+            <summary>Represents the color Aquamarine as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Turquoise">
+            <summary>Represents the color Turquoise as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Azure">
+            <summary>Represents the color Azure as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.AquaCyan">
+            <summary>Represents the color AquaCyan as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Teal">
+            <summary>Represents the color Teal as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Lavender">
+            <summary>Represents the color Lavender as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Blue">
+            <summary>Represents the color Blue as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Navy">
+            <summary>Represents the color Navy as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.BlueViolet">
+            <summary>Represents the color BlueViolet as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Indigo">
+            <summary>Represents the color Indigo as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.DarkViolet">
+            <summary>Represents the color DarkViolet as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Plum">
+            <summary>Represents the color Plum as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Magenta">
+            <summary>Represents the color Magenta as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Purple">
+            <summary>Represents the color Purple as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.RedViolet">
+            <summary>Represents the color RedViolet as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Tan">
+            <summary>Represents the color Tan as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Beige">
+            <summary>Represents the color Beige as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.SlateGray">
+            <summary>Represents the color SlateGray as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.DarkSlateGray">
+            <summary>Represents the color DarkSlateGray as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.White">
+            <summary>Represents the color White as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.SmokeWhite">
+            <summary>Represents the color SmokeWhite as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.LightGray">
+            <summary>Represents the color LightGray as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Silver">
+            <summary>Represents the color Silver as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.DarkGray">
+            <summary>Represents the color DarkGray as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Gray">
+            <summary>Represents the color Gray as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.DimGray">
+            <summary>Represents the color DimGray as RGB48 instance</summary>
+        </member>
+        <member name="F:MemwLib.Colors.Rgb48.Black">
+            <summary>Represents the color Black as RGB48 instance</summary>
+        </member>
+        <member name="T:MemwLib.Colors.Rgb64">
+            <summary>64-bit RGBA representation.</summary>
+        </member>
+        <member name="P:MemwLib.Colors.Rgb64.A">
+            <summary>The opacity value.</summary>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb64.#ctor(System.UInt16,System.UInt16,System.UInt16,System.UInt16)">
+            <inheritdoc cref="M:MemwLib.Colors.Rgb32.#ctor(System.Byte,System.Byte,System.Byte,System.Byte)"/>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb64.#ctor(System.UInt64)">
+            <summary>The unsigned integer value constructor.</summary>
+            <param name="color">The decimal representation of the color.</param>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb64.#ctor(MemwLib.Colors.Rgb48)">
+            <summary>Rgb48 cast constructor, constructs an instance of RGB64 from an instance of RGB48.</summary>
+            <param name="color">The instance to cast from.</param>
+        </member>
+        <member name="P:MemwLib.Colors.Rgb64.AsUlong">
+            <inheritdoc cref="P:MemwLib.Colors.Rgb48.AsUlong"/>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb64.op_Explicit(MemwLib.Colors.Rgb64)~System.UInt64">
+            <summary>Cast an instance of RGB64 to an instance of unsigned long integer.</summary>
+            <inheritdoc cref="M:MemwLib.Colors.Rgb48.op_Explicit(MemwLib.Colors.Rgb48)~System.UInt64"/>
+            <returns>The casted instance as unsigned long integer.</returns>
+        </member>
+        <member name="M:MemwLib.Colors.Rgb64.op_Explicit(System.UInt64)~MemwLib.Colors.Rgb64">
+            <summary>Cast an instance of unsigned long integer to an instance of RGB64</summary>
+            <inheritdoc cref="M:MemwLib.Colors.Rgb48.op_Explicit(System.UInt64)~MemwLib.Colors.Rgb48"/>
+            <returns>The casted instance as RGB64.</returns>
+        </member>
+        <member name="T:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2">
+            <summary>Abstract class to define isolated implementations.</summary>
+            <typeparam name="TKey">The type of the keys for this collection instance.</typeparam>
+            <typeparam name="TValue">The type of the values for this collection instance.</typeparam>
+        </member>
+        <member name="F:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.Variables">
+            <summary>Collection default dictionary</summary>
+            <remarks>This should not be exposed.</remarks>
+        </member>
+        <member name="P:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.Length">
+            <summary>How many variables exist in this collection.</summary>
+        </member>
+        <member name="P:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.IsEmpty">
+            <inheritdoc cref="P:MemwLib.CoreUtils.Collections.ICountable.IsEmpty"/>
+        </member>
+        <member name="M:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.#ctor">
+            <summary>Initializes an empty instance.</summary>
+        </member>
+        <member name="M:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.#ctor(MemwLib.CoreUtils.Collections.BaseIsolatedCollection{`0,`1})">
+            <summary>Initializes a collection instance with another collection's items.</summary>
+            <param name="collection">The collection to get the items from.</param>
+        </member>
+        <member name="M:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.Contains(`0)">
+            <summary>Checks if there is a variable with the specified key.</summary>
+            <param name="key">The key to check</param>
+            <returns>true if the variable exists, otherwise false.</returns>
+        </member>
+        <member name="M:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.Set(`0,`1)">
+            <summary>Sets a value in this collection.</summary>
+            <param name="key">The key that references the object.</param>
+            <param name="value">The value itself.</param>
+            <remarks>If the value already existed in that key it will be replaced.</remarks>
+        </member>
+        <member name="M:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.Get(`0)">
+            <summary>Gets a value from this collection.</summary>
+            <param name="key">The key that references the object.</param>
+            <returns>The value that was referenced by the key, or null if it did not exist.</returns>
+        </member>
+        <member name="M:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.Remove(`0)">
+            <inheritdoc cref="M:System.Collections.Generic.Dictionary`2.Remove(`0)"/>
+        </member>
+        <member name="P:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.Item(`0)">
+            <inheritdoc cref="P:System.Collections.Generic.Dictionary`2.Item(`0)"/>
+        </member>
+        <member name="M:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.GetEnumerator">
+            <inheritdoc cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator"/>
+        </member>
+        <member name="T:MemwLib.CoreUtils.Collections.ICountable">
+            <summary>Interface that promises the collection will be able to be counted.</summary>
+        </member>
+        <member name="P:MemwLib.CoreUtils.Collections.ICountable.Length">
+            <summary>Gets the length of this collection.</summary>
+        </member>
+        <member name="P:MemwLib.CoreUtils.Collections.ICountable.IsEmpty">
+            <summary>Whether this collection is empty or not.</summary>
+        </member>
+        <member name="T:MemwLib.Cron.CronManager">
+            <summary>This class acts as a manager for all of your cron jobs.</summary>
+        </member>
+        <member name="M:MemwLib.Cron.CronManager.#ctor(System.Nullable{System.Threading.CancellationToken})">
+            <summary>Constructs a new instance of a cron manager.</summary>
+            <param name="cancellationToken">Cancellation token used to stop all the cron jobs externally.</param>
+        </member>
+        <member name="M:MemwLib.Cron.CronManager.AddJob(System.String,System.String,System.Delegate,System.Object[])">
+            <summary>Adds a cron job to this manager.</summary>
+            <param name="identifier">An identifier for this cron, if null won't be obtainable and must rely on return value.</param>
+            <param name="cron">The cron expression, when to run the task.</param>
+            <param name="action">The task itself, if the function is not void the result will not be used.</param>
+            <param name="parameters">The handler parameters.</param>
+            <exception cref="T:MemwLib.Cron.Types.Exceptions.CronParseException">Thrown when there was an error while parsing the cron expression.</exception>
+            <exception cref="T:MemwLib.Cron.Types.Exceptions.CronAlreadyExistsException">Thrown when another occurrence of this identifier was found in this manager.</exception>
+            <returns>The CronJob instance that represents this job.</returns>
+        </member>
+        <member name="M:MemwLib.Cron.CronManager.AddJob``1(System.String,System.String,System.Delegate,System.Object[])">
+            <inheritdoc cref="M:MemwLib.Cron.CronManager.AddJob(System.String,System.String,System.Delegate,System.Object[])"/>
+            <typeparam name="TReturn">The type of return this handler has.</typeparam>
+            <returns>A CronJob instance that holds an event for return values.</returns>
+        </member>
+        <member name="T:MemwLib.Cron.Types.CronExecutedEventDelegate`1">
+            <summary>Delegate used for the on cron run event in the CronJob class.</summary>
+            <typeparam name="TValue">The type of value the handler returns when executed.</typeparam>
+        </member>
+        <member name="T:MemwLib.Cron.Types.Exceptions.CronAlreadyExistsException">
+            <summary>This exception is thrown when there is already a cron entry in this CronManager.</summary>
+        </member>
+        <member name="P:MemwLib.Cron.Types.Exceptions.CronAlreadyExistsException.Message">
+            <inheritdoc cref="P:System.Exception.Message"/>
+        </member>
+        <member name="T:MemwLib.Cron.Types.Exceptions.CronParseException">
+            <summary>Exception thrown when there was an error while parsing a cron expression.</summary>
+            <remarks>This exception is only thrown internally.</remarks>
+        </member>
+        <member name="P:MemwLib.Cron.Types.Exceptions.CronParseException.Message">
+            <inheritdoc cref="P:System.Exception.Message"/>
+        </member>
+        <member name="P:MemwLib.Cron.Types.Exceptions.CronParseException.Expression">
+            <summary>The invalid cron exception that threw the error.</summary>
+        </member>
+        <member name="T:MemwLib.Cron.Types.Jobs.CronJob">
+            <summary>This class represents a basic cron job.</summary>
+        </member>
+        <member name="P:MemwLib.Cron.Types.Jobs.CronJob.Activated">
+            <summary>
+            Whether this job runs or not, setting this value to
+            true will let the job run, otherwise it will wait until true again.
+            </summary>
+        </member>
+        <member name="P:MemwLib.Cron.Types.Jobs.CronJob.TimesExecuted">
+            <summary>The times this cron was executed.</summary>
+        </member>
+        <member name="M:MemwLib.Cron.Types.Jobs.CronJob.ActionTask">
+            <summary>The task this cron is going to be doing.</summary>
+        </member>
+        <member name="M:MemwLib.Cron.Types.Jobs.CronJob.WaitForCron">
+            <summary
+            >Waits for the next occurrence of time of
+            this specific cron in this instance.
+            </summary>
+            <returns>
+            A task to await that will complete when
+            the next occurrence of time happens.
+            </returns>
+            <exception cref="T:MemwLib.Cron.Types.Exceptions.CronParseException">
+            Thrown when there was an error
+            while parsing the cron expression.
+            </exception>
+        </member>
+        <member name="T:MemwLib.Cron.Types.Jobs.ReturningCronJob`1">
+            <summary>This class represents a cron job.</summary>
+            <typeparam name="TReturn">The type of parameter this job returns each time is ran.</typeparam>
+            <remarks>This class can't be constructed without using a CronManager.</remarks>
+        </member>
+        <member name="E:MemwLib.Cron.Types.Jobs.ReturningCronJob`1.CronExecuted">
+            <summary>Event fired when this cron is executed.</summary>
+        </member>
+        <member name="M:MemwLib.Cron.Types.Jobs.ReturningCronJob`1.ActionTask">
+            <inheritdoc cref="M:MemwLib.Cron.Types.Jobs.ReturningCronJob`1.ActionTask"/>
+        </member>
+        <member name="T:MemwLib.Data.EnvironmentVariables.Attributes.EnvironmentIgnoreAttribute">
+            <summary>Will mark the current property as ignored by the EnvContext type converter.</summary>
+        </member>
+        <member name="T:MemwLib.Data.EnvironmentVariables.Attributes.EnvironmentVariableAttribute">
+            <summary>Define an alternative name for EnvContext type converter.</summary>
+            <remarks>You most likely want to use this if you are following each language naming conventions.</remarks>
+        </member>
+        <member name="M:MemwLib.Data.EnvironmentVariables.Attributes.EnvironmentVariableAttribute.#ctor(System.String)">
+            <summary>Constructor to define the alternative name for the environment variable.</summary>
+            <param name="name">The variable name.</param>
+        </member>
+        <member name="T:MemwLib.Data.EnvironmentVariables.EnvContext">
+            <summary>Environment context is a Dictionary&lt;string, string&gt; encapsulated class to manage environment variables.</summary>
+        </member>
+        <member name="P:MemwLib.Data.EnvironmentVariables.EnvContext.Count">
+            <summary>The amount of variables this context has.</summary>
+        </member>
+        <member name="P:MemwLib.Data.EnvironmentVariables.EnvContext.Item(System.String)">
+            <summary>Value index operator.</summary>
+            <param name="key">The key assigned to the value to get.</param>
+            <returns>The value assigned to the key parameter.</returns>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">The property is retrieved and key does not exist in the collection.</exception>
+        </member>
+        <member name="M:MemwLib.Data.EnvironmentVariables.EnvContext.#ctor(System.Boolean)">
+            <summary>Creates a new instance of EnvContext<see href="https://hexdocs.pm/dotenvy/dotenv-file-format.html">, for accepted format guide see this</see>.</summary>
+            <param name="useSystemEnv">Lets you decide whether to add the system environment variables or not.</param>
+        </member>
+        <member name="M:MemwLib.Data.EnvironmentVariables.EnvContext.AddVariablesFrom(System.IO.Stream,System.Boolean)">
+            <summary>Adds variables from a stream of data reading the remaining length in the stream.</summary>
+            <param name="data">Stream to read from.</param>
+            <param name="closeOnFinish">Whether to close the stream after finished reading.</param>
+            <exception cref="T:System.ArgumentException">The sum of offset and count is larger than the stream length.</exception>
+            <exception cref="T:System.IO.IOException">An I/O exception occurred in the underlying device.</exception>
+            <exception cref="T:System.Data.ConstraintException">There is a conflicting key between the data parameter and the instance.</exception>
+            <exception cref="T:System.FormatException">The data is not well formatted <see href="https://hexdocs.pm/dotenvy/dotenv-file-format.html">, for environment variables</see>.</exception>
+        </member>
+        <member name="M:MemwLib.Data.EnvironmentVariables.EnvContext.AddVariablesFrom(System.IO.Stream,System.Int64,System.Boolean)">
+            <summary>Adds variables from a stream of data till the specified length.</summary>
+            <param name="data">Stream to read from.</param>
+            <param name="length">The length to read from the stream</param>
+            <param name="closeOnFinish">Whether to close the stream after finished reading.</param>
+            <exception cref="T:System.ArgumentException">The sum of offset and count is larger than the stream length.</exception>
+            <exception cref="T:System.IO.IOException">An I/O exception occurred in the underlying device.</exception>
+            <exception cref="T:System.Data.ConstraintException">There is a conflicting key between the data parameter and the instance.</exception>
+            <exception cref="T:System.FormatException">The data is not well formatted <see href="https://hexdocs.pm/dotenvy/dotenv-file-format.html">, for environment variables</see>.</exception>
+        </member>
+        <member name="M:MemwLib.Data.EnvironmentVariables.EnvContext.AddVariablesFrom(System.String)">
+            <summary>Add environment variables from a formatted string.</summary>
+            <param name="data">The string to parse from.</param>
+            <exception cref="T:System.Data.ConstraintException">There is a conflicting key between the data parameter and the instance.</exception>
+            <exception cref="T:System.FormatException">The data is not well formatted for environment variables <see href="https://hexdocs.pm/dotenvy/dotenv-file-format.html"/></exception>
+        </member>
+        <member name="M:MemwLib.Data.EnvironmentVariables.EnvContext.Contains(System.String)">
+            <summary>Checks if there is a value assigned to a key.</summary>
+            <param name="key">The key that should be assigned to the value.</param>
+            <returns>true if the value exists, otherwise false.</returns>
+        </member>
+        <member name="M:MemwLib.Data.EnvironmentVariables.EnvContext.GetEnumerator">
+            <inheritdoc cref="M:System.Collections.IEnumerable.GetEnumerator"/>
+        </member>
+        <member name="M:MemwLib.Data.EnvironmentVariables.EnvContext.ToType``1(System.Boolean,System.Reflection.BindingFlags)">
+            <summary>
+            Convert the current instance to a TInstance instance
+            filling properties dynamically using reflections.
+            </summary>
+            <typeparam name="TInstance">The type that this instance must be converted to.</typeparam>
+            <param name="caseSensitive">Define if the field naming is case sensitive or not.</param>
+            <param name="flags">The meta binding flags to search for properties in the TInstance type.</param>
+            <returns>A new instance of TInstance filled with the parameters found defined in the class.</returns>
+            <remarks>
+            This doesn't assume types as for standard,
+            you will need to manually convert the string to the desired type
+            </remarks>
+        </member>
+        <member name="M:MemwLib.Data.EnvironmentVariables.EnvContext.EntryRegex">
+            <remarks>
+            Pattern explanation:<br/>
+            <code>
+            ○ "key" capture group.<br/>
+                ○ Match a character in the set [A-Z_a-z] greedily at least once.<br/>
+                ○ Match a character in the set [0-9A-Z_a-z] atomically any number of times.<br/>
+            ○ Match ' ' atomically any number of times.<br/>
+            ○ Match '='.<br/>
+            ○ Match ' ' greedily any number of times.<br/>
+            ○ "value" capture group.<br/>
+                ○ Atomic group.<br/>
+                    ○ Conditionally match one of two expressions depending on whether an initial expression matches.<br/>
+                        ○ Condition: Match with 2 alternative expressions, atomically.<br/>
+                            ○ Match '"' atomically at least 3 times.<br/>
+                            ○ Match '\'' atomically at least 3 times.<br/>
+                        ○ Matched: Match a sequence of expressions.<br/>
+                            ○ Match with 2 alternative expressions.<br/>
+                                ○ Match '"' greedily at least 3 times.<br/>
+                                ○ Match '\'' greedily at least 3 times.<br/>
+                            ○ Loop lazily at least once.<br/>
+                                ○ Match with 2 alternative expressions.<br/>
+                                    ○ Match '\n'.<br/>
+                                    ○ Match any character other than '\n'.<br/>
+                            ○ Match with 2 alternative expressions, atomically.<br/>
+                                ○ Match '"' atomically at least 3 times.<br/>
+                                ○ Match '\'' atomically at least 3 times.<br/>
+                        ○ Not Matched: Conditionally match one of two expressions depending on whether an initial expression matches.<br/>
+                            ○ Condition: Match a character in the set ["'] atomically at least 1 and at most 2 times.<br/>
+                            ○ Matched: Match a sequence of expressions.<br/>
+                                ○ Match a character in the set ["'].<br/>
+                                ○ Match a character in the set [^\n"'] greedily at least once.<br/>
+                                ○ Match a character in the set ["'].<br/>
+                            ○ Not Matched: Match a character in the set [^\n"'] atomically at least once.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="M:MemwLib.Data.EnvironmentVariables.EnvContext.SystemVariableRegex">
+            <remarks>
+            Pattern explanation:<br/>
+            <code>
+            ○ Match the string "${".<br/>
+            ○ "name" capture group.<br/>
+                ○ Match a character in the set [A-Z_a-z].<br/>
+                ○ Match a character in the set [0-9A-Z_a-z] atomically any number of times.<br/>
+            ○ Match '}'.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="T:MemwLib.Data.Json.Attributes.JsonObjectAttribute">
+            <summary>Attribute used to define the behavior of a JSON parser on a type.</summary>
+        </member>
+        <member name="M:MemwLib.Data.Json.Attributes.JsonObjectAttribute.#ctor(MemwLib.Data.Json.Enums.JsonObjectBehavior)">
+            <summary>
+            Initializes a new instance of JsonObjectAttribute
+            to define the behavior of the parser on the type.
+            </summary>
+            <param name="behavior">the defined behavior.</param>
+        </member>
+        <member name="T:MemwLib.Data.Json.Attributes.JsonPropertyAttribute">
+            <summary>
+            This class defines the name of the json property in
+            the object that should be assigned to this type's property.
+            </summary>
+        </member>
+        <member name="M:MemwLib.Data.Json.Attributes.JsonPropertyAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of JsonPropertyAttribute
+            to define the name of the property.
+            </summary>
+            <param name="name">The related name on the JSON object.</param>
+            <remarks>
+            If the name parameter was not provided this
+            will only instruct the parser to include this property
+            if the object behavior was defined to be OnlyPropertiesWithAttribute,
+            and search the property name in the JSON object which will most
+            likely not be found (if following json naming conventions).
+            </remarks>
+        </member>
+        <member name="T:MemwLib.Data.Json.Enums.JsonObjectBehavior">
+            <summary>Enum used to define the behavior of a type acting as a json object.</summary>
+        </member>
+        <member name="F:MemwLib.Data.Json.Enums.JsonObjectBehavior.OnlyPropertiesWithAttribute">
+            <summary>This will only fill the properties that have the JsonPropertyAttribute.</summary>
+            <exception cref="T:System.NullReferenceException"
+            >A non nullable property that didn't
+            have the JsonPropertyAttribute wasn't filled.
+            </exception>
+        </member>
+        <member name="F:MemwLib.Data.Json.Enums.JsonObjectBehavior.AllProperties">
+            <summary>Fills all properties that are found in the object.</summary>
+            <exception cref="T:System.NullReferenceException">
+            A non nullable property present
+            in the type was not found in the target object.
+            </exception>
+            <remarks>
+            This is the default value, if you consider using this value
+            you might as well remove the JsonObjectAttribute from your class.
+            </remarks>
+        </member>
+        <member name="T:MemwLib.Data.Json.Exceptions.InvalidJsonConstraintException">
+            <summary>Thrown when a constraint for JSON format was broken.</summary>
+            <remarks>This class is not constructable externally.</remarks>
+        </member>
+        <member name="P:MemwLib.Data.Json.Exceptions.InvalidJsonConstraintException.Message">
+            <inheritdoc cref="P:System.Exception.Message"/>
+        </member>
+        <member name="T:MemwLib.Data.Json.Exceptions.InvalidJsonSequenceException">
+            <summary>Thrown when an invalid sequence start or end is found</summary>
+            <remarks>This class is not constructable externally.</remarks>
+        </member>
+        <member name="P:MemwLib.Data.Json.Exceptions.InvalidJsonSequenceException.Message">
+            <inheritdoc cref="P:System.Exception.Message"/>
+        </member>
+        <member name="T:MemwLib.Data.Json.Exceptions.InvalidJsonTargetTypeException">
+            <summary>Thrown when the target type for a JSON payload didn't match.</summary>
+            <remarks>This class is not constructable externally.</remarks>
+        </member>
+        <member name="P:MemwLib.Data.Json.Exceptions.InvalidJsonTargetTypeException.Message">
+            <inheritdoc cref="P:System.Exception.Message"/>
+        </member>
+        <member name="T:MemwLib.Data.Json.Exceptions.UnexpectedJsonEoiException">
+            <summary>Thrown when an unexpected character was found.</summary>
+            <remarks>This class is not constructable externally.</remarks>
+        </member>
+        <member name="P:MemwLib.Data.Json.Exceptions.UnexpectedJsonEoiException.Message">
+            <inheritdoc cref="P:System.Exception.Message"/>
+        </member>
+        <member name="T:MemwLib.Data.Json.JsonParser">
+            <summary>A class that defines utilities for working with the JSON data type.</summary>
+        </member>
+        <member name="M:MemwLib.Data.Json.JsonParser.Deserialize``1(System.String)">
+            <summary>
+            Verifies an converts a JSON string into an instance
+            of TResult? if it could be converted.
+            </summary>
+            <param name="payload">The JSON payload to convert.</param>
+            <typeparam name="TResult">The type of the result.</typeparam>
+            <exception cref="T:MemwLib.Data.Json.Exceptions.InvalidJsonConstraintException">Thrown when a constraint for the JSON standard was broken.</exception>
+            <exception cref="T:MemwLib.Data.Json.Exceptions.InvalidJsonSequenceException">Thrown when a sequence of a JSON fragment didn't match enclosing rules.</exception>
+            <exception cref="T:MemwLib.Data.Json.Exceptions.UnexpectedJsonEoiException">Thrown when an unexpected end of input was found in this object while verifying.</exception>
+            <exception cref="T:MemwLib.Data.Json.Exceptions.InvalidJsonTargetTypeException">Thrown when the type of this payload didn't match the target type.</exception>
+            <exception cref="T:System.NullReferenceException">
+            Thrown when a non-nullable property wasn't found in the object or not
+            set due to JsonObjectBehavior definitions in the target type.
+            </exception>
+            <returns>An instance of TResult constructed based on the payload provided.</returns>
+            <remarks>For collections only List&lt;T&gt; and T[] are supported.</remarks>
+        </member>
+        <member name="M:MemwLib.Data.Json.JsonParser.IsValidJson(System.String,System.Boolean)">
+            <summary>Simply checks if a JSON payload is valid or invalid.</summary>
+            <param name="payload">the JSON payload to check.</param>
+            <returns>Whether the payload is valid or invalid.</returns>
+        </member>
+        <member name="M:MemwLib.Data.Json.JsonParser.Serialize(System.Object,System.Int32)">
+            <summary>Converts an object to a string JSON object as JavaScript's JSON.stringify.</summary>
+            <param name="payload"></param>
+            <param name="indentation"></param>
+            <exception cref="T:MemwLib.Data.Json.Exceptions.InvalidJsonConstraintException">Supplied dictionary keys aren't strings.</exception>
+            <returns></returns>
+        </member>
+        <member name="T:MemwLib.Data.ProgramArguments.ArgumentParser">
+            <summary>Main class for console line arguments parser utilities.</summary>
+        </member>
+        <member name="M:MemwLib.Data.ProgramArguments.ArgumentParser.Parse``1(MemwLib.Data.ProgramArguments.Options.ArgumentParseOptionsTyped)">
+            <summary>Parse arguments from a console line argument formatted string[].</summary>
+            <param name="options">Configuration for the argument parsing.</param>
+            <typeparam name="TParsed">The resulting type to return the parsed arguments as.</typeparam>
+            <returns>The parsed arguments as a TParsed instance.</returns>
+            <remarks><para>- Only the properties will be counted as valid fields for argument stubs.</para></remarks>
+            <remarks><para>- Types that do not implement IParsable won't count as valid arguments, thus will be ignored.</para></remarks>
+        </member>
+        <member name="M:MemwLib.Data.ProgramArguments.ArgumentParser.Parse(MemwLib.Data.ProgramArguments.Options.ArgumentParseOptionsDynamic)">
+            <summary>Parse from a console line argument formatted string[].</summary>
+            <param name="options">Configuration for the argument parsing.</param>
+            <returns>A System.Dynamic.ExpandoObject aka dynamic instance containing all of the passed arguments</returns>
+            <exception cref="T:System.Data.ConstraintException">Thrown when a user defined constraint is not met.</exception>
+            <remarks><para>- Types are assumed based on the input string, for type safety it's recommended to use Parse&lt;TParsed&gt; instead</para></remarks>
+            <remarks><para>- All of the properties are lowercased</para></remarks>
+        </member>
+        <member name="T:MemwLib.Data.ProgramArguments.Attributes.ArgumentAttribute">
+            <summary>Modifier to change long and short name for an argument.</summary>
+        </member>
+        <member name="M:MemwLib.Data.ProgramArguments.Attributes.ArgumentAttribute.#ctor(System.String,System.String)">
+            <summary>Constructor for argument modifier.</summary>
+            <param name="shortName">The short name for an argument.</param>
+            <param name="longName">The long name for an argument.</param>
+        </member>
+        <member name="T:MemwLib.Data.ProgramArguments.Attributes.ArgumentTypeAttribute">
+            <summary>Define the behavior for how to treat an argument class.</summary>
+        </member>
+        <member name="M:MemwLib.Data.ProgramArguments.Attributes.ArgumentTypeAttribute.#ctor(MemwLib.Data.ProgramArguments.Attributes.ArgumentTypeTreat)">
+            <summary>Argument type constructor.</summary>
+            <param name="treat">Tell the parser how to treat the class.</param>
+        </member>
+        <member name="T:MemwLib.Data.ProgramArguments.Attributes.ArgumentTypeTreat">
+            <summary>Behavior definitions for how to treat an argument class.</summary>
+        </member>
+        <member name="F:MemwLib.Data.ProgramArguments.Attributes.ArgumentTypeTreat.AllWithArgumentAttribute">
+            <summary>Will only parse all private and public properties but only with argument attribute.</summary>
+        </member>
+        <member name="F:MemwLib.Data.ProgramArguments.Attributes.ArgumentTypeTreat.OnlyPublicWithArgumentAttribute">
+            <summary>Will only parse public properties but only with argument attribute.</summary>
+        </member>
+        <member name="F:MemwLib.Data.ProgramArguments.Attributes.ArgumentTypeTreat.All">
+            <summary>Will parse private and public properties even without the argument attribute.</summary>
+        </member>
+        <member name="F:MemwLib.Data.ProgramArguments.Attributes.ArgumentTypeTreat.OnlyPublic">
+            <summary>Will only parse public properties even without the argument attribute.</summary>
+        </member>
+        <member name="T:MemwLib.Data.ProgramArguments.Collections.ArgumentAliases">
+            <summary>Aliases for dynamic arguments.</summary>
+        </member>
+        <member name="M:MemwLib.Data.ProgramArguments.Collections.ArgumentAliases.AddAlias(System.String,System.String)">
+            <summary>Adds an alias to this collection.</summary>
+            <returns>The same instance.</returns>
+        </member>
+        <member name="M:MemwLib.Data.ProgramArguments.Collections.ArgumentAliases.GetEnumerator">
+            <inheritdoc cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator"/>
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Collections.ArgumentAliases.Item(System.String)">
+            <summary>Index a property name by alias.</summary>
+            <param name="alias">The alias to find the name of.</param>
+        </member>
+        <member name="T:MemwLib.Data.ProgramArguments.Exceptions.ArgumentNonOptionalException">
+            <summary>Thrown when a value is not found for a non optional property.</summary>
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Exceptions.ArgumentNonOptionalException.Message">
+            <inheritdoc cref="P:System.Exception.Message"/>
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Exceptions.ArgumentNonOptionalException.TargetProperty">
+            <summary>The property that was supposed to be set.</summary>
+        </member>
+        <member name="T:MemwLib.Data.ProgramArguments.Exceptions.ConvertArgumentException">
+            <summary>Thrown when an argument couldn't be converted successfully</summary>
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Exceptions.ConvertArgumentException.Message">
+            <inheritdoc cref="P:System.Exception.Message"/>
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Exceptions.ConvertArgumentException.TargetProperty">
+            <summary>The property that was supposed to be set.</summary>
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Exceptions.ConvertArgumentException.Value">
+            <summary>The value that was supposed to be set to the target property.</summary>
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Exceptions.ConvertArgumentException.InternalException">
+            <summary>The internal exception thrown by the converter.</summary>
+        </member>
+        <member name="T:MemwLib.Data.ProgramArguments.Options.ArgumentParseOptions">
+            <summary>Base options for command line argument parsing.</summary>
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Options.ArgumentParseOptions.Arguments">
+            <summary>The arguments to parse from.</summary>
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Options.ArgumentParseOptions.LongPrefix">
+            <summary>The prefix for long argument keys.</summary>
+            <example>--key value</example>
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Options.ArgumentParseOptions.ShortPrefix">
+            <summary>The prefix for short argument keys.</summary>
+            <example>-k value</example>
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Options.ArgumentParseOptions.ShouldExplicitlyHaveValue">
+            <summary>Defines if the arguments should explicitly have a value and not infer behavior from type.</summary>
+            <example>
+            the option "--enable" could be a boolean,
+            if the behavior is inferred from usage it will be true on present, whether the value is true or has no value.
+            </example>
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Options.ArgumentParseOptions.CaseSensitive">
+            <summary>Defines whether property lookup is case sensitive or not.</summary>
+        </member>
+        <member name="T:MemwLib.Data.ProgramArguments.Options.ArgumentParseOptionsDynamic">
+            <summary>Options for command line argument parsing for dynamic output.</summary>                                                     
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Options.ArgumentParseOptionsDynamic.Aliases">
+            <summary>
+            Aliases for dynamic arguments, short argument names will
+            search for its long pair and won't be set if not found.
+            </summary>
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Options.ArgumentParseOptionsDynamic.AssumeTypes">
+            <summary>
+            Whether to assume types based on string
+            comparison like true or false being a boolean
+            </summary>
+        </member>
+        <member name="P:MemwLib.Data.ProgramArguments.Options.ArgumentParseOptionsDynamic.OverwriteDuplicates">
+            <summary>
+            Overwrite a duplicate key if true,
+            otherwise throw ConstraintException
+            </summary>
+        </member>
+        <member name="T:MemwLib.Data.ProgramArguments.Options.ArgumentParseOptionsTyped">
+            <summary>Options for command line argument parsing for typed output.</summary>
+        </member>
+        <member name="T:MemwLib.Http.HttpRequests">
+            <summary>Class that statically holds HTTP request methods.</summary>
+        </member>
+        <member name="M:MemwLib.Http.HttpRequests.CreateRequest(MemwLib.Http.Types.Configuration.HttpRequestConfig)">
+            <summary>Sends an HTTP request based on the request builder parameter.</summary>
+            <param name="config">Request configuration parameters.</param>
+            <returns>A response from the server.</returns>
+            <exception cref="T:System.Net.Sockets.SocketException">An error occurred while trying to access the socket.</exception>
+        </member>
+        <member name="T:MemwLib.Http.HttpServer">
+            <summary>HTTP server that behaves like express.js and means easier use.</summary>
+        </member>
+        <member name="P:MemwLib.Http.HttpServer.State">
+            <summary>Whether this server instance is on development or production mode.</summary>
+        </member>
+        <member name="P:MemwLib.Http.HttpServer.SuccessfulRequests">
+            <summary>
+            Contains the count of successful requests
+            that returned 100-299 this server handled.
+            </summary>
+        </member>
+        <member name="P:MemwLib.Http.HttpServer.FailedRequests">
+            <summary>
+            Contains the count of failed requests
+            that returned 300-599 this server handled.
+            </summary>
+        </member>
+        <member name="E:MemwLib.Http.HttpServer.OnLog">
+            <summary>Event that will be fired each time this server logged something.</summary>
+        </member>
+        <member name="M:MemwLib.Http.HttpServer.#ctor(MemwLib.Http.Types.Configuration.HttpServerConfig,System.Nullable{System.Threading.CancellationToken})">
+            <summary>Default constructor for HttpServer.</summary>
+            <param name="config">Tells the server how it should behave.</param>
+            <param name="cancellationToken">Token to stop the server on cancellation.</param>
+            <inheritdoc cref="M:System.Net.Sockets.TcpListener.Start"/>
+            <exception cref="T:System.OutOfMemoryException">There is not enough memory available to start this server.</exception>
+        </member>
+        <member name="M:MemwLib.Http.HttpServer.Finalize">
+            <summary>Http server destructor... Is this even visible?</summary>
+        </member>
+        <member name="M:MemwLib.Http.HttpServer.AddGlobalMiddleware(MemwLib.Http.Types.MiddleWareDelegate)">
+            <summary>Adds a global middleware piece that will be run before every endpoint.</summary>
+            <param name="handler">The middleware piece to execute.</param>
+            <returns>The same server instance for sake of chaining declarations.</returns>
+            <remarks>This middleware will run before any other individual middleware, and will be called in order of declaration.</remarks>
+        </member>
+        <member name="M:MemwLib.Http.HttpServer.AddEndpoint(MemwLib.Http.Types.RequestMethodType,System.Text.RegularExpressions.Regex,MemwLib.Http.Types.RequestDelegate)">
+            <summary>Registers an endpoint to this server that runs the handler if the method and route match.</summary>
+            <param name="requestMethod">The request method flags that will trigger this handler.</param>
+            <param name="regexPattern">The regex pattern for matching the route to trigger this handler.</param>
+            <param name="handler">What will this handler do when triggered.</param>
+            <remarks>
+            If two regex pattern conflict, the one that's added
+            first will run while leaving the remaining useless.
+            </remarks>
+        </member>
+        <member name="M:MemwLib.Http.HttpServer.AddEndpoint(MemwLib.Http.Types.RequestMethodType,System.String,MemwLib.Http.Types.RequestDelegate)">
+            <summary>Registers an endpoint to this server that runs the handler if the method and route match.</summary>
+            <param name="requestMethod">The request method flags that will trigger this handler.</param>
+            <param name="path">The literal path for matching the route to trigger this handler.</param>
+            <param name="handler">What will this handler do when triggered.</param>
+            <remarks>
+            If two path conflicts or is the same as another,
+            the one that's added first will run while leaving the remaining useless.
+            </remarks>
+        </member>
+        <member name="M:MemwLib.Http.HttpServer.AddGroup``1">
+            <summary>Adds a route group defined by a RouteGroupAttribute.</summary>
+            <typeparam name="TGroup">The group class type.</typeparam>
+            <remarks>The target type must not be internal in order to get all the members from it.</remarks>
+        </member>
+        <member name="M:MemwLib.Http.HttpServer.AddGroup(System.Type)">
+            <summary>Adds a route group defined by a RouteGroupAttribute.</summary>
+            <param name="type">The group class type.</param>
+            <remarks>The target type must not be internal in order to get all the members from it.</remarks>
+        </member>
+        <member name="M:MemwLib.Http.HttpServer.AddResponseListener(MemwLib.Http.Types.Entities.ResponseCodes,MemwLib.Http.Types.InterceptorDelegate)">
+            <summary>
+            Lets you intercept a response code and do/respond
+            something else before the sent response.
+            </summary>
+            <param name="code">The response code to intercept.</param>
+            <param name="handler">What will this handler do when intercepted.</param>
+            <returns>The same instance to act as a constructor.</returns>
+            <remarks>
+            The interceptors will run in declaration order,
+            if the response code changes, it won't trigger other code interceptors.
+            </remarks>
+        </member>
+        <member name="M:MemwLib.Http.HttpServer.Dispose">
+            <inheritdoc cref="M:System.IDisposable.Dispose"/>
+        </member>
+        <member name="T:MemwLib.Http.Types.Attributes.GroupMemberAttribute">
+            <summary>Defines a group member that forms part of a route group.</summary>
+        </member>
+        <member name="M:MemwLib.Http.Types.Attributes.GroupMemberAttribute.#ctor(MemwLib.Http.Types.RequestMethodType,System.String,System.Boolean)">
+            <summary>Constructor to define group member route.</summary>
+            <param name="requestMethod">The HTTP method for the route.</param>
+            <param name="route">The route, must not be an empty string.</param>
+            <param name="asRegex">Specifies whether the route will be using as regex or not.</param>
+            <remarks>
+            If placed inside a class that doesn't have the
+            RouteGroupAttribute, will define the route from root.
+            BEWARE THE ROUTES SHOULD MATCH, IF THE GROUP MEMBER ENDS WITH / AND THIS STARTS WITH / IT WILL TRY TO MATCH //
+            </remarks>
+        </member>
+        <member name="T:MemwLib.Http.Types.Attributes.RouteGroupAttribute">
+            <summary>Defines a route group of static members for HTTP routes.</summary>
+        </member>
+        <member name="M:MemwLib.Http.Types.Attributes.RouteGroupAttribute.#ctor(System.String,System.Boolean)">
+            <summary>Constructor to define the route group's prefix.</summary>
+            <param name="route">The prefix, must not be an empty string.</param>
+            <param name="asRegex">Specifies whether the route will be using as regex or not.</param>
+            <example>
+            The first part of the route group as in /users and
+            the members would need to be accessed within /users/member
+            </example>
+            <remarks>BEWARE THE ROUTES SHOULD MATCH, IF THE GROUP MEMBER ENDS WITH / AND THIS STARTS WITH / IT WILL TRY TO MATCH //</remarks>
+        </member>
+        <member name="T:MemwLib.Http.Types.Attributes.UsesMiddlewareAttribute">
+            <summary>Enables routes to use middleware.</summary>
+            <remarks>
+            The group middleware will be executed first,
+            then all of the member middleware, everything will be executed from first to last.
+            </remarks>
+            <example>
+            Please refer to MiddlewareDelegate
+            documentation for more information in the allowed method signatures.
+            </example>
+        </member>
+        <member name="M:MemwLib.Http.Types.Attributes.UsesMiddlewareAttribute.#ctor(System.Type,System.String)">
+            <summary>Constructor to set the middleware target.</summary>
+            <remarks>Only the static methods are eligible for invocation, the order is specified by attribute declaration.</remarks>
+            <exception cref="T:MemwLib.Http.Types.Exceptions.MiddleWareNotEligibleException">Thrown when the current method is not eligible for invocation.</exception>
+            <remarks>
+            The group middleware will be executed first,
+            then all of the member middleware, everything will be executed from first to last.
+            </remarks>
+            <example>
+            Please refer to the MiddlewareDelegate documentation to see the required
+            method signature.
+            </example>
+        </member>
+        <member name="T:MemwLib.Http.Types.Collections.HeaderCollection">
+            <summary>Collection implementation for HTTP headers.</summary>
+            <remarks>The constructor for this collection is internal.</remarks>
+        </member>
+        <member name="M:MemwLib.Http.Types.Collections.HeaderCollection.Verify(System.String,System.String)">
+            <inheritdoc cref="M:MemwLib.Http.Types.Collections.ParsingCollection.Verify(System.String,System.String)"/>
+        </member>
+        <member name="M:MemwLib.Http.Types.Collections.HeaderCollection.ToString">
+            <inheritdoc cref="M:MemwLib.Http.Types.Collections.ParsingCollection.ToString"/>
+        </member>
+        <member name="M:MemwLib.Http.Types.Collections.HeaderCollection.HeaderVerification">
+            <remarks>
+            Pattern explanation:<br/>
+            <code>
+            ○ "key" capture group.<br/>
+                ○ Match a character in the set [-0-9A-Z_a-z] atomically at least once.<br/>
+            ○ Match the string ": ".<br/>
+            ○ "value" capture group.<br/>
+                ○ Match a character in the set [ -~] atomically at least once.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="T:MemwLib.Http.Types.Collections.HttpRegexGroupCollection">
+            <summary>A collection implementation for capturing groups found in URLs in routes.</summary>
+            <remarks>The constructor for this collection is internal.</remarks>
+        </member>
+        <member name="P:MemwLib.Http.Types.Collections.HttpRegexGroupCollection.Item(System.String)">
+            <summary>Indexer to get a specific group from the current route.</summary>
+            <param name="index">The index of the group, if named a string otherwise an integer.</param>
+            <example>For groups like (?&lt;name&gt;\d) use the string indexer otherwise if the group is conventional use the integer indexer.</example>
+        </member>
+        <member name="P:MemwLib.Http.Types.Collections.HttpRegexGroupCollection.Item(System.Int32)">
+            <inheritdoc cref="P:MemwLib.Http.Types.Collections.HttpRegexGroupCollection.Item(System.String)"/>
+        </member>
+        <member name="T:MemwLib.Http.Types.Collections.ParameterCollection">
+            <summary>Collection implementation for HTTP URI parameters.</summary>
+            <remarks>The constructor for this collection is internal.</remarks>
+        </member>
+        <member name="M:MemwLib.Http.Types.Collections.ParameterCollection.Verify(System.String,System.String)">
+            <inheritdoc cref="M:MemwLib.Http.Types.Collections.ParsingCollection.Verify(System.String,System.String)"/>
+        </member>
+        <member name="M:MemwLib.Http.Types.Collections.ParameterCollection.ToString">
+            <inheritdoc cref="M:MemwLib.Http.Types.Collections.ParsingCollection.ToString"/>
+        </member>
+        <member name="M:MemwLib.Http.Types.Collections.ParameterCollection.ParameterVerification">
+            <remarks>
+            Pattern explanation:<br/>
+            <code>
+            ○ "key" capture group.<br/>
+                ○ Match a character in the set [!$'-;@-Z\\_a-z~] atomically at least once.<br/>
+            ○ Match '='.<br/>
+            ○ "value" capture group.<br/>
+                ○ Match a character in the set [!$'-;@-Z\\_a-z~] atomically at least once.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="T:MemwLib.Http.Types.Collections.ParsingCollection">
+            <summary>
+            Abstract class for collections that need to be parsed,
+            contains common fields between all the collection types.
+            </summary>
+            <example>
+            Headers in HTTP requests/responses need to be
+            parsed from "Key: value" to an actual collection
+            </example>
+        </member>
+        <member name="M:MemwLib.Http.Types.Collections.ParsingCollection.ToString">
+            <summary>Abstract override ToString() method to prepare the instance for a body.</summary>
+            <returns>The prepared string for an HTTP body.</returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Collections.ParsingCollection.Verify(System.String,System.String)">
+            <summary>Verification method for KeyValuePairs.</summary>
+            <param name="key">The key of the collection item.</param>
+            <param name="value">The value of the collection item.</param>
+            <returns>true if the pair is valid, otherwise false.</returns>
+            <remarks>This method should not be exposed.</remarks>
+        </member>
+        <member name="M:MemwLib.Http.Types.Collections.ParsingCollection.op_Explicit(MemwLib.Http.Types.Collections.ParsingCollection)~System.String">
+            <summary>Runs the ToString() method of the specified instance.</summary>
+            <param name="instance">The instance to run the method on.</param>
+            <returns>The result of the ToString() call in the instance.</returns>
+        </member>
+        <member name="P:MemwLib.Http.Types.Collections.ParsingCollection.Item(System.String)">
+            <summary>Key indexer for a collection.</summary>
+            <param name="key">The key assigned to the desired value.</param>
+            <exception cref="T:System.ArgumentException">The value set is null.</exception>
+        </member>
+        <member name="T:MemwLib.Http.Types.Collections.SessionParameterCollection">
+            <summary>A collection implementation for session parameters passed from middleware.</summary>
+            <remarks>The constructor for this collection is internal.</remarks>
+        </member>
+        <member name="M:MemwLib.Http.Types.Collections.SessionParameterCollection.Get``1(System.String)">
+            <inheritdoc cref="M:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.Get(`0)"/>
+            <typeparam name="TValue">The type of the value that is referenced by the key.</typeparam>
+        </member>
+        <member name="T:MemwLib.Http.Types.Configuration.HttpRequestConfig">
+            <summary>Request configuration to send a request to a server.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Configuration.HttpRequestConfig.Url">
+            <summary>Where to send the request to</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Configuration.HttpRequestConfig.Method">
+            <summary>The request method type.</summary>
+            <remarks>Flags are not supported, using them will throw an exception.</remarks>
+        </member>
+        <member name="P:MemwLib.Http.Types.Configuration.HttpRequestConfig.Headers">
+            <summary>The headers for this request.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Configuration.HttpRequestConfig.Body">
+            <summary>The body of this request.</summary>
+        </member>
+        <member name="T:MemwLib.Http.Types.Configuration.HttpServerConfig">
+            <summary>This class serves as configuration for the HttpServer constructor.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Configuration.HttpServerConfig.Address">
+            <summary>The address this server is going to listen to.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Configuration.HttpServerConfig.Port">
+            <summary>The port this server is going to listen to.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Configuration.HttpServerConfig.ServerState">
+            <summary>The current server state, it tells the server if it should show or not debug data.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Configuration.HttpServerConfig.SslCertificate">
+            <summary>The certificate path this server is going to use.</summary>
+            <remarks>If null, it's going to use a self signed certificate.</remarks>
+        </member>
+        <member name="P:MemwLib.Http.Types.Configuration.HttpServerConfig.SslBehavior">
+            <summary>Defines the server behavior on how it should interact with SSL</summary>
+        </member>
+        <member name="M:MemwLib.Http.Types.Configuration.HttpServerConfig.#ctor">
+            <inheritdoc cref="T:MemwLib.Http.Types.Configuration.HttpServerConfig"/>
+        </member>
+        <member name="T:MemwLib.Http.Types.Content.BodyConverter">
+            <summary>
+            This class is intended to add interoperability
+            between strings and IBody implementations
+            </summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Content.BodyConverter.ContentType">
+            <summary>The content type this BodyConverter is holding.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Content.BodyConverter.RawBody">
+            <summary>The raw body contained by this converter.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Content.BodyConverter.IsEmpty">
+            <summary>Whether the current body is empty or not.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Content.BodyConverter.Length">
+            <summary>Gets the length of the body in a raw format.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Content.BodyConverter.Empty">
+            <summary>Returns an empty instance of a BodyConverter.</summary>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.BodyConverter.#ctor(System.String)">
+            <summary>
+            BodyConverter raw constructor,
+            initializes this instance from a raw string.
+            </summary>
+            <param name="raw">The string that contains the body content.</param>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.BodyConverter.#ctor(MemwLib.Http.Types.Content.IBody)">
+            <summary>
+            BodyConverter instance constructor, initializes
+            this instance from a IBody implementation instance.
+            </summary>
+            <param name="body">The body to convert from.</param>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.BodyConverter.ReadAs``1">
+            <summary>Reads the current BodyConverter instance as a body instance.</summary>
+            <typeparam name="TBody">The type of body to convert to.</typeparam>
+            <returns>
+            An instance of TBody based on this converter's
+            raw string or null if there was no body in the first place.
+            </returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.BodyConverter.TryReadAs``1(``0@)">
+            <summary>Tries to read the current body converter instance as a body instance.</summary>
+            <param name="body">The result of this conversion.</param>
+            <typeparam name="TBody">The type of body to convert to.</typeparam>
+            <returns>A boolean instance whether the body could be converted or not.</returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.BodyConverter.ToString">
+            <inheritdoc cref="M:System.Object.ToString"/>
+        </member>
+        <member name="T:MemwLib.Http.Types.Content.IBody">
+            <summary>Interface used to define which class behaves as a body.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Content.IBody.ContentType">
+            <summary>The content type of this body.</summary>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.IBody.ParseImpl(System.String)">
+            <summary>
+            This method implementation is used to parse
+            the current body implementation from an string.
+            </summary>
+            <param name="content">The string content to parse from.</param>
+            <returns>
+            An instance of the current body
+            implementation based on the provided string content.
+            </returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.IBody.ToRaw">
+            <summary>Convert the current body implementation to a raw string.</summary>
+            <returns>A raw string representing the current body implementation.</returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.IBody.Parse``1(System.String)">
+            <summary>Parse some string to a body of the defined type.</summary>
+            <param name="content">The raw content to parse from.</param>
+            <typeparam name="TBody">The target type.</typeparam>
+            <returns>
+            An instance of the target type based in the
+            provided raw string content.
+            </returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.IBody.TryParse``1(System.String,``0@)">
+            <summary>Tries to parse a raw string to a body.</summary>
+            <param name="content">The raw content to parse from.</param>
+            <param name="body">The conversion result, null if couldn't convert.</param>
+            <typeparam name="TBody">The type of body to convert to.</typeparam>
+            <returns>A boolean instance whether the conversion was successful or not.</returns>
+        </member>
+        <member name="T:MemwLib.Http.Types.Content.Implementations.RawBody">
+            <summary>Body implementation for raw string body.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Content.Implementations.RawBody.ContentType">
+            <inheritdoc cref="P:MemwLib.Http.Types.Content.IBody.ContentType"/>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.Implementations.RawBody.#ctor(System.String)">
+            <summary>Initialize a raw body instance with a string.</summary>
+            <param name="content">The string to initialize the body with.</param>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.Implementations.RawBody.ParseImpl(System.String)">
+            <inheritdoc cref="M:MemwLib.Http.Types.Content.IBody.ParseImpl(System.String)"/>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.Implementations.RawBody.ToRaw">
+            <inheritdoc cref="M:MemwLib.Http.Types.Content.IBody.ToRaw"/>
+        </member>
+        <member name="T:MemwLib.Http.Types.Content.Implementations.StreamBody">
+            <summary>Read a body as a stream</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Content.Implementations.StreamBody.ContentType">
+            <inheritdoc cref="P:MemwLib.Http.Types.Content.IBody.ContentType"/>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.Implementations.StreamBody.#ctor(System.IO.Stream,System.String,System.Boolean)">
+            <summary>Create a new instance of Stream body</summary>
+            <param name="stream">The stream to handle.</param>
+            <param name="contentType">The stream mime type.</param>
+            <param name="closeOnFinish">Whether to close or not on dispose this instance.</param>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.Implementations.StreamBody.#ctor(System.IO.Stream,System.Boolean)">
+            <summary>Create a new instance of Stream body</summary>
+            <param name="stream">The stream to handle.</param>
+            <param name="closeOnFinish">Whether to close or not on dispose this instance.</param>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.Implementations.StreamBody.ParseImpl(System.String)">
+            <inheritdoc cref="M:MemwLib.Http.Types.Content.IBody.ParseImpl(System.String)"/>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.Implementations.StreamBody.ToRaw">
+            <inheritdoc cref="M:MemwLib.Http.Types.Content.IBody.ToRaw"/>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.Implementations.StreamBody.Dispose">
+            <inheritdoc cref="M:System.IDisposable.Dispose"/>
+        </member>
+        <member name="T:MemwLib.Http.Types.Content.Implementations.UrlEncodedBody">
+            <summary>Reads and parses a post x-www-form-urlencoded body.</summary>
+            <example>name=john&amp;age=20</example>
+        </member>
+        <member name="P:MemwLib.Http.Types.Content.Implementations.UrlEncodedBody.ContentType">
+            <inheritdoc cref="P:MemwLib.Http.Types.Content.IBody.ContentType"/>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.Implementations.UrlEncodedBody.#ctor(System.Collections.Generic.KeyValuePair{System.String,System.String}[])">
+            <summary>Initializes an instance of x-www-form-urlencoded body.</summary>
+            <param name="pairs">The pairs the body will contain.</param>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.Implementations.UrlEncodedBody.ParseImpl(System.String)">
+            <inheritdoc cref="M:MemwLib.Http.Types.Content.IBody.ParseImpl(System.String)"/>
+        </member>
+        <member name="M:MemwLib.Http.Types.Content.Implementations.UrlEncodedBody.ToRaw">
+            <inheritdoc cref="M:MemwLib.Http.Types.Content.IBody.ToRaw"/>
+        </member>
+        <member name="T:MemwLib.Http.Types.RequestDelegate">
+            <summary>The delegate used for HTTPServer endpoint handler.</summary>
+            <param name="request">The request sent by the client.</param>
+            <returns>The response that the server should send.</returns>
+        </member>
+        <member name="T:MemwLib.Http.Types.LogDelegate">
+            <summary>The delegate used for Logging in the HTTPServer.</summary>
+            <param name="message">The message that the server returned.</param>
+        </member>
+        <member name="T:MemwLib.Http.Types.MiddleWareDelegate">
+            <summary>Delegate used to implement custom logic to HTTP requests within the HTTPServer.</summary>
+            <param name="request">The message sent by the client.</param>
+            <returns>The response that the server should send.</returns>
+            <remarks>
+            Returning a response after calling the next method will result in ignoring that response,
+            so you might want to simply return null after the call to the next function.
+            </remarks>
+        </member>
+        <member name="T:MemwLib.Http.Types.InterceptorDelegate">
+            <summary>Delegate used to implement response code interception logic.</summary>
+            <param name="response">The anterior response.</param>
+            <returns>The response that the server should send.</returns>
+            <remarks>Changing the response code won't trigger other interceptors.</remarks>
+        </member>
+        <member name="T:MemwLib.Http.Types.Entities.BaseEntity">
+            <summary>Abstract class for base HTTP entity, contains common fields between all the entity types.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Entities.BaseEntity.Headers">
+            <summary>The header collection corresponding to this HTTP entity.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Entities.BaseEntity.Body">
+            <summary>The body corresponding to this HTTP entity.</summary>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.BaseEntity.BuildStart">
+            <summary>Protected method to build the first line of the entity.</summary>
+            <returns>The built first line of the entity as string.</returns>
+            <remarks>This method should not be exposed.</remarks>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.BaseEntity.ToString">
+            <summary>ToString override to build the entity as a String.</summary>
+            <returns>The built entity as string.</returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.BaseEntity.ToArray">
+            <summary>Builds a Byte[] from the String version of the entity prepared for streams.</summary>
+            <returns>The entity as a Byte[] prepared to be sent in a TCP stream.</returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.BaseEntity.op_Explicit(MemwLib.Http.Types.Entities.BaseEntity)~System.String">
+            <summary>Runs the ToString() method of the specified instance.</summary>
+            <param name="instance">The instance to run the method on.</param>
+            <returns>The result of the ToString() call in the instance.</returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.BaseEntity.InitEntity(System.IO.StreamReader)">
+            <summary>
+            This method can be called from a inheriting constructor to
+            initialize the common properties of an entity, getting the
+            top part while avoiding the use of abstract methods.
+            </summary>
+            <param name="reader">Where to read the entity from.</param>
+            <returns>The top part of the entity as it's what changes.</returns>
+            <exception cref="T:System.TimeoutException">It took too long for the initializer to receive data.</exception>
+            <exception cref="T:MemwLib.Http.Types.Exceptions.ParseException`1">This entity was not correctly formatted or there was an error while parsing.</exception>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.BaseEntity.HttpVersionRegex">
+            <remarks>
+            Pattern explanation:<br/>
+            <code>
+            ○ Match a character in the set [Hh].<br/>
+            ○ Match a character in the set [Tt] exactly 2 times.<br/>
+            ○ Match a character in the set [Pp].<br/>
+            ○ Match '/'.<br/>
+            ○ Match a Unicode digit atomically at least once.<br/>
+            ○ Match '.'.<br/>
+            ○ Match a Unicode digit atomically at least once.<br/>
+            </code>
+            </remarks>
+        </member>
+        <member name="T:MemwLib.Http.Types.Entities.IResponsible">
+            <summary>Defines that a type is a response within the HTTP server.</summary>
+        </member>
+        <member name="T:MemwLib.Http.Types.Entities.NextMiddleWare">
+            <summary>Tells the server to execute the next middleware piece.</summary>
+            <remarks>This class contains nothing, it's purely used for type metadata.</remarks>
+        </member>
+        <member name="T:MemwLib.Http.Types.Entities.RequestEntity">
+            <summary>BaseEntity implementation for HTTP requests.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Entities.RequestEntity.SessionParameters">
+            <summary>Session parameters passed by middleware.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Entities.RequestEntity.RequestMethod">
+            <summary>The request method for this HTTP request entity.</summary>
+            <remarks>This does not support flags.</remarks>
+            <exception cref="T:System.ArgumentException">Throws when flags were set for this property.</exception>
+        </member>
+        <member name="P:MemwLib.Http.Types.Entities.RequestEntity.Path">
+            <summary>The request location as a PartialUri instance.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Entities.RequestEntity.HttpVersion">
+            <summary>The HTTP protocol version for this request.</summary>
+            <remarks>Due to implementation the http version doesn't modify behavior YET.</remarks>
+        </member>
+        <member name="P:MemwLib.Http.Types.Entities.RequestEntity.CapturedGroups">
+            <summary>
+            If your route declaration contained RegEx,
+            you can access RegEx capture groups trough this property.
+            </summary>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.RequestEntity.#ctor(System.IO.StreamReader)">
+            <summary>Stream constructor, reads a stream into an instance of RequestEntity.</summary>
+            <param name="reader">The entity to parse.</param>
+            <exception cref="T:MemwLib.Http.Types.Exceptions.ParseException`1">There was an error while parsing this stream.</exception>
+            <remarks>The reader must be positioned at the first line of the content.</remarks>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.RequestEntity.#ctor(MemwLib.Http.Types.RequestMethodType,MemwLib.Http.Types.Routes.PartialUri,MemwLib.Http.Types.Content.IBody)">
+            <summary>Parameterized constructor for request entity.</summary>
+            <param name="method">The method for this entity.</param>
+            <param name="path">The path for this entity as a PartialUri instance.</param>
+            <param name="body">The body for this entity.</param>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.RequestEntity.#ctor(MemwLib.Http.Types.RequestMethodType,MemwLib.Http.Types.Routes.PartialUri,System.String,MemwLib.Http.Types.Content.IBody)">
+            <inheritdoc cref="M:MemwLib.Http.Types.Entities.RequestEntity.#ctor(MemwLib.Http.Types.RequestMethodType,MemwLib.Http.Types.Routes.PartialUri,MemwLib.Http.Types.Content.IBody)"/>
+            <param name="version">the version of the standard this request follows.</param>
+            <exception cref="T:System.FormatException">The HTTP version is invalid.</exception>
+            <remarks>The version doesn't change the functionality, it's just parsed as string to be sent with the entity.</remarks>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.RequestEntity.BuildStart">
+            <inheritdoc cref="M:MemwLib.Http.Types.Entities.BaseEntity.BuildStart"/>
+        </member>
+        <member name="T:MemwLib.Http.Types.Entities.ResponseCodes">
+            <summary>
+            Represents HTTP status codes as an enumeration for better readability and usage.
+            Each enum member corresponds to a specific HTTP status code along with its associated description.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.Continue">
+            <summary>
+            The server has received the request headers and the client should proceed to send the request body.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.SwitchingProtocols">
+            <summary>
+            The requester has asked the server to switch protocols and the server has agreed to do so.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.Ok">
+            <summary>
+            Standard response for successful HTTP requests.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.Created">
+            <summary>
+            The request has been fulfilled, resulting in the creation of a new resource.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.Accepted">
+            <summary>
+            The request has been accepted for processing, but the processing has not been completed.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.NonAuthoritativeInformation">
+            <summary>
+            The server successfully processed the request but returned non-authoritative information.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.NoContent">
+            <summary>
+            The server successfully processed the request but there is no additional information to send back.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.ResetContent">
+            <summary>
+            The server successfully processed the request but wants to instruct the client to reset the document view.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.PartialContent">
+            <summary>
+            The server has fulfilled the partial GET request for the resource.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.MultipleChoices">
+            <summary>
+            The requested resource corresponds to any one of a set of representations, each with its own specific location.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.MovedPermanently">
+            <summary>
+            The requested resource has been assigned a new permanent URI and any future references to this resource should use one of the returned URIs.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.Found">
+            <summary>
+            The requested resource can be found under a different URI.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.SeeOther">
+            <summary>
+            The response to the request can be found under a different URI and should be retrieved using a GET method on that resource.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.NotModified">
+            <summary>
+            The server has not modified the document, but there is no information to send back.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.UseProxy">
+            <summary>
+            The requested resource must be accessed through a proxy, specified in the Location header.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.TemporaryRedirect">
+            <summary>
+            The requested resource temporarily resides under a different URI.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.BadRequest">
+            <summary>
+            The server cannot or will not process the request due to an apparent client error.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.Unauthorized">
+            <summary>
+            Similar to 401 (Unauthorized), but indicates that the client must authenticate itself to get permission.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.PaymentRequired">
+            <summary>
+            Reserved for future use. The original intention was that this code might indicate that the client must make payment to access the resource.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.Forbidden">
+            <summary>
+            The client does not have access rights to the content, i.e., they are unauthorized to access the requested resource.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.NotFound">
+            <summary>
+            The server can not find the requested resource. This status code is often used as a catch-all for all methods for which no specific status code is applicable.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.MethodNotAllowed">
+            <summary>
+            The method specified in the request is not allowed for the resource identified by the request URI.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.NotAcceptable">
+            <summary>
+            The requested resource is capable of generating only content not acceptable according to the Accept headers sent in the request.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.ProxyAuthenticationRequired">
+            <summary>
+            Similar to 401 (Unauthorized), but indicates that the client must first authenticate itself with the proxy.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.RequestTimeout">
+            <summary>
+            The server timed out waiting for the request.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.Conflict">
+            <summary>
+            Indicates that the request could not be processed because of conflict in the request.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.Gone">
+            <summary>
+            Indicates that the requested resource is no longer available at the server and no forwarding address is known.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.LengthRequired">
+            <summary>
+            The server refuses to accept the request without a defined Content-Length.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.PreconditionFailed">
+            <summary>
+            The precondition given in one or more of the request-header fields evaluated to false when it was tested on the server.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.RequestEntityTooLarge">
+            <summary>
+            The server is refusing to process a request because the request entity is larger than the server is willing or able to process.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.RequestUriTooLong">
+            <summary>
+            The server is refusing to service the request because the request-URI is longer than the server is willing to interpret.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.UnsupportedMediaType">
+            <summary>
+            The server is refusing to service the request because the entity of the request is in a format not supported by the requested resource for the requested method.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.RequestedRangeNotSatisfiable">
+            <summary>
+            The client has asked for a portion of the file, but the server cannot supply that portion.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.ExpectationFailed">
+            <summary>
+            The server cannot meet the requirements of the Expect request-header field.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.InternalServerError">
+            <summary>
+            A generic error message returned when an unexpected condition was encountered on the server.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.NotImplemented">
+            <summary>
+            The server either does not recognize the request method, or it lacks the ability to fulfill the request.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.BadGateway">
+            <summary>
+            The server was acting as a gateway or proxy and received an invalid response from the upstream server.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.ServiceUnavailable">
+            <summary>
+            The server is currently unable to handle the request due to temporary overloading or maintenance of the server.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.GatewayTimeout">
+            <summary>
+            The server, while acting as a gateway or proxy, did not receive a timely response from the upstream server or some other auxiliary server it needed to access in order to complete the request.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.VersionNotSupported">
+            <summary>
+            The server does not support the HTTP protocol version that was used in the request.
+            </summary>
+        </member>
+        <member name="T:MemwLib.Http.Types.Entities.ResponseCodesExtensions">
+            <summary>Extension methods for the response codes enum instances.</summary>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.ResponseCodesExtensions.GetName(MemwLib.Http.Types.Entities.ResponseCodes)">
+            <summary>Obtain a formatted string representing the response code hint.</summary>
+            <param name="code">The ResponseCode enumerable instance.</param>
+            <returns>The formatted response code as string.</returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.ResponseCodesExtensions.GetCode(MemwLib.Http.Types.Entities.ResponseCodes)">
+            <summary>Obtain the response code as integer.</summary>
+            <param name="code">The ResponseCode enumerable instance.</param>
+            <returns>The response code as integer.</returns>
+        </member>
+        <member name="T:MemwLib.Http.Types.Entities.ResponseEntity">
+            <summary>BaseEntity implementation for HTTP responses.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Entities.ResponseEntity.HttpVersion">
+            <summary>The HTTP protocol version for this request.</summary>
+            <remarks>Due to implementation the http version doesn't modify behavior YET.</remarks>
+        </member>
+        <member name="P:MemwLib.Http.Types.Entities.ResponseEntity.ResponseCode">
+            <summary>The response code for this request.</summary>
+            <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">Status codes on MDN.</see>
+        </member>
+        <member name="P:MemwLib.Http.Types.Entities.ResponseEntity.IsSuccessfulResponse">
+            <summary>Returns true if the response code is 100-399 otherwise false.</summary>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.ResponseEntity.#ctor(System.IO.StreamReader)">
+            <summary>Stream constructor, reads a stream into an instance of ResponseEntity.</summary>
+            <param name="reader">The entity to parse.</param>
+            <exception cref="T:MemwLib.Http.Types.Exceptions.ParseException`1">There was an error while parsing this stream.</exception>
+            <remarks>The reader must be positioned at the first line of the content.</remarks>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.ResponseEntity.#ctor(MemwLib.Http.Types.Entities.ResponseCodes,MemwLib.Http.Types.Content.IBody)">
+            <summary>Parameterized constructor for ResponseEntity.</summary>
+            <param name="responseCode">The response code for this entity.</param>
+            <param name="body">The request body for this entity.</param>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.ResponseEntity.#ctor(MemwLib.Http.Types.Entities.ResponseCodes,System.String,MemwLib.Http.Types.Content.IBody)">
+            <inheritdoc cref="M:MemwLib.Http.Types.Entities.ResponseEntity.#ctor(MemwLib.Http.Types.Entities.ResponseCodes,MemwLib.Http.Types.Content.IBody)"/>
+            <param name="version">the version of the standard this request follows.</param>
+            <exception cref="T:System.FormatException">The HTTP version is invalid.</exception>
+            <remarks>The version doesn't change the functionality, it's just parsed as string to be sent with the entity.</remarks>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.ResponseEntity.BuildStart">
+            <inheritdoc cref="M:MemwLib.Http.Types.Entities.BaseEntity.BuildStart"/>
+        </member>
+        <member name="T:MemwLib.Http.Types.Exceptions.MiddleWareNotEligibleException">
+            <summary>Thrown when a middleware target method is not found or not eligible.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Exceptions.MiddleWareNotEligibleException.Message">
+            <inheritdoc cref="P:System.Exception.Message"/>
+        </member>
+        <member name="T:MemwLib.Http.Types.Exceptions.ParseException`1">
+            <summary>This exception is thrown when an entity couldn't be parsed.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Exceptions.ParseException`1.Message">
+            <inheritdoc cref="P:System.Exception.Message"/>
+        </member>
+        <member name="T:MemwLib.Http.Types.Logging.LogMessage">
+            <summary>Default log message implementation for HTTP server logs.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Logging.LogMessage.Date">
+            <summary>The date of the log, if unset the actual date.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Logging.LogMessage.Type">
+            <summary>The log type as LogType enumerable.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Logging.LogMessage.Message">
+            <summary>The message corresponding to the log.</summary>
+        </member>
+        <member name="M:MemwLib.Http.Types.Logging.LogMessage.ToString">
+            <summary>Prepares the class for direct STDOUT.</summary>
+            <returns>The formatted log.</returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Logging.LogMessage.op_Implicit(MemwLib.Http.Types.Logging.LogMessage)~System.String">
+            <summary>Implicit cast operator to String, runs the ToString() method implicitly.</summary>
+            <param name="instance">The right operand to run the ToString() method from.</param>
+            <returns>The result of the ToString() method from the passed instance.</returns>
+        </member>
+        <member name="T:MemwLib.Http.Types.Logging.LogType">
+            <summary>The log type enum for ILogMessage implementations</summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Logging.LogType.Info">
+            <summary>Defines an information log.</summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Logging.LogType.SuccessfulRequest">
+            <summary>Defines a successful request log.</summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Logging.LogType.FailedRequest">
+            <summary>Defines a failed request log.</summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Logging.LogType.Warning">
+            <summary>Defines a warning log.</summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Logging.LogType.Error">
+            <summary>Defines an error log.</summary>
+            <remarks>This should always go together with a stack trace.</remarks>
+        </member>
+        <member name="T:MemwLib.Http.Types.RequestMethodType">
+            <summary>The HTTP request method type enumerator.</summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.RequestMethodType.Options">
+            <summary>OPTIONS: Used to retrieve information about the communication options for the target resource.</summary>
+            <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/OPTIONS"/>
+        </member>
+        <member name="F:MemwLib.Http.Types.RequestMethodType.Get">
+            <summary>GET: Used to retrieve data from the target resource.</summary>
+            <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET"/>
+        </member>
+        <member name="F:MemwLib.Http.Types.RequestMethodType.Head">
+            <summary>HEAD: Similar to GET, but without the response body. Used to check resource headers.</summary>
+            <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/HEAD"/>
+        </member>
+        <member name="F:MemwLib.Http.Types.RequestMethodType.Post">
+            <summary>POST: Used to send data to the target resource for processing.</summary>
+            <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST"/>
+        </member>
+        <member name="F:MemwLib.Http.Types.RequestMethodType.Patch">
+            <summary>PATCH: Used to apply partial modifications to a resource.</summary>
+            <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PATCH"/>
+        </member>
+        <member name="F:MemwLib.Http.Types.RequestMethodType.Put">
+            <summary>PUT: Used to replace the target resource with the provided payload.</summary>
+            <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT"/>
+        </member>
+        <member name="F:MemwLib.Http.Types.RequestMethodType.Delete">
+            <summary>DELETE: Used to request the removal of the target resource.</summary>
+            <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/DELETE"/>
+        </member>
+        <member name="F:MemwLib.Http.Types.RequestMethodType.Trace">
+            <summary>TRACE: Used to perform a diagnostic test along the path to the target resource.</summary>
+            <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/TRACE"/>
+        </member>
+        <member name="F:MemwLib.Http.Types.RequestMethodType.Connect">
+            <summary>CONNECT: Used to establish a network connection to the target resource.</summary>
+            <see href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/CONNECT"/>
+        </member>
+        <member name="T:MemwLib.Http.Types.Routes.CompleteUri">
+            <summary>Complete URI implementation from partial URI class, adds the host, port and protocol.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Routes.CompleteUri.Protocol">
+            <summary>The URI protocol to follow, instructs the server/client how to behave.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Routes.CompleteUri.HostName">
+            <summary>The domain name, serves as key for the DNS server to resolve an IP.</summary>
+            <remarks>This property doesn't check for TLD validity.</remarks>
+        </member>
+        <member name="P:MemwLib.Http.Types.Routes.CompleteUri.User">
+            <summary>The username from basic authentication.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Routes.CompleteUri.Password">
+            <summary>The password from basic authentication.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Routes.CompleteUri.Port">
+            <summary>
+            The port number where to establish the connection,
+            if unset will use protocol default ports as for common TCP ports.
+            </summary>
+        </member>
+        <member name="M:MemwLib.Http.Types.Routes.CompleteUri.#ctor(System.String)">
+            <summary>
+            Default constructor for Complete URI, constructs the URI
+            from the formatted string following the RFC1808 standard.
+            </summary>
+            <param name="uri">The formatted URI.</param>
+            <exception cref="T:System.FormatException">The passed URI is not in a valid format.</exception>
+        </member>
+        <member name="M:MemwLib.Http.Types.Routes.CompleteUri.ToString">
+            <summary>Constructs the URI contained in the instance as a String.</summary>
+            <returns>The current instance as a String.</returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Routes.CompleteUri.op_Explicit(MemwLib.Http.Types.Routes.CompleteUri)~System.String">
+            <summary>Runs the ToString() method from the right operand.</summary>
+            <param name="instance">The right operand to get the string from.</param>
+            <returns>The result of ToString() in the right operand.</returns>
+        </member>
+        <member name="T:MemwLib.Http.Types.Routes.PartialUri">
+            <summary>A class that represents a partial URI for request bodies.</summary>
+            <example>/route?key=value#fragment</example>
+        </member>
+        <member name="P:MemwLib.Http.Types.Routes.PartialUri.Route">
+            <summary>The path where the server is supposed to look for data.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Routes.PartialUri.Parameters">
+            <summary>A collection of the URI parameters whose are after the (?) question mark.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.Routes.PartialUri.Fragment">
+            <summary>The fragment which is defined after the (#) hashtag or NULL if not none.</summary>
+            <remarks>
+            Not supported in rfc9112 standard, but left for media fragment resolution in edge cases.<para/>
+            This won't be sent in the HTTP client.
+            </remarks>
+        </member>
+        <member name="M:MemwLib.Http.Types.Routes.PartialUri.#ctor(System.String)">
+            <summary>
+            Default constructor for partial URI class,
+            constructs the URI from the formatted string following the RFC1808 standard.
+            </summary>
+            <param name="uri">The formatted URI.</param>
+            <exception cref="T:System.FormatException">The passed URI is not in a valid format.</exception>
+        </member>
+        <member name="M:MemwLib.Http.Types.Routes.PartialUri.#ctor(MemwLib.Http.Types.Routes.CompleteUri)">
+            <summary>Constructor from CompleteURI to avoid polymorphism issues.</summary>
+            <param name="uri">The URI to cast from.</param>
+        </member>
+        <member name="M:MemwLib.Http.Types.Routes.PartialUri.ToString">
+            <summary>Constructs the URI contained in the instance as a String.</summary>
+            <returns>The current instance as a String.</returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Routes.PartialUri.op_Explicit(MemwLib.Http.Types.Routes.PartialUri)~System.String">
+            <summary>Runs the ToString() method from the right operand.</summary>
+            <param name="instance">The right operand to get the string from.</param>
+            <returns>The result of ToString() in the right operand.</returns>
+        </member>
+        <member name="T:MemwLib.Http.Types.Routes.Protocol">
+            <summary>
+            An enumeration representing different network
+            protocols with their associated port numbers.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Routes.Protocol.Https">
+            <summary>The HTTPS protocol, using port 443.</summary>
+            <see href="https://developer.mozilla.org/en-US/docs/Glossary/HTTPS"/>
+        </member>
+        <member name="F:MemwLib.Http.Types.Routes.Protocol.Http">
+            <summary>The HTTP protocol, using port 80.</summary>
+            <see href="https://developer.mozilla.org/en-US/docs/Glossary/HTTP"/>
+        </member>
+        <member name="T:MemwLib.Http.Types.Routes.UriHelpers">
+            <summary>Class for methods related to URIS</summary>
+        </member>
+        <member name="M:MemwLib.Http.Types.Routes.UriHelpers.DecodeUriComponent(System.String)">
+            <summary>Decodes a URI component from it's hex representation to a normal string.</summary>
+            <param name="component">The encoded component.</param>
+            <returns>The decoded component.</returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Routes.UriHelpers.EncodeUriComponent(System.String)">
+            <summary>Encodes a URI component from a basic string component to it's hex representation.</summary>
+            <param name="component">The basic string component.</param>
+            <returns>The encoded component.</returns>
+        </member>
+        <member name="T:MemwLib.Http.Types.ServerStates">
+            <summary>Constant definition for the server state.</summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.ServerStates.Production">
+            <summary>
+            Use this constant when the server must be in production mode,
+            this means no details on the development will be exposed in any manner.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.ServerStates.Development">
+            <summary>
+            Use this constant when the server must be in development mode,
+            this means that details on the development such as errors will be exposed
+            </summary>
+            <remarks>
+            For your own security don't leave this constant on production as it leaves
+            details and hints for any third party to attack your server.
+            </remarks>
+        </member>
+        <member name="T:MemwLib.Http.Types.SSL.CustomCertificateOptions">
+            <summary>This class is meant to specify options for a custom certificate.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.SSL.CustomCertificateOptions.CertificatePath">
+            <summary>This is the certificate path, or where to get the pfx file from.</summary>
+        </member>
+        <member name="P:MemwLib.Http.Types.SSL.CustomCertificateOptions.CertificatePassword">
+            <summary>This is the certificate password, it is used to let the server decrypt the certificate.</summary>
+        </member>
+        <member name="T:MemwLib.Http.Types.SSL.SslBehavior">
+            <summary>This enum lets you decide how is the server going to mainly behave.</summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.SSL.SslBehavior.AlwaysFindAndUseCertificate">
+            <summary>
+            Whether a custom certificate was specified, if not
+            found, the server is going to generate a self signed one.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.SSL.SslBehavior.DoNotUseCertificateIfNotFound">
+            <summary>If a certificate is not found use HTTP instead of HTTPS.</summary>
+        </member>
+        <member name="T:MemwLib.Strings.Extensions">
+            <summary>String extension methods.</summary>
+        </member>
+        <member name="M:MemwLib.Strings.Extensions.Separate(System.String)">
+            <summary>Separates a camel cased or pascal cased string with spaces.</summary>
+            <param name="instance">the camel or pascal cased string.</param>
+            <returns>The separated string result from the conversion.</returns>
+        </member>
+        <member name="T:MemwLib.Strings.StringConverter">
+            <summary>Handler to convert from char *, char[], string to each.</summary>
+            <remarks>This converter can only be instantiated from cast operators.</remarks>
+        </member>
+        <member name="F:MemwLib.Strings.StringConverter.Handle">
+            <summary>The internal string handle for this converter.</summary>
+        </member>
+        <member name="P:MemwLib.Strings.StringConverter.Length">
+            <summary>Return the length of the underlying handle in this string converter.</summary>
+        </member>
+        <member name="P:MemwLib.Strings.StringConverter.Item(System.Int32)">
+            <inheritdoc cref="P:System.String.Chars(System.Int32)"/>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.EntryRegex_0">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the EntryRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.EntryRegex_0.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.EntryRegex_0.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.EntryRegex_0.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.EntryRegex_0.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.EntryRegex_0.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.EntryRegex_0.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.EntryRegex_0.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.EntryRegex_0.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.SystemVariableRegex_1">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the SystemVariableRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.SystemVariableRegex_1.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.SystemVariableRegex_1.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.SystemVariableRegex_1.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.SystemVariableRegex_1.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.SystemVariableRegex_1.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.SystemVariableRegex_1.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.SystemVariableRegex_1.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.SystemVariableRegex_1.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.HeaderVerification_2">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the HeaderVerification method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.HeaderVerification_2.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.HeaderVerification_2.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.HeaderVerification_2.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.HeaderVerification_2.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.HeaderVerification_2.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.HeaderVerification_2.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.HeaderVerification_2.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.HeaderVerification_2.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.ParameterVerification_3">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the ParameterVerification method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.ParameterVerification_3.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ParameterVerification_3.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.ParameterVerification_3.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ParameterVerification_3.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.ParameterVerification_3.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ParameterVerification_3.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ParameterVerification_3.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.ParameterVerification_3.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.HttpVersionRegex_4">
+            <summary>Custom <see cref="T:System.Text.RegularExpressions.Regex"/>-derived type for the HttpVersionRegex method.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.HttpVersionRegex_4.Instance">
+            <summary>Cached, thread-safe singleton instance.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.HttpVersionRegex_4.#ctor">
+            <summary>Initializes the instance.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.HttpVersionRegex_4.RunnerFactory">
+            <summary>Provides a factory for creating <see cref="T:System.Text.RegularExpressions.RegexRunner"/> instances to be used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.HttpVersionRegex_4.RunnerFactory.CreateInstance">
+            <summary>Creates an instance of a <see cref="T:System.Text.RegularExpressions.RegexRunner"/> used by methods on <see cref="T:System.Text.RegularExpressions.Regex"/>.</summary>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.HttpVersionRegex_4.RunnerFactory.Runner">
+            <summary>Provides the runner that contains the custom logic implementing the specified regular expression.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.HttpVersionRegex_4.RunnerFactory.Runner.Scan(System.ReadOnlySpan{System.Char})">
+            <summary>Scan the <paramref name="inputSpan"/> starting from base.runtextstart for the next match.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.HttpVersionRegex_4.RunnerFactory.Runner.TryFindNextPossibleStartingPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Search <paramref name="inputSpan"/> starting from base.runtextpos for the next location a match could possibly start.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if a possible match was found; false if no more matches are possible.</returns>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.HttpVersionRegex_4.RunnerFactory.Runner.TryMatchAtCurrentPosition(System.ReadOnlySpan{System.Char})">
+            <summary>Determine whether <paramref name="inputSpan"/> at base.runtextpos is a match for the regular expression.</summary>
+            <param name="inputSpan">The text being scanned by the regular expression.</param>
+            <returns>true if the regular expression matches at the current position; otherwise, false.</returns>
+        </member>
+        <member name="T:System.Text.RegularExpressions.Generated.Utilities">
+            <summary>Helper methods used by generated <see cref="T:System.Text.RegularExpressions.Regex"/>-derived implementations.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout">
+            <summary>Default timeout value set in <see cref="T:System.AppContext"/>, or <see cref="F:System.Text.RegularExpressions.Regex.InfiniteMatchTimeout"/> if none was set.</summary>
+        </member>
+        <member name="F:System.Text.RegularExpressions.Generated.Utilities.s_hasTimeout">
+            <summary>Whether <see cref="F:System.Text.RegularExpressions.Generated.Utilities.s_defaultTimeout"/> is non-infinite.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.StackPush(System.Int32[]@,System.Int32@,System.Int32,System.Int32)">
+            <summary>Pushes 2 values onto the backtracking stack.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.StackPush(System.Int32[]@,System.Int32@,System.Int32,System.Int32,System.Int32)">
+            <summary>Pushes 3 values onto the backtracking stack.</summary>
+        </member>
+        <member name="M:System.Text.RegularExpressions.Generated.Utilities.StackPop(System.Int32[],System.Int32@,System.Int32@,System.Int32@)">
+            <summary>Pops 2 values from the backtracking stack.</summary>
+        </member>
+    </members>
+</doc>

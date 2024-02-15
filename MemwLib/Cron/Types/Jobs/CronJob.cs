@@ -1,6 +1,8 @@
 using JetBrains.Annotations;
 using MemwLib.Cron.Types.Exceptions;
 
+#if DEBUG
+
 namespace MemwLib.Cron.Types.Jobs;
 
 /// <summary>This class represents a basic cron job.</summary>
@@ -116,3 +118,5 @@ public class CronJob
         }
     }
 }
+
+#endif

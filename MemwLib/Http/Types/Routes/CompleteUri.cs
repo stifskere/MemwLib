@@ -1,19 +1,23 @@
-using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 
 namespace MemwLib.Http.Types.Routes;
 
 /// <summary>Complete URI implementation from partial URI class, adds the host, port and protocol.</summary>
-public partial class CompleteUri : PartialUri
+[PublicAPI]
+public class CompleteUri : PartialUri
 {
     /// <summary>The URI protocol to follow, instructs the server/client how to behave.</summary>
-    [PublicAPI]
     public Protocol Protocol { get; set; }
     
     /// <summary>The domain name, serves as key for the DNS server to resolve an IP.</summary>
     /// <remarks>This property doesn't check for TLD validity.</remarks>
-    [PublicAPI]
     public string HostName { get; set; }
+    
+    /// <summary>The username from basic authentication.</summary>
+    public string? User { get; set; }
+    
+    /// <summary>The password from basic authentication.</summary>
+    public string? Password { get; set; }
     
     /// <summary>
     /// The port number where to establish the connection,
@@ -36,35 +40,74 @@ public partial class CompleteUri : PartialUri
     /// <exception cref="FormatException">The passed URI is not in a valid format.</exception>
     public CompleteUri(string uri) : base(uri)
     {
-        Match matchedUri = UriRegex().Match(uri);
-
-        if (!matchedUri.Success)
-            throw new FormatException("Complete URI is not in a valid format.");
+        if (!uri.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+            throw new FormatException("Error while parsing a complete URI, missing protocol.");
         
-        Protocol = matchedUri.Groups.ContainsKey("protocol") 
-            ? Enum.Parse<Protocol>(matchedUri.Groups["protocol"].Value, true)
+        string[] splitUri = uri.Split('/');
+        
+        Protocol = splitUri[0][..^1].Equals("https", StringComparison.OrdinalIgnoreCase)
+            ? Protocol.Https
             : Protocol.Http;
 
-        string[] name = matchedUri.Groups["name"].Value.Split(':');
+        string[] sAHost = splitUri[2].Split('@');
 
-        HostName = name[0];
-        
-        _port = name.Length == 2 ? ushort.Parse(name[1]) : null;
+        if (sAHost.Length < 2)
+        {
+            string[] sHPort = sAHost[0].Split(':');
             
+            HostName = sHPort[0];
+
+            if (sHPort.Length > 1)
+                Port = ushort.Parse(sHPort[1]);
+
+            if (sHPort.Length > 2)
+                throw new FormatException("Invalid Host:Port pair.");
+            return;
+        }
+
+        {
+            string[] sHPort = sAHost[1].Split(':');
+
+            HostName = sHPort[0];
+
+            if (sHPort.Length > 1)
+                Port = ushort.Parse(sHPort[1]);
+
+            if (sHPort.Length > 2)
+                throw new FormatException("Invalid Host:Port pair.");
+        }
+        
+        {
+            string[] sUPassword = sAHost[0].Split(':');
+
+            if (sUPassword.Length != 2)
+                throw new FormatException("Invalid user authentication.");
+
+            User = sUPassword[0];
+            Password = sUPassword[1];
+        }
     }
     
     /// <summary>Constructs the URI contained in the instance as a String.</summary>
     /// <returns>The current instance as a String.</returns>
     public override string ToString()
-        => $"{Protocol.ToString().ToLower()}://{HostName}{base.ToString()}";
+    {
+        string auth = string.Empty;
+
+        if (User != null && Password != null)
+            auth += $"{User}:{Password}@";
+
+        string port = string.Empty;
+
+        if (Port is not (443 or 80))
+            port += ":" + Port;
+        
+        return $"{Protocol.ToString().ToLower()}://{auth}{HostName}{port}{base.ToString()}";
+    }
 
     /// <summary>Runs the ToString() method from the right operand.</summary>
     /// <param name="instance">The right operand to get the string from.</param>
     /// <returns>The result of ToString() in the right operand.</returns>
     public static explicit operator string(CompleteUri instance)
         => instance.ToString();
-    
-    
-    [GeneratedRegex(@"^(?:(?'protocol'https?)\:\/\/)?(?'name'[a-z\-0-9.]+(?::\d{1,5})?)\/?", RegexOptions.Singleline)]
-    private static partial Regex UriRegex();
 }

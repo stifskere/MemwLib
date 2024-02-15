@@ -31,11 +31,13 @@ public static class JsonParser
     /// <remarks>For collections only List&lt;T&gt; and T[] are supported.</remarks>
     public static TResult? Deserialize<TResult>(string payload)
     {
-        JsonTokenHandler.VerifyJson(payload, true);
+        payload = payload.Trim(' ', '\n');
+        
+        JsonTokenHandler.Validators.VerifyJson(payload, true);
         
         if (payload.StartsWith('{'))
         {
-            Dictionary<string, object?> dictResult = JsonTokenHandler.HandleObject(payload);
+            Dictionary<string, object?> dictResult = JsonTokenHandler.Assigns.HandleObject(payload);
 
             if (typeof(IDictionary).IsAssignableFrom(typeof(TResult)))
                 return (TResult?)(object)dictResult;
@@ -58,28 +60,23 @@ public static class JsonParser
             if (!typeof(ICollection).IsAssignableFrom(typeof(TResult)))
                 throw new InvalidJsonTargetTypeException(typeof(TResult).Name);
             
-            return (TResult?)(object)JsonTokenHandler.HandleList(payload);
+            return (TResult?)(object)JsonTokenHandler.Assigns.HandleList(payload);
         }
 
-        return (TResult?)JsonTokenHandler.HandlePrimitive(payload);
+        return (TResult?)JsonTokenHandler.Assigns.HandlePrimitive(payload);
     }
 
     /// <summary>Simply checks if a JSON payload is valid or invalid.</summary>
     /// <param name="payload">the JSON payload to check.</param>
     /// <returns>Whether the payload is valid or invalid.</returns>
-    public static bool IsValidJson(string payload) 
-        => JsonTokenHandler.VerifyJson(payload, false) 
-           && JsonTokenHandler.VerifyStringKeys(payload);
+    public static bool IsValidJson(string payload, bool test = false)
+        => JsonTokenHandler.Validators.VerifyJson(payload, test);
 
-    // TODO: take a look at this function, it adds x * 2 spaces more.
-    /// <summary>Converts a class instance to a JSON string.</summary>
-    /// <param name="payload">The class instance to convert.</param>
-    /// <param name="indentation">The indentation level, if 0 it won't be indented nor new lined.</param>
-    /// <exception cref="InvalidJsonConstraintException">
-    /// Thrown when a serialization condition
-    /// leads to breaking any JSON standard constraint.
-    /// </exception>
-    /// <returns>A string instance representing the TPayload instance as JSON.</returns>
+    /// <summary>Converts an object to a string JSON object as JavaScript's JSON.stringify.</summary>
+    /// <param name="payload"></param>
+    /// <param name="indentation"></param>
+    /// <exception cref="InvalidJsonConstraintException">Supplied dictionary keys aren't strings.</exception>
+    /// <returns></returns>
     public static string Serialize(object? payload, int indentation = 0)
     {
         if (payload is null)
@@ -100,41 +97,34 @@ public static class JsonParser
         if (payload is bool payloadAsBool)
             return payloadAsBool.ToString().ToLower();
 
-        if (payload is ICollection payloadAsCollection)
-        {
-            int itemCount = 0;
-            
-            return payloadAsCollection.Cast<object>()
-                .Aggregate("[", (current, item) => current + $"{(itemCount++ > 0 ? "," : "")}{(indentation > 0 ? "\n" : "")}{" ".Repeat(indentation)}{Serialize(item, indentation + 2)}")
-                + $"{(indentation > 0 && itemCount > 0 ? "\n" : "")}{" ".Repeat(indentation)}]";
-        }
-
+        string result;
+        
         if (payload is IDictionary payloadAsDictionary)
         {
-            string result = "{";
-
-            int entryCount = 0;
-            foreach (DictionaryEntry entry in payloadAsDictionary)
-            {
-                if (entry.Key is not string keyAsString)
-                    throw new InvalidJsonConstraintException("JSON object keys must be strings.");
-
-                result += $"{(entryCount > 0 ? "," : "")}{(indentation > 0 ? "\n" : "")}{" ".Repeat(indentation)}\"{keyAsString}\":{(indentation > 0 ? " " : "")}{Serialize(entry.Value, indentation + 2)}";
-                entryCount++;
-            }
-
-            return result + $"{(indentation > 0 && entryCount > 0 ? "\n" : "")}{" ".Repeat(indentation)}}}";
+            result = payloadAsDictionary
+                .Cast<KeyValuePair<object, object>>()
+                .Aggregate("{", (last, next) => 
+                    next.Key is not string ? throw new InvalidJsonConstraintException("Keys for json objects must be strings.")
+                    : $"{last}\"{next.Key}\":{Serialize(next.Value)},"
+                )[..^1] + '}';
         }
 
+        else if (payload is ICollection payloadAsCollection)
         {
+            result =  payloadAsCollection
+                .Cast<object>()
+                .Aggregate("[", (last, next) => $"{last}{Serialize(next)},")[..^1] + ']';
+        }
+        
+        else {
             Type payloadType = payload.GetType();
-            string result = "{";
 
             JsonObjectBehavior behavior =
                 payloadType.GetCustomAttribute<JsonObjectAttribute>()?.Behavior
                 ?? JsonObjectBehavior.AllProperties;
 
-            int propertyCount = 0;
+            result = "{";
+            
             foreach (PropertyInfo property in payloadType.GetProperties())
             {
                 JsonPropertyAttribute? propertyAttribute = property.GetCustomAttribute<JsonPropertyAttribute>();
@@ -142,11 +132,14 @@ public static class JsonParser
                 if (behavior == JsonObjectBehavior.OnlyPropertiesWithAttribute && propertyAttribute is null)
                     continue;
 
-                result += $"{(propertyCount > 0 ? "," : "")}{(indentation > 0 ? "\n" : "")}{" ".Repeat(indentation)}\"{propertyAttribute?.Name ?? property.Name}\":{(indentation > 0 ? " " : "")}{Serialize(property.GetValue(payload), indentation + 2)}";
-                propertyCount++;
+                result += $"\"{propertyAttribute?.Name ?? property.Name}\":{Serialize(property.GetValue(payload))},";
             }
 
-            return result + $"{(indentation > 0 && propertyCount > 0 ? "\n" : "")}{" ".Repeat(indentation)}}}";
+            result = result[..^1] + '}';
         }
+
+        return indentation > 0 
+            ? JsonTokenHandler.PrettifyJson(result, indentation) 
+            : result;
     }
 }

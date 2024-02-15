@@ -20,7 +20,7 @@ namespace MemwLib.Http;
 
 /// <summary>HTTP server that behaves like express.js and means easier use.</summary>
 [UnsupportedOSPlatform("browser"), PublicAPI]
-public sealed class HttpServer
+public sealed class HttpServer : IDisposable
 {
     private readonly TcpListener _listener;
     private readonly CancellationToken _cancellationToken;
@@ -75,15 +75,36 @@ public sealed class HttpServer
         new Thread(ThreadHandler).Start();
     }
 
+    /// <summary>Http server destructor... Is this even visible?</summary>
+    ~HttpServer()
+    {
+        Dispose();
+    }
+    
     private void ThreadHandler()
     {
+        TcpClient connection = default!;
+        Stream incomingStream = default!;
+        bool cancelled = false;
+        
         while (!_cancellationToken.IsCancellationRequested)
         {
-            TcpClient connection = _listener.AcceptTcpClient();
-            using Stream incomingStream = _serverCertificate is not null
-                ? new SslStream(connection.GetStream(), false)
-                : connection.GetStream();
-
+            try
+            {
+                connection = _listener.AcceptTcpClient();
+                incomingStream = _serverCertificate is not null
+                    ? new SslStream(connection.GetStream(), false)
+                    : connection.GetStream();
+            }
+            catch (SocketException exception)
+            {
+                if (exception.SocketErrorCode == SocketError.Interrupted)
+                    cancelled = true;
+            }
+            
+            if (cancelled)
+                break;
+            
             try
             {
                 if (incomingStream is SslStream sslStream)
@@ -232,6 +253,11 @@ public sealed class HttpServer
                 connection.Close();
             }
         }
+        
+        // ReSharper disable ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
+        incomingStream?.Dispose();
+        connection?.Dispose();
+        // ReSharper restore ConditionalAccessQualifierIsNonNullableAccordingToAPIContract
     }
     
     /// <summary>Adds a global middleware piece that will be run before every endpoint.</summary>
@@ -322,5 +348,17 @@ public sealed class HttpServer
         _codeInterceptors[code].Add(handler);
             
         return this;
+    }
+
+    /// <inheritdoc cref="IDisposable.Dispose"/>
+    public void Dispose()
+    {
+        GC.SuppressFinalize(this);
+        _serverCertificate?.Dispose();
+        _listener.Stop();
+        _codeInterceptors.Clear();
+        _globalMiddleware.Clear();
+        _serverCertificate?.Dispose();
+        _endpoints.Clear();
     }
 }

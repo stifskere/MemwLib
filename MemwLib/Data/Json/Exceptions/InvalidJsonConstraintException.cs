@@ -10,7 +10,7 @@ public class InvalidJsonConstraintException : Exception
     /// <inheritdoc cref="Exception.Message"/>
     public override string Message { get; }
 
-    internal InvalidJsonConstraintException(string message)
+    internal InvalidJsonConstraintException(string message, int? line = null)
     {
         Message = message;
     }

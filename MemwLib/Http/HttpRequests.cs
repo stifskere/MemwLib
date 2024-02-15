@@ -1,6 +1,7 @@
 using System.Net.Security;
 using System.Net.Sockets;
 using System.Security.Authentication;
+using System.Text;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Configuration;
 using MemwLib.Http.Types.Entities;
@@ -21,8 +22,19 @@ public static class HttpRequests
         CompleteUri target = new CompleteUri(config.Url);
         RequestEntity request = new(config.Method, target, config.Body)
         {
-            Headers = config.Headers
+            Headers = config.Headers,
+            Path =
+            {
+                Fragment = null
+            }
         };
+
+        if (target is { User: not null, Password: not null })
+            request.Headers["Authorization"] 
+                = $"Basic {Convert.ToBase64String(Encoding.ASCII.GetBytes($"{target.User}:{target.Password}"))}";
+        
+        if (!request.Headers.Contains("Content-Length"))
+            request.Headers["Content-Length"] = request.Body.Length.ToString();
         
         request.Headers["Host"] = target.HostName;
         using TcpClient client = new(target.HostName, target.Port);
@@ -45,7 +57,7 @@ public static class HttpRequests
             
         await httpsStream.WriteAsync(request.ToArray());
         await httpsStream.FlushAsync();
-            
+        
         return new ResponseEntity(new StreamReader(httpsStream));
     }
 }

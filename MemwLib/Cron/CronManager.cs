@@ -2,6 +2,8 @@ using JetBrains.Annotations;
 using MemwLib.Cron.Types.Exceptions;
 using MemwLib.Cron.Types.Jobs;
 
+#if DEBUG
+
 namespace MemwLib.Cron;
 
 /// <summary>This class acts as a manager for all of your cron jobs.</summary>
@@ -51,3 +53,5 @@ public class CronManager
         return job;
     }
 }
+
+#endif

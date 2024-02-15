@@ -1,6 +1,7 @@
 using System.Data;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
+using MemwLib.Http.Types.Routes;
 
 namespace MemwLib.Http.Types.Collections;
 
@@ -19,8 +20,8 @@ public sealed partial class ParameterCollection : ParsingCollection
         
         foreach (Match parameter in matches)
         {
-            string key = parameter.Groups["key"].Value,
-                value = parameter.Groups["value"].Value;
+            string key = UriHelpers.DecodeUriComponent(parameter.Groups["key"].Value),
+                value = UriHelpers.DecodeUriComponent(parameter.Groups["value"].Value);
 
             if (Contains(key))
                 throw new ConstraintException("There is a duplicated key in this collection of parameters.");
@@ -35,7 +36,8 @@ public sealed partial class ParameterCollection : ParsingCollection
 
     /// <inheritdoc cref="ParsingCollection.ToString"/>
     public override string ToString() 
-        => Variables.Count == 0 ? string.Empty : Variables.Aggregate("", (old, iteration) => $"{old}{iteration.Key}={iteration.Value}&")[..^1];
+        => Variables.Count == 0 ? string.Empty : Variables.Aggregate("", (old, iteration) 
+            => $"{old}{UriHelpers.EncodeUriComponent(iteration.Key)}={UriHelpers.EncodeUriComponent(iteration.Value!)}&")[..^1];
     
     [GeneratedRegex(@"(?'key'[a-zA-Z0-9;,/\\:@+$\-_.!~*'()]+)=(?'value'[a-zA-Z0-9;,/\\:@+$\-_.!~*'()]+)", RegexOptions.Singleline)]
     private static partial Regex ParameterVerification();

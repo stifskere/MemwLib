@@ -1,5 +1,7 @@
 using JetBrains.Annotations;
 
+#if DEBUG
+
 namespace MemwLib.Cron.Types.Jobs;
 
 /// <summary>This class represents a cron job.</summary>
@@ -40,3 +42,5 @@ public class ReturningCronJob<TReturn> : CronJob
         }
     }
 }
+
+#endif

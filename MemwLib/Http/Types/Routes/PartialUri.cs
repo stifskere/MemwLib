@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Collections;
 
@@ -6,20 +5,21 @@ namespace MemwLib.Http.Types.Routes;
 
 /// <summary>A class that represents a partial URI for request bodies.</summary>
 /// <example>/route?key=value#fragment</example>
-public partial class PartialUri
+[PublicAPI]
+public class PartialUri
 {
     /// <summary>The path where the server is supposed to look for data.</summary>
-    [PublicAPI]
-    public string Route { get; protected set; }
+    public string Route { get; set; }
     
     /// <summary>A collection of the URI parameters whose are after the (?) question mark.</summary>
-    [PublicAPI]
     public ParameterCollection Parameters { get; protected set; }
     
     /// <summary>The fragment which is defined after the (#) hashtag or NULL if not none.</summary>
-    /// <remarks>Not supported in rfc9112 standard, but left for media fragment resolution in edge cases.</remarks>
-    [PublicAPI]
-    public string? Fragment { get; protected set; }
+    /// <remarks>
+    /// Not supported in rfc9112 standard, but left for media fragment resolution in edge cases.<para/>
+    /// This won't be sent in the HTTP client.
+    /// </remarks>
+    public string? Fragment { get; set; }
 
     /// <summary>
     /// Default constructor for partial URI class,
@@ -29,24 +29,41 @@ public partial class PartialUri
     /// <exception cref="FormatException">The passed URI is not in a valid format.</exception>
     public PartialUri(string uri)
     {
-        if (uri.EndsWith('#') || uri.EndsWith('?'))
-            uri = uri[..^1];
-        
-        Match matchedUri = PartialUriRegex().Match(uri);
+        if (uri.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+        {
+            string[] sFirst = uri.Split('/');
 
-        if (!matchedUri.Success)
-            throw new FormatException("Partial URI is not in a valid format.");
+            if (sFirst.Length < 4)
+                throw new FormatException("the URI is empty.");
+            
+            uri = "/" + string.Join('/', sFirst[3..]);
+        }
 
-        string provRoute = matchedUri.Groups["path"].Value;
-        Route = string.IsNullOrEmpty(provRoute) ? "/" : provRoute;
+        string[] sRParams = uri.Split('?');
         
-        Parameters = matchedUri.Groups.ContainsKey("params") 
-            ? new ParameterCollection(matchedUri.Groups["params"].Value) 
-            : new ParameterCollection();
+        Route = string.Join('/', sRParams[0].Split('/').Select(UriHelpers.DecodeUriComponent));
+        Parameters = new ParameterCollection();
         
-        Fragment = matchedUri.Groups.ContainsKey("fragment")
-            ? matchedUri.Groups["fragment"].Value
-            : null;
+        if (sRParams.Length < 2)
+            return;
+
+        foreach (string pair in sRParams[1].Split('&'))
+        {
+            string[] splitPair = pair.Split('=');
+
+            if (splitPair.Length != 2)
+                throw new FormatException("Invalid URI query parameter found.");
+            
+            Parameters.Set(
+                UriHelpers.DecodeUriComponent(splitPair[0]), 
+                UriHelpers.DecodeUriComponent(splitPair[1])
+            );
+        }
+
+        string[] sPFragment = sRParams[1].Split('#');
+
+        if (sPFragment.Length != 1)
+            Fragment = UriHelpers.DecodeUriComponent(sPFragment[1]);
     }
 
     /// <summary>Constructor from CompleteURI to avoid polymorphism issues.</summary>
@@ -58,18 +75,25 @@ public partial class PartialUri
         Fragment = uri.Fragment;
     }
     
-
     /// <summary>Constructs the URI contained in the instance as a String.</summary>
     /// <returns>The current instance as a String.</returns>
     public override string ToString()
-        => $"{Route}{(Parameters.Length != 0 ? $"?{(string)Parameters}" : "")}{(string.IsNullOrEmpty(Fragment) ? "" : $"#{Fragment}")}";
+    {
+        string result 
+            = string.Join('/', Route.Split('/').Select(UriHelpers.EncodeUriComponent));
+
+        if (Parameters.Length > 0)
+            result += "?" + (string)Parameters;
+
+        if (!string.IsNullOrEmpty(Fragment))
+            result += "#" + UriHelpers.EncodeUriComponent(Fragment);
+        
+        return result;
+    }
     
     /// <summary>Runs the ToString() method from the right operand.</summary>
     /// <param name="instance">The right operand to get the string from.</param>
     /// <returns>The result of ToString() in the right operand.</returns>
     public static explicit operator string(PartialUri instance)
         => instance.ToString();
-    
-    [GeneratedRegex(@"(?:https?:\/\/[^\/]+)?.?(?'path'\/[^?#{}|\\^~\[\]\/][^?#{}|\^~[\]]*)?(?'params'\?[^#]*)?(?'fragment'#.*)?$", RegexOptions.Singleline)]
-    private static partial Regex PartialUriRegex();
 }

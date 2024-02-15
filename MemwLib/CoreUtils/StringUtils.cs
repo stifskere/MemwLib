@@ -29,9 +29,12 @@ internal static class StringUtils
     public static bool EndsWithAnyOf(this string instance, params char[] characters)
         => characters.Contains(instance[^1]);
 
-    public static bool IsEnclosedWithAnyOf(this string instance, params char[] characters)
-        => instance.StartsWithAnyOf(characters) && instance.EndsWithAnyOf(instance[0]);
+    public static bool IsEnclosedWithSameOf(this string instance, params char[] characters)
+        => instance.Length > 1 && instance.StartsWithAnyOf(characters) && instance.EndsWithAnyOf(instance[0]);
 
+    public static bool IsEnclosedBy(this string instance, char start, char end)
+        => instance.StartsWith(start) && instance.EndsWith(end);
+    
     public static string Repeat(this string instance, int times)
     {
         string result = string.Empty;

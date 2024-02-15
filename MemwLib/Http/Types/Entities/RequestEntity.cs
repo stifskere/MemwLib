@@ -1,17 +1,14 @@
-using System.Text;
-using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Collections;
 using MemwLib.Http.Types.Content;
 using MemwLib.Http.Types.Exceptions;
 using MemwLib.Http.Types.Routes;
-using HeaderCollection = MemwLib.Http.Types.Collections.HeaderCollection;
 
 namespace MemwLib.Http.Types.Entities;
 
 /// <summary>BaseEntity implementation for HTTP requests.</summary>
 [PublicAPI]
-public sealed partial class RequestEntity : BaseEntity
+public sealed class RequestEntity : BaseEntity
 {
     private RequestMethodType _requestMethod;
 
@@ -37,7 +34,7 @@ public sealed partial class RequestEntity : BaseEntity
     /// <summary>The request location as a PartialUri instance.</summary>
     [PublicAPI]
     public PartialUri Path { get; set; }
-    
+
     /// <summary>The HTTP protocol version for this request.</summary>
     /// <remarks>Due to implementation the http version doesn't modify behavior YET.</remarks>
     [PublicAPI]
@@ -53,62 +50,16 @@ public sealed partial class RequestEntity : BaseEntity
     /// <param name="reader">The entity to parse.</param>
     /// <exception cref="ParseException{T}">There was an error while parsing this stream.</exception>
     /// <remarks>The reader must be positioned at the first line of the content.</remarks>
-    // TODO: requires abstraction, implement timeout
     public RequestEntity(StreamReader reader)
     {
-        string? target;
-        
-        while ((target = reader.ReadLine()) == null) { }
+        string[] splitTarget = InitEntity(reader).Split(' ');
 
-        {
-            string[] splitTarget = target.Split(' ');
-
-            if (splitTarget.Length != 3)
-                throw new ParseException<RequestEntity>();
-            
-            RequestMethod = (RequestMethodType)Enum.Parse(typeof(RequestMethodType), splitTarget[0], true);
-            Path = new PartialUri(splitTarget[1]);
-            HttpVersion = splitTarget[2];
-        }
-
-        Headers = new HeaderCollection();
-        
-        while (!string.IsNullOrEmpty(target = reader.ReadLine()))
-        {
-            string[] splitTarget = target.Split(": ");
-
-            if (splitTarget.Length != 2)
-                throw new ParseException<RequestEntity>();
-
-            Headers[splitTarget[0]] = splitTarget[1];
-        }
-        
-        if (!Headers.Contains("Content-Length"))
-        {
-            Body = BodyConverter.Empty;
-            return;
-        }
-
-        if (!int.TryParse(Headers["Content-Length"], out int bodyLength))
+        if (splitTarget.Length != 3)
             throw new ParseException<RequestEntity>();
-
-        byte[] body = new byte[bodyLength];
-
-        int index = 0;
-        while (bodyLength-- > 0)
-        {
-            int read = reader.Read();
-
-            if (read == -1)
-            {
-                Headers["Content-Length"] = index.ToString();
-                break;
-            }
-
-            body[index++] = (byte)read;
-        }
-
-        Body = new BodyConverter(Encoding.ASCII.GetString(body));
+            
+        RequestMethod = (RequestMethodType)Enum.Parse(typeof(RequestMethodType), splitTarget[0], true);
+        Path = new PartialUri(splitTarget[1]);
+        HttpVersion = splitTarget[2];
     }
     
     /// <summary>Parameterized constructor for request entity.</summary>
@@ -140,11 +91,4 @@ public sealed partial class RequestEntity : BaseEntity
     /// <inheritdoc cref="BaseEntity.BuildStart"/>
     protected override string BuildStart() 
         => $"{RequestMethod.ToString().ToUpper()} {(string)Path} {HttpVersion}";
-
-    [GeneratedRegex(@"(?<method>OPTIONS|GET|HEAD|POST|PATCH|PUT|DELETE|TRACE|CONNECT) (?'path'\/[^ ]*) (?<version>HTTP\/\d+\.\d+)", RegexOptions.IgnoreCase | RegexOptions.Singleline)]
-    private static partial Regex StartLineRegex();
-
-    
-    [GeneratedRegex(@"HTTP\/\d+\.\d+", RegexOptions.IgnoreCase)]
-    private static partial Regex HttpVersionRegex();
 }

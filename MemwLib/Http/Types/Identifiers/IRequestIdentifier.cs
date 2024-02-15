@@ -1,5 +1,3 @@
-using System.Text.RegularExpressions;
-
 namespace MemwLib.Http.Types.Identifiers;
 
 internal interface IRequestIdentifier

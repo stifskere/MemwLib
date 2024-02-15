@@ -1,6 +1,8 @@
-bin/
-obj/
+./bin/
+
+./MemwLib/obj/
+./Tests/obj/
+
 /packages/
-riderModule.iml
+./riderModule.iml
 /_ReSharper.Caches/
-.idea

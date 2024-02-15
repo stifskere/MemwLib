@@ -1,15 +1,12 @@
-using System.Text;
-using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http.Types.Content;
 using MemwLib.Http.Types.Exceptions;
-using HeaderCollection = MemwLib.Http.Types.Collections.HeaderCollection;
 
 namespace MemwLib.Http.Types.Entities;
 
 /// <summary>BaseEntity implementation for HTTP responses.</summary>
 [PublicAPI]
-public sealed partial class ResponseEntity : BaseEntity, IResponsible
+public sealed class ResponseEntity : BaseEntity, IResponsible
 {
     /// <summary>The HTTP protocol version for this request.</summary>
     /// <remarks>Due to implementation the http version doesn't modify behavior YET.</remarks>
@@ -26,61 +23,15 @@ public sealed partial class ResponseEntity : BaseEntity, IResponsible
     /// <param name="reader">The entity to parse.</param>
     /// <exception cref="ParseException{T}">There was an error while parsing this stream.</exception>
     /// <remarks>The reader must be positioned at the first line of the content.</remarks>
-    // TODO: requires abstraction, implement timeout
     public ResponseEntity(StreamReader reader)
     {
-        string? target;
-        
-        while ((target = reader.ReadLine()) == null) { }
-        
-        {
-            string[] splitTarget = target.Split(' ');
+        string[] splitTarget = InitEntity(reader).Split(' ');
 
-            if (splitTarget.Length != 3)
-                throw new ParseException<ResponseEntity>();
+        if (splitTarget.Length != 3)
+            throw new ParseException<ResponseEntity>();
             
-            HttpVersion = splitTarget[0];
-            ResponseCode = (ResponseCodes)Enum.Parse(typeof(ResponseCodes), splitTarget[1], true);
-        }
-
-        Headers = new HeaderCollection();
-        
-        while (!string.IsNullOrEmpty(target = reader.ReadLine()))
-        {
-            string[] splitTarget = target.Split(": ");
-
-            if (splitTarget.Length != 2)
-                throw new ParseException<RequestEntity>();
-
-            Headers[splitTarget[0]] = splitTarget[1];
-        }
-        
-        if (!Headers.Contains("Content-Length"))
-        {
-            Body = BodyConverter.Empty;
-            return;
-        }
-
-        if (!int.TryParse(Headers["Content-Length"], out int bodyLength))
-            throw new ParseException<RequestEntity>();
-
-        byte[] body = new byte[bodyLength];
-
-        int index = 0;
-        while (bodyLength-- > 0)
-        {
-            int read = reader.Read();
-
-            if (read == -1)
-            {
-                Headers["Content-Length"] = index.ToString();
-                break;
-            }
-
-            body[index++] = (byte)read;
-        }
-
-        Body = new BodyConverter(Encoding.ASCII.GetString(body));
+        HttpVersion = splitTarget[0];
+        ResponseCode = (ResponseCodes)Enum.Parse(typeof(ResponseCodes), splitTarget[1], true);
     }
 
     /// <summary>Parameterized constructor for ResponseEntity.</summary>
@@ -112,10 +63,4 @@ public sealed partial class ResponseEntity : BaseEntity, IResponsible
     /// <inheritdoc cref="BaseEntity.BuildStart"/>
     protected override string BuildStart()
         => $"{HttpVersion} {ResponseCode.GetCode()} {ResponseCode.GetName()}";
-    
-    [GeneratedRegex(@"HTTP\/\d+\.\d+", RegexOptions.IgnoreCase, "en-US")]
-    private static partial Regex HttpVersionRegex();
-    
-    [GeneratedRegex(@"(HTTP\/\d+\.\d+) (\d+) .+", RegexOptions.IgnoreCase | RegexOptions.Singleline, "en-US")]
-    private static partial Regex StartLineRegex();
 }
