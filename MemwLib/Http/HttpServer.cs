@@ -166,7 +166,12 @@ public sealed class HttpServer : IDisposable
                     {
                         responseEntity = new ResponseEntity(ResponseCodes.MethodNotAllowed, 
                             new MethodNotAllowedBody(parsedRequest.RequestMethod, parsedRequest.Path.Route));
+                        
                         continue;
+                    }
+                    else
+                    {
+                        responseEntity = null;
                     }
                     
                     IResponsible next;

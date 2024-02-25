@@ -6,7 +6,7 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         
-        <Version>2.2.2</Version>
+        <Version>2.2.3</Version>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>MemwLib</Title>
         <Authors>Memw1</Authors>

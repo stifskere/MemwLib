@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>MemwLib</id>
+    <version>2.2.3</version>
+    <title>MemwLib</title>
+    <authors>Memw1</authors>
+    <icon>icon.png</icon>
+    <readme>README.md</readme>
+    <description>This is a library made for convenient implementations that microsoft did not add to C#, or are not good enough.</description>
+    <tags>Utils HTTP HTTPS Data Colors Strings</tags>
+    <repository type="Git" url="https://github.com/stifskere/MemwLib" commit="c5cedfbb38370b1f923d49fe340c08d40a2a6c7a" />
+    <dependencies>
+      <group targetFramework="net7.0">
+        <dependency id="JetBrains.Annotations" version="2023.2.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="/home/memw/Desktop/ProjectsRider/MemwLib/bin/AnyCPU_Debug/MemwLib/net7.0/MemwLib.dll" target="lib/net7.0/MemwLib.dll" />
+    <file src="/home/memw/Desktop/ProjectsRider/MemwLib/bin/AnyCPU_Debug/MemwLib/net7.0/MemwLib.xml" target="lib/net7.0/MemwLib.xml" />
+    <file src="/home/memw/Desktop/ProjectsRider/MemwLib/icon.png" target="/icon.png" />
+    <file src="/home/memw/Desktop/ProjectsRider/MemwLib/README.md" target="/README.md" />
+  </files>
+</package>

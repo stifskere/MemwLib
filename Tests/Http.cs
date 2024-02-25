@@ -73,6 +73,9 @@ public class Http : IDisposable
         });
 
         _server.AddGroup<RoutesFromClass>();
+
+        _server.AddEndpoint(RequestMethodType.Options, new Regex(".+"), _ => new ResponseEntity(ResponseCodes.Ok));
+        _server.AddGlobalMiddleware(_ => new NextMiddleWare().WithHeader("Access-Control-Allow-Origin", "*"));
     }
     
     [Test]
@@ -89,6 +92,8 @@ public class Http : IDisposable
             Assert.That(response.ResponseCode, Is.EqualTo(ResponseCodes.Ok));
             Assert.That(response.Body.RawBody, Is.EqualTo("hello"));
         });
+        
+        Assert.That(response.Headers.Contains("Access-Control-Allow-Origin"), Is.True);
     }
 
     [Test]
@@ -104,8 +109,11 @@ public class Http : IDisposable
                 ["pass"] = "1234"
             }
         });
-        
-        Assert.That(response.ResponseCode, Is.EqualTo(ResponseCodes.Created));
+        Assert.Multiple(() =>
+        {
+            Assert.That(response.ResponseCode, Is.EqualTo(ResponseCodes.Created));
+            Assert.That(response.Headers.Contains("Access-Control-Allow-Origin"), Is.True);
+        });
     }
 
     [Test]
@@ -125,8 +133,26 @@ public class Http : IDisposable
             Assert.That(response.Headers["My-Header-From-Middleware"], Is.EqualTo("true"));
             Assert.That(response.Headers["My-Header-From-Handler"], Is.EqualTo("true"));
         });
+        
+        Assert.That(response.Headers.Contains("Access-Control-Allow-Origin"), Is.True);
     }
-    
+
+    [Test]
+    public async Task MethodOverlap()
+    {
+        ResponseEntity response = await HttpRequests.CreateRequest(new HttpRequestConfig
+        {
+            Url = "http://localhost:8080/header-test/uhh",
+            Method = RequestMethodType.Options
+        });
+        
+        Assert.Multiple(() =>
+        {
+            Assert.That(response.ResponseCode, Is.EqualTo(ResponseCodes.Ok));
+            Assert.That(response.Headers.Contains("Access-Control-Allow-Origin"), Is.True);
+        });
+    }
+
     public void Dispose()
     {
         GC.SuppressFinalize(this);
