@@ -9,7 +9,7 @@
     <readme>README.md</readme>
     <description>This is a library made for convenient implementations that microsoft did not add to C#, or are not good enough.</description>
     <tags>Utils HTTP HTTPS Data Colors Strings</tags>
-    <repository type="Git" url="https://github.com/stifskere/MemwLib" commit="a1463319ca8a50928f0cb0793045ef102fe8af5c" />
+    <repository type="Git" url="https://github.com/stifskere/MemwLib" commit="817197fc35b0b4cc28a3c9263a8b49697cfb4bea" />
     <dependencies>
       <group targetFramework="net7.0">
         <dependency id="JetBrains.Annotations" version="2023.2.0" exclude="Build,Analyzers" />
