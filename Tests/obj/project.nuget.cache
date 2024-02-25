@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mYgsPxvx6hY7AL4QLLPcV6ShoHwkIwjm9y+3ZYJejGapa6l//CYoCr4pQuuYUf8oZsXZn1YcHOk21/FPYFVMkw==",
+  "dgSpecHash": "TvOtLeqlBLGoaiwnWfEwfkbgHBQ3ktSoy2Vc4UdHWr7QaBHwOCMp+xfTxzbmVxNoEVPiQTTXTuKZWcQ8MwYU5g==",
   "success": true,
   "projectFilePath": "/home/memw/Desktop/ProjectsRider/MemwLib/Tests/Tests.csproj",
   "expectedPackageFiles": [
@@ -18,7 +18,7 @@
     "/home/memw/.nuget/packages/nunit.analyzers/3.6.1/nunit.analyzers.3.6.1.nupkg.sha512",
     "/home/memw/.nuget/packages/nunit3testadapter/4.4.2/nunit3testadapter.4.4.2.nupkg.sha512",
     "/home/memw/.nuget/packages/system.reflection.metadata/1.6.0/system.reflection.metadata.1.6.0.nupkg.sha512",
-    "/home/memw/.nuget/packages/memwlib/2.2.0/memwlib.2.2.0.nupkg.sha512",
+    "/home/memw/.nuget/packages/memwlib/2.2.1/memwlib.2.2.1.nupkg.sha512",
     "/home/memw/.nuget/packages/microsoft.netcore.app.ref/7.0.16/microsoft.netcore.app.ref.7.0.16.nupkg.sha512",
     "/home/memw/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.16/microsoft.aspnetcore.app.ref.7.0.16.nupkg.sha512"
   ],
