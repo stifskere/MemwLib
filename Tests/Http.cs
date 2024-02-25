@@ -1,7 +1,9 @@
 using System.Text;
 using System.Text.RegularExpressions;
+using JetBrains.Annotations;
 using MemwLib.Http;
 using MemwLib.Http.Types;
+using MemwLib.Http.Types.Attributes;
 using MemwLib.Http.Types.Configuration;
 using MemwLib.Http.Types.Content.Implementations;
 using MemwLib.Http.Types.Entities;
@@ -19,7 +21,7 @@ public class Http : IDisposable
     [OneTimeSetUp]
     public void Setup()
     {
-        _server = new(new HttpServerConfig
+        _server = new HttpServer(new HttpServerConfig
         {
             Port = 8080,
             SslBehavior = SslBehavior.DoNotUseCertificateIfNotFound
@@ -30,7 +32,7 @@ public class Http : IDisposable
             Assert.That(message.Type, Is.Not.EqualTo(LogType.Error));
         };
 
-        _server.AddEndpoint(RequestMethodType.Get, new Regex("/users/(?'user'[^/]+)"), request =>
+        _server.AddEndpoint(RequestMethodType.Get, new Regex("/users/(?'user'[^/]+)", RegexOptions.Compiled), request =>
         {
             Assert.Multiple(() =>
             {
@@ -69,6 +71,8 @@ public class Http : IDisposable
             
             return new ResponseEntity(ResponseCodes.Created);
         });
+
+        _server.AddGroup<RoutesFromClass>();
     }
     
     [Test]
@@ -104,9 +108,46 @@ public class Http : IDisposable
         Assert.That(response.ResponseCode, Is.EqualTo(ResponseCodes.Created));
     }
 
+    [Test]
+    public async Task TestHeaders()
+    {
+        ResponseEntity response = await HttpRequests.CreateRequest(new HttpRequestConfig
+        {
+            Url = "http://localhost:8080/header-test/uhh",
+            Method = RequestMethodType.Get
+        });
+        
+        Assert.Multiple(() =>
+        {
+            Assert.That(response.Headers.Contains("My-Header-From-Middleware"), Is.True);
+            Assert.That(response.Headers.Contains("My-Header-From-Handler"), Is.True);
+                
+            Assert.That(response.Headers["My-Header-From-Middleware"], Is.EqualTo("true"));
+            Assert.That(response.Headers["My-Header-From-Handler"], Is.EqualTo("true"));
+        });
+    }
+    
     public void Dispose()
     {
         GC.SuppressFinalize(this);
         _server.Dispose();
+    }
+}
+
+[RouteGroup("/header-test")]
+public class RoutesFromClass
+{
+    public static IResponsible AddHeaderMiddleware(RequestEntity _)
+    {
+        return new NextMiddleWare()
+            .WithHeader("My-Header-From-Middleware", "true");
+    }
+
+    [UsesMiddleware(typeof(RoutesFromClass), nameof(AddHeaderMiddleware))]
+    [GroupMember(RequestMethodType.Get, "/uhh"), UsedImplicitly]
+    public static ResponseEntity TestHeader(RequestEntity _)
+    {
+        return new ResponseEntity(ResponseCodes.Ok)
+            .WithHeader("My-Header-From-Handler", "true");
     }
 }

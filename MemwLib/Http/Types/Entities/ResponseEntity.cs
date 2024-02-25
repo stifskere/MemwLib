@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using MemwLib.Http.Types.Collections;
 using MemwLib.Http.Types.Content;
 using MemwLib.Http.Types.Exceptions;
 
@@ -27,7 +28,7 @@ public sealed class ResponseEntity : BaseEntity, IResponsible
     {
         string[] splitTarget = InitEntity(reader).Split(' ');
 
-        if (splitTarget.Length != 3)
+        if (splitTarget.Length < 3)
             throw new ParseException<ResponseEntity>();
             
         HttpVersion = splitTarget[0];
@@ -59,6 +60,36 @@ public sealed class ResponseEntity : BaseEntity, IResponsible
 
         Body = new BodyConverter(body);
     }
+
+    /// <inheritdoc cref="IResponsible.WithHeader" />
+    public ResponseEntity WithHeader(string key, string value)
+    {
+        Headers.Set(key, value);
+        return this;
+    }
+    
+    IResponsible IResponsible.WithHeader(string key, string value) 
+        => WithHeader(key, value);
+
+    /// <inheritdoc cref="IResponsible.WithHeaders(Dictionary{string, string})" />
+    public ResponseEntity WithHeaders(Dictionary<string, string> headers)
+    {
+        Headers.Add(headers!); // это никогда не будет нулевым сука
+        return this;
+    }
+    
+    IResponsible IResponsible.WithHeaders(Dictionary<string, string> headers)
+        => WithHeaders(headers);
+
+    /// <inheritdoc cref="IResponsible.WithHeaders(HeaderCollection)" />
+    public ResponseEntity WithHeaders(HeaderCollection headers)
+    {
+        Headers.Add(headers);
+        return this;
+    }
+    
+    IResponsible IResponsible.WithHeaders(HeaderCollection headers)
+        => WithHeaders(headers);
     
     /// <inheritdoc cref="BaseEntity.BuildStart"/>
     protected override string BuildStart()

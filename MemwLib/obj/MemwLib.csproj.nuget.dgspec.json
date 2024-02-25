@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\10047563\\Desktop\\ProjectsRider\\MemwLib\\MemwLib\\MemwLib.csproj": {}
+    "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/MemwLib.csproj": {}
   },
   "projects": {
-    "C:\\Users\\10047563\\Desktop\\ProjectsRider\\MemwLib\\MemwLib\\MemwLib.csproj": {
+    "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/MemwLib.csproj": {
       "version": "2.2.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\10047563\\Desktop\\ProjectsRider\\MemwLib\\MemwLib\\MemwLib.csproj",
+        "projectUniqueName": "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/MemwLib.csproj",
         "projectName": "MemwLib",
-        "projectPath": "C:\\Users\\10047563\\Desktop\\ProjectsRider\\MemwLib\\MemwLib\\MemwLib.csproj",
-        "packagesPath": "C:\\Users\\10047563\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\10047563\\Desktop\\ProjectsRider\\MemwLib\\MemwLib\\obj\\",
+        "projectPath": "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/MemwLib.csproj",
+        "packagesPath": "/home/memw/.nuget/packages/",
+        "outputPath": "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\10047563\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/memw/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nuget.bepinex.dev/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
@@ -57,15 +58,11 @@
           "downloadDependencies": [
             {
               "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
+              "version": "[7.0.16, 7.0.16]"
             },
             {
               "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.14, 7.0.14]"
+              "version": "[7.0.16, 7.0.16]"
             }
           ],
           "frameworkReferences": {
@@ -73,7 +70,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Users\\10047563\\.dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/home/memw/.dotnet/sdk/8.0.102/RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -461,6 +461,19 @@
             <param name="key">The key that references the object.</param>
             <param name="value">The value itself.</param>
             <remarks>If the value already existed in that key it will be replaced.</remarks>
+            <returns>The same instance to act as a constructor.</returns>
+        </member>
+        <member name="M:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.Add(MemwLib.CoreUtils.Collections.BaseIsolatedCollection{`0,`1})">
+            <summary>Grab properties from another collection and adds them to this collection.</summary>
+            <param name="other">The other collection</param>
+            <remarks>If the value already existed in that key it will be replaced.</remarks>
+            <returns>The same instance to act as a constructor.</returns>
+        </member>
+        <member name="M:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.Add(System.Collections.Generic.Dictionary{`0,`1})">
+            <summary>Grab properties from another collection and adds them to this collection.</summary>
+            <param name="other">The other collection</param>
+            <remarks>If the value already existed in that key it will be replaced.</remarks>
+            <returns>The same instance to act as a constructor.</returns>
         </member>
         <member name="M:MemwLib.CoreUtils.Collections.BaseIsolatedCollection`2.Get(`0)">
             <summary>Gets a value from this collection.</summary>
@@ -1084,6 +1097,14 @@
             <summary>Collection implementation for HTTP headers.</summary>
             <remarks>The constructor for this collection is internal.</remarks>
         </member>
+        <member name="M:MemwLib.Http.Types.Collections.HeaderCollection.#ctor">
+            <summary>Initializes an empty instance of HTTP header collection that can be used within MemwLib.</summary>
+        </member>
+        <member name="M:MemwLib.Http.Types.Collections.HeaderCollection.#ctor(System.String)">
+            <summary>Constructs an instance of an HTTP header collection that can be used within MemwLib.</summary>
+            <param name="collection">the representation of headers in the RFC2616 specification.</param>
+            <exception cref="T:System.Data.ConstraintException">Thrown when a duplicated key is found.</exception>
+        </member>
         <member name="M:MemwLib.Http.Types.Collections.HeaderCollection.Verify(System.String,System.String)">
             <inheritdoc cref="M:MemwLib.Http.Types.Collections.ParsingCollection.Verify(System.String,System.String)"/>
         </member>
@@ -1440,9 +1461,39 @@
         <member name="T:MemwLib.Http.Types.Entities.IResponsible">
             <summary>Defines that a type is a response within the HTTP server.</summary>
         </member>
+        <member name="P:MemwLib.Http.Types.Entities.IResponsible.Headers">
+            <summary>The header collection corresponding to this HTTP entity.</summary>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.IResponsible.WithHeader(System.String,System.String)">
+            <summary>Add a header to the response.</summary>
+            <param name="key">The key of the header.</param>
+            <param name="value">The value of the header.</param>
+            <returns>An instance of self to act as a constructor</returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.IResponsible.WithHeaders(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>Adds multiple headers to the response.</summary>
+            <param name="headers">A dictionary of key-value pairs that represent the header key and value.</param>
+            <returns>An instance of self to act as a constructor.</returns>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.IResponsible.WithHeaders(MemwLib.Http.Types.Collections.HeaderCollection)">
+            <summary>Adds multiple headers to the response.</summary>
+            <param name="headers">A header collection to append to this one header collection.</param>
+            <returns>An instance of self to act as a constructor.</returns>
+        </member>
         <member name="T:MemwLib.Http.Types.Entities.NextMiddleWare">
             <summary>Tells the server to execute the next middleware piece.</summary>
-            <remarks>This class contains nothing, it's purely used for type metadata.</remarks>
+        </member>
+        <member name="P:MemwLib.Http.Types.Entities.NextMiddleWare.Headers">
+            <inheritdoc cref="P:MemwLib.Http.Types.Entities.IResponsible.Headers"/>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.NextMiddleWare.WithHeader(System.String,System.String)">
+            <inheritdoc cref="M:MemwLib.Http.Types.Entities.IResponsible.WithHeader(System.String,System.String)"/>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.NextMiddleWare.WithHeaders(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <inheritdoc cref="M:MemwLib.Http.Types.Entities.IResponsible.WithHeaders(System.Collections.Generic.Dictionary{System.String,System.String})"/>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.NextMiddleWare.WithHeaders(MemwLib.Http.Types.Collections.HeaderCollection)">
+            <inheritdoc cref="M:MemwLib.Http.Types.Entities.IResponsible.WithHeaders(MemwLib.Http.Types.Collections.HeaderCollection)"/>
         </member>
         <member name="T:MemwLib.Http.Types.Entities.RequestEntity">
             <summary>BaseEntity implementation for HTTP requests.</summary>
@@ -1505,6 +1556,18 @@
             The requester has asked the server to switch protocols and the server has agreed to do so.
             </summary>
         </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.Processing">
+            <summary>
+            indicates that the server has received and is processing the request, but no response is available yet.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.EarlyHints">
+            <summary>
+            This status code is primarily intended to be used with the Link header,
+            letting the user agent start preloading resources while the server prepares
+            a response or pre-connect to an origin from which the page will need resources.
+            </summary>
+        </member>
         <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.Ok">
             <summary>
             Standard response for successful HTTP requests.
@@ -1540,6 +1603,23 @@
             The server has fulfilled the partial GET request for the resource.
             </summary>
         </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.MultiStatus">
+            <summary>
+            Conveys information about multiple resources, for situations where multiple status codes might be appropriate.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.AlreadyReported">
+            <summary>
+            Used inside a &lt;dav:propstat&gt; response element to avoid repeatedly enumerating the
+            internal members of multiple bindings to the same collection.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.ImUsed">
+            <summary>
+            The server has fulfilled a GET request for the resource, and the response is a representation of
+            the result of one or more instance-manipulations applied to the current instance.
+            </summary>
+        </member>
         <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.MultipleChoices">
             <summary>
             The requested resource corresponds to any one of a set of representations, each with its own specific location.
@@ -1565,14 +1645,14 @@
             The server has not modified the document, but there is no information to send back.
             </summary>
         </member>
-        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.UseProxy">
-            <summary>
-            The requested resource must be accessed through a proxy, specified in the Location header.
-            </summary>
-        </member>
         <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.TemporaryRedirect">
             <summary>
             The requested resource temporarily resides under a different URI.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.PermanentRedirect">
+            <summary>
+            The requested resource resides permanently under a different URI.
             </summary>
         </member>
         <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.BadRequest">
@@ -1665,6 +1745,69 @@
             The server cannot meet the requirements of the Expect request-header field.
             </summary>
         </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.ImATeaPot">
+            <summary>
+            indicates that the server refuses to brew coffee because it is, permanently, a teapot. A combined coffee/tea pot that is
+            temporarily out of coffee should instead return 503. This error is a reference to Hyper Text Coffee Pot Control Protocol defined
+            in April Fools' jokes in 1998 and 2014.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.MisdirectedRequest">
+            <summary>
+            The request was directed at a server that is not able to produce a response. This can be sent by a server that is not configured to produce responses
+            for the combination of scheme and authority that are included in the request URI. 
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.UnprocessableContent">
+            <summary>
+            The request was well-formed but was unable to be followed due to semantic errors.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.Locked">
+            <summary>
+            The resource that is being accessed is locked.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.FailedDependency">
+            <summary>
+            The request failed due to failure of a previous request.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.TooEarly">
+            <summary>
+            Indicates that the server is unwilling to risk processing a request that might be replayed.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.UpgradeRequired">
+            <summary>
+            The server refuses to perform the request using the current protocol but might be willing to do so
+            after the client upgrades to a different protocol. The server sends an Upgrade header in a 426 response
+            to indicate the required protocol(s). 
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.PreconditionRequired">
+            <summary>
+            The origin server requires the request to be conditional. This response is intended to prevent the
+            'lost update' problem, where a client GETs a resource's state, modifies it and PUTs it back to the
+            server, when meanwhile a third party has modified the state on the server, leading to a conflict. 
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.TooManyRequests">
+            <summary>
+            indicates the user has sent too many requests in a given amount of time.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.RequestFieldsTooLarge">
+            <summary>
+            The server is unwilling to process the request because its header fields are too large.
+            The request may be resubmitted after reducing the size of the request header fields. 
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.UnavailableForLegalReasons">
+            <summary>
+            The user agent requested a resource that cannot legally be provided, such as a web page censored by a government.
+            </summary>
+        </member>
         <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.InternalServerError">
             <summary>
             A generic error message returned when an unexpected condition was encountered on the server.
@@ -1693,6 +1836,33 @@
         <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.VersionNotSupported">
             <summary>
             The server does not support the HTTP protocol version that was used in the request.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.VariantAlsoNegotiates">
+            <summary>
+            The server has an internal configuration error: the chosen variant resource is configured to engage in
+            transparent content negotiation itself, and is therefore not a proper end point in the negotiation process.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.InsufficientStorage">
+            <summary>
+            The method could not be performed on the resource because the server is unable to store the representation needed
+            to successfully complete the request.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.LoopDetected">
+            <summary>
+            The server detected an infinite loop while processing the request.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.NotExtended">
+            <summary>
+            Further extensions to the request are required for the server to fulfill it.
+            </summary>
+        </member>
+        <member name="F:MemwLib.Http.Types.Entities.ResponseCodes.NetworkAuthenticationRequired">
+            <summary>
+            Indicates that the client needs to authenticate to gain network access.
             </summary>
         </member>
         <member name="T:MemwLib.Http.Types.Entities.ResponseCodesExtensions">
@@ -1738,6 +1908,15 @@
             <param name="version">the version of the standard this request follows.</param>
             <exception cref="T:System.FormatException">The HTTP version is invalid.</exception>
             <remarks>The version doesn't change the functionality, it's just parsed as string to be sent with the entity.</remarks>
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.ResponseEntity.WithHeader(System.String,System.String)">
+            <inheritdoc cref="M:MemwLib.Http.Types.Entities.IResponsible.WithHeader(System.String,System.String)" />
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.ResponseEntity.WithHeaders(System.Collections.Generic.Dictionary{System.String,System.String})">
+            <inheritdoc cref="M:MemwLib.Http.Types.Entities.IResponsible.WithHeaders(System.Collections.Generic.Dictionary{System.String,System.String})" />
+        </member>
+        <member name="M:MemwLib.Http.Types.Entities.ResponseEntity.WithHeaders(MemwLib.Http.Types.Collections.HeaderCollection)">
+            <inheritdoc cref="M:MemwLib.Http.Types.Entities.IResponsible.WithHeaders(MemwLib.Http.Types.Collections.HeaderCollection)" />
         </member>
         <member name="M:MemwLib.Http.Types.Entities.ResponseEntity.BuildStart">
             <inheritdoc cref="M:MemwLib.Http.Types.Entities.BaseEntity.BuildStart"/>

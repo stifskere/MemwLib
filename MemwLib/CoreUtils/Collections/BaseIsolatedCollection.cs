@@ -7,7 +7,8 @@ namespace MemwLib.CoreUtils.Collections;
 /// <typeparam name="TKey">The type of the keys for this collection instance.</typeparam>
 /// <typeparam name="TValue">The type of the values for this collection instance.</typeparam>
 [PublicAPI]
-public abstract class BaseIsolatedCollection<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>, ICountable where TKey : notnull
+public abstract class BaseIsolatedCollection<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>, ICountable 
+    where TKey : notnull
 {
     /// <summary>Collection default dictionary</summary>
     /// <remarks>This should not be exposed.</remarks>
@@ -40,9 +41,35 @@ public abstract class BaseIsolatedCollection<TKey, TValue> : IEnumerable<KeyValu
     /// <param name="key">The key that references the object.</param>
     /// <param name="value">The value itself.</param>
     /// <remarks>If the value already existed in that key it will be replaced.</remarks>
-    public virtual void Set(TKey key, TValue value)
+    /// <returns>The same instance to act as a constructor.</returns>
+    public virtual BaseIsolatedCollection<TKey, TValue> Set(TKey key, TValue value)
     {
         Variables[key] = value;
+        return this;
+    }
+
+    /// <summary>Grab properties from another collection and adds them to this collection.</summary>
+    /// <param name="other">The other collection</param>
+    /// <remarks>If the value already existed in that key it will be replaced.</remarks>
+    /// <returns>The same instance to act as a constructor.</returns>
+    public virtual BaseIsolatedCollection<TKey, TValue> Add(BaseIsolatedCollection<TKey, TValue> other)
+    {
+        foreach ((TKey key, TValue value) in other)
+            Set(key, value);
+
+        return this;
+    }
+
+    /// <summary>Grab properties from another collection and adds them to this collection.</summary>
+    /// <param name="other">The other collection</param>
+    /// <remarks>If the value already existed in that key it will be replaced.</remarks>
+    /// <returns>The same instance to act as a constructor.</returns>
+    public virtual BaseIsolatedCollection<TKey, TValue> Add(Dictionary<TKey, TValue> other)
+    {
+        foreach ((TKey key, TValue value) in other)
+            Set(key, value);
+
+        return this;
     }
 
     /// <summary>Gets a value from this collection.</summary>

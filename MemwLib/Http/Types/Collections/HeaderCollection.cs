@@ -9,9 +9,13 @@ namespace MemwLib.Http.Types.Collections;
 [PublicAPI]
 public sealed partial class HeaderCollection : ParsingCollection
 {
-    internal HeaderCollection() {}
+    /// <summary>Initializes an empty instance of HTTP header collection that can be used within MemwLib.</summary>
+    public HeaderCollection() {}
     
-    internal HeaderCollection(string collection)
+    /// <summary>Constructs an instance of an HTTP header collection that can be used within MemwLib.</summary>
+    /// <param name="collection">the representation of headers in the RFC2616 specification.</param>
+    /// <exception cref="ConstraintException">Thrown when a duplicated key is found.</exception>
+    public HeaderCollection(string collection)
     {
         MatchCollection matches;
         if (string.IsNullOrEmpty(collection) || (matches = HeaderVerification().Matches(collection)).Count == 0)
@@ -28,7 +32,7 @@ public sealed partial class HeaderCollection : ParsingCollection
             this[key] = value;
         }
     }
-    
+
     /// <inheritdoc cref="ParsingCollection.Verify"/>
     protected override bool Verify(string key, string value)
         => HeaderVerification().IsMatch($"{key}: {value}");

@@ -23,6 +23,7 @@ public delegate IResponsible MiddleWareDelegate(RequestEntity request);
 
 /// <summary>Delegate used to implement response code interception logic.</summary>
 /// <param name="response">The anterior response.</param>
+/// <param name="request">The request related to this response.</param>
 /// <returns>The response that the server should send.</returns>
 /// <remarks>Changing the response code won't trigger other interceptors.</remarks>
-public delegate IResponsible InterceptorDelegate(ResponseEntity response);
+public delegate IResponsible InterceptorDelegate(RequestEntity request, ResponseEntity response);

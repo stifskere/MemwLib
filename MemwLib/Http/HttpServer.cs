@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http.Types;
 using MemwLib.Http.Types.Attributes;
+using MemwLib.Http.Types.Collections;
 using MemwLib.Http.Types.Configuration;
 using MemwLib.Http.Types.Content.Implementations;
 using MemwLib.Http.Types.Entities;
@@ -169,27 +170,35 @@ public sealed class HttpServer : IDisposable
                     }
                     
                     IResponsible next;
+
+                    HeaderCollection headerCache = new();
                     
                     RunMiddleware(_globalMiddleware);
                     RunMiddlewareFromAttributes(handler.Method.DeclaringType?.GetCustomAttributes<UsesMiddlewareAttribute>());
                     RunMiddlewareFromAttributes(handler.Method.GetCustomAttributes<UsesMiddlewareAttribute>());
                     
-                    responseEntity ??= handler(parsedRequest);
+                    responseEntity ??= handler(parsedRequest)
+                        .WithHeaders(headerCache);
+                    
                     break;
 
                     void RunMiddleware(IEnumerable<MiddleWareDelegate>? middleWarePieces)
                     {
                         if (middleWarePieces is null)
                             return;
-
+                        
                         foreach (MiddleWareDelegate middleware in middleWarePieces)
                         {
                             next = middleware(parsedRequest);
 
+                            headerCache.Add(next.Headers);
+                            
                             if (next is not ResponseEntity resEntity)
                                 continue;
 
-                            responseEntity = resEntity;
+                            responseEntity = resEntity
+                                .WithHeaders(responseEntity?.Headers ?? new HeaderCollection());
+                            
                             break;
                         }
                     }
@@ -203,10 +212,14 @@ public sealed class HttpServer : IDisposable
                         {
                             next = middleware.Target(parsedRequest);
 
+                            headerCache.Add(next.Headers);
+                            
                             if (next is not ResponseEntity resEntity) 
                                 continue;
                         
-                            responseEntity = resEntity;
+                            responseEntity = resEntity
+                                .WithHeaders(responseEntity?.Headers ?? new HeaderCollection());
+                            
                             break;
                         }
                     }
@@ -223,12 +236,20 @@ public sealed class HttpServer : IDisposable
 
             if (_codeInterceptors.TryGetValue(responseEntity.ResponseCode, out List<InterceptorDelegate>? interceptor))
             {
+                HeaderCollection headerCache = new();
+                
                 foreach (InterceptorDelegate handler in interceptor)
                 {
-                    if (handler(responseEntity) is not ResponseEntity interceptorResponse) 
+                    IResponsible response = handler(parsedRequest, responseEntity);
+
+                    headerCache.Add(response.Headers);
+                    
+                    if (response is not ResponseEntity interceptorResponse) 
                         continue;
                     
-                    responseEntity = interceptorResponse;
+                    responseEntity = interceptorResponse
+                        .WithHeaders(headerCache);
+                    
                     break;
                 }
             }
@@ -316,7 +337,7 @@ public sealed class HttpServer : IDisposable
             GroupMemberAttribute? postFix = method.GetCustomAttribute<GroupMemberAttribute>();
 
             if (postFix is null)
-                return this;
+                continue;
             
             _endpoints.Add(new MixedIdentifier
             {
