@@ -1,6 +1,5 @@
-using JetBrains.Annotations;
-
 #if DEBUG
+using JetBrains.Annotations;
 
 namespace MemwLib.Cron.Types.Jobs;
 

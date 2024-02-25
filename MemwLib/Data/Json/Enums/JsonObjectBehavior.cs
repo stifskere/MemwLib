@@ -1,6 +1,6 @@
+#if DEBUG
 using JetBrains.Annotations;
 
-#if DEBUG
 
 namespace MemwLib.Data.Json.Enums;
 

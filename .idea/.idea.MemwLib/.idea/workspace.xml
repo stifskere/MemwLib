@@ -78,7 +78,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="HTTP Request.All in rest-api_1">
+  <component name="RunManager">
     <configuration name="All in rest-api_1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/rest-api_1.http">
       <method v="2" />
     </configuration>
