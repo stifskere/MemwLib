@@ -395,7 +395,7 @@
           }
         }
       },
-      "MemwLib/2.2.1": {
+      "MemwLib/2.2.3": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
@@ -1024,7 +1024,7 @@
         "version.txt"
       ]
     },
-    "MemwLib/2.2.1": {
+    "MemwLib/2.2.3": {
       "type": "project",
       "path": "../MemwLib/MemwLib.csproj",
       "msbuildProject": "../MemwLib/MemwLib.csproj"
@@ -1032,7 +1032,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "MemwLib >= 2.2.1",
+      "MemwLib >= 2.2.3",
       "Microsoft.NET.Test.Sdk >= 17.5.0",
       "NUnit >= 3.13.3",
       "NUnit.Analyzers >= 3.6.1",

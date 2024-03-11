@@ -25,6 +25,8 @@ public class BodyConverter
     /// <summary>Returns an empty instance of a BodyConverter.</summary>
     public static BodyConverter Empty => new(string.Empty);
     
+    // TODO: must read stream instead of string, I'm thinking of reading it till Content-Length or end of stream data.
+    
     /// <summary>
     /// BodyConverter raw constructor,
     /// initializes this instance from a raw string.

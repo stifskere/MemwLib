@@ -1,17 +1,15 @@
 # MemwLib
 
-This is a library made for convenient implementations that microsoft did not add to C#, or are not good enough.
-
-(in my opinion)
+This library was made with the intention of making some of the pre-implemented features in the language more handful.
 
 # Documentation
 
-The documentation for this whole library is done trough XML for the moment, but in the future there will be an actual documentation page *maybe served with this library HTTP server*.
+The documentation is being developed in my [portfolio site](https://memw.es), expect to find tutorials and XML maps there soon.
 
 # Contributing
 
-Simply make a pull request.
+Please make a pull request and it will be reviewed as soon as possible.
 
 # Downloading
 
-This library is available in NuGet as MemwLib.
+This library is available in [NuGet as MemwLib](https://www.nuget.org/packages/MemwLib), or you can download the assembly in the releases section of this github repository (may be outdated)

@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyDescriptionAttribute("This is a library made for convenient implementations that microsoft did not add " +
     "to C#, or are not good enough.")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("2.2.3.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("2.2.3+c5cedfbb38370b1f923d49fe340c08d40a2a6c7a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("2.2.3+f72de47a4b5be62e7f8e9ccf1163b17655315c1c")]
 [assembly: System.Reflection.AssemblyProductAttribute("MemwLib")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MemwLib")]
 [assembly: System.Reflection.AssemblyVersionAttribute("2.2.3.0")]

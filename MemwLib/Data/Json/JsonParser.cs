@@ -25,7 +25,6 @@ public static class JsonParser
     /// <typeparam name="TResult">The type of the result.</typeparam>
     /// <exception cref="InvalidJsonConstraintException">Thrown when a constraint for the JSON standard was broken.</exception>
     /// <exception cref="InvalidJsonSequenceException">Thrown when a sequence of a JSON fragment didn't match enclosing rules.</exception>
-    /// <exception cref="UnexpectedJsonEoiException">Thrown when an unexpected end of input was found in this object while verifying.</exception>
     /// <exception cref="InvalidJsonTargetTypeException">Thrown when the type of this payload didn't match the target type.</exception>
     /// <exception cref="NullReferenceException">
     /// Thrown when a non-nullable property wasn't found in the object or not

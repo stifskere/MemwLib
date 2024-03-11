@@ -775,13 +775,6 @@
         <member name="P:MemwLib.Data.Json.Exceptions.InvalidJsonTargetTypeException.Message">
             <inheritdoc cref="P:System.Exception.Message"/>
         </member>
-        <member name="T:MemwLib.Data.Json.Exceptions.UnexpectedJsonEoiException">
-            <summary>Thrown when an unexpected character was found.</summary>
-            <remarks>This class is not constructable externally.</remarks>
-        </member>
-        <member name="P:MemwLib.Data.Json.Exceptions.UnexpectedJsonEoiException.Message">
-            <inheritdoc cref="P:System.Exception.Message"/>
-        </member>
         <member name="T:MemwLib.Data.Json.JsonParser">
             <summary>A class that defines utilities for working with the JSON data type.</summary>
         </member>
@@ -794,7 +787,7 @@
             <typeparam name="TResult">The type of the result.</typeparam>
             <exception cref="T:MemwLib.Data.Json.Exceptions.InvalidJsonConstraintException">Thrown when a constraint for the JSON standard was broken.</exception>
             <exception cref="T:MemwLib.Data.Json.Exceptions.InvalidJsonSequenceException">Thrown when a sequence of a JSON fragment didn't match enclosing rules.</exception>
-            <exception cref="T:MemwLib.Data.Json.Exceptions.UnexpectedJsonEoiException">Thrown when an unexpected end of input was found in this object while verifying.</exception>
+            <exception cref="!:UnexpectedJsonEoiException">Thrown when an unexpected end of input was found in this object while verifying.</exception>
             <exception cref="T:MemwLib.Data.Json.Exceptions.InvalidJsonTargetTypeException">Thrown when the type of this payload didn't match the target type.</exception>
             <exception cref="T:System.NullReferenceException">
             Thrown when a non-nullable property wasn't found in the object or not

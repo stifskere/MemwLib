@@ -50,7 +50,7 @@
     "/home/memw/.nuget/packages/": {}
   },
   "project": {
-    "version": "2.2.1",
+    "version": "2.2.3",
     "restore": {
       "projectUniqueName": "/home/memw/Desktop/ProjectsRider/MemwLib/MemwLib/MemwLib.csproj",
       "projectName": "MemwLib",

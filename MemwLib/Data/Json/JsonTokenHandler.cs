@@ -71,280 +71,104 @@ internal static class JsonTokenHandler
             if (inferred is not string s) 
                 return inferred;
 
-            if (s.IsEnclosedWithSameOf('"'))
-            {
-                for (int i = 1; i < s.Length - 1; i++)
-                    if (s[i] == '"' && s[i - 1] == '\\' && i > 1 && s[i - 2] != '\\')
-                        return s;
+            if (s.IsEnclosedWithSameOf('"')) 
+                return s[1..^1];
+            
+            for (int i = 1; i < s.Length - 1; i++)
+                if (s[i] == '"' && s[i - 1] == '\\' && i > 1 && s[i - 2] != '\\')
+                    return s;
                 
-                throw new InvalidJsonSequenceException('"');
-            }
-            
-            return s[1..^1];
-        }
-        
-        private static List<string> SplitAtLevel(string payload)
-        {
-            List<string> result = new();
-            bool insideSquareBrackets = false;
-            bool insideCurlyBraces = false;
-            int startIndex = 0;
-
-            for (int i = 0; i < payload.Length; i++)
-            {
-                switch (payload[i])
-                {
-                    case '[':
-                        insideSquareBrackets = true;
-                        break;
-                    case ']':
-                        insideSquareBrackets = false;
-                        break;
-                    case '{':
-                        insideCurlyBraces = true;
-                        break;
-                    case '}':
-                        insideCurlyBraces = false;
-                        break;
-                    case ',' when !insideSquareBrackets && !insideCurlyBraces:
-                    {
-                        string substring = payload.Substring(startIndex, i - startIndex).Trim();
-                        result.Add(substring);
-                        startIndex = i + 1;
-                        break;
-                    }
-                }
-            }
-
-            string lastSubstring = payload[startIndex..].Trim();
-            
-            if (!string.IsNullOrEmpty(lastSubstring)) 
-                result.Add(lastSubstring);
-
-            return result;
+            throw new InvalidJsonSequenceException('"');
         }
     }
 
     public static class Validators
     {
+        private enum PrimitiveType
+        {
+            String = 1,
+            Number = 1 << 1,
+            Boolean = 1 << 2,
+            Null = 1 << 3
+        }
+        
         public static bool VerifyJson(string payload, bool throwOnError)
         {
             payload = payload.Trim();
-            int iterator = 0;
-            
-            if (payload.IsEnclosedBy('{', '}'))
-                return CheckObject(ref payload, ref iterator, throwOnError);
-            
-            if (payload.IsEnclosedBy('[', ']'))
-                return CheckList(ref payload, ref iterator, throwOnError);
-            
-            return CheckPrimitive(ref payload, ref iterator, throwOnError);
+
+            return payload[0] switch
+            {
+                '{' => CheckObject(payload, throwOnError),
+                '[' => CheckList(payload, throwOnError),
+                _ => CheckPrimitive(payload, throwOnError) is not null
+            };
         }
         
-        private static bool CheckObject(ref string payload, ref int iterator, bool throwOnError)
+        private static bool CheckObject(string payload, bool throwOnError)
         {
-            iterator++;
-            bool isKey = true;
-
-            while (iterator < payload.Length)
-            {
-                if (payload[iterator] is ' ' or '\n' or '\r')
-                {
-                    iterator++;
-                    continue;
-                }
-
-                if (payload[iterator] == '}')
-                {
-                    iterator++;
-                    return true;
-                }
-                
-                if (isKey)
-                {
-                    if (payload[iterator] != '"')
-                    {
-                        return throwOnError
-                            ? throw new InvalidJsonConstraintException("Object keys must be strings.")
-                            : false;
-                    }
-                    
-                    iterator++;
-                    
-                    bool escaped = false;
-                    while (iterator < payload.Length)
-                    {
-                        char nextChar = payload[iterator++];
-                        
-                        if (nextChar == '\\' && !escaped)
-                        {
-                            escaped = true;
-                            continue;
-                        }
-                        
-                        if (nextChar == '"' && !escaped)
-                        {
-                            isKey = false; 
-                            break;
-                        }
-                        
-                        escaped = false;
-                    }
-                }
-                else
-                {
-                    if (payload[iterator] != ':')
-                    {
-                        return throwOnError
-                            ? throw new UnexpectedJsonEoiException(payload[iterator], ":", iterator)
-                            : false;
-                    }
-                    
-                    iterator++;
-                    
-                    while (iterator < payload.Length && payload[iterator] is ' ' or '\n' or '\r')
-                        iterator++;
-                    
-                    switch (payload[iterator])
-                    {
-                        case '{':
-                        {
-                            if (!CheckObject(ref payload, ref iterator, throwOnError))
-                                return false;
-                            iterator++;
-                            break;
-                        }
-                        case '[':
-                        {
-                            if (!CheckList(ref payload, ref iterator, throwOnError))
-                                return false;
-                            iterator++;
-                            break;
-                        }
-                        default:
-                        {
-                            if (!CheckPrimitive(ref payload, ref iterator, throwOnError))
-                                return false;
-                            break;
-                        }
-                    }
-
-                    if (payload[iterator] == '}')
-                        return true;
-                    
-                    iterator++;
-                    isKey = true;
-                }
-            }
+            payload = payload.Trim();
             
-            return throwOnError 
-                ? throw new UnexpectedJsonEoiException(payload[iterator], "}", iterator) 
-                : false;
-        }
+            if (!payload.IsEnclosedBy('{', '}'))
+                return FalseOrThrow(throwOnError, "JSON Objects must start with { and end with }.");
 
-        private static bool CheckList(ref string payload, ref int iterator, bool throwOnError)
-        {
-            bool needsToFindComa = false;
-            iterator++;
-            
-            for (; iterator < payload.Length; iterator++)
+            foreach (string kvp in SplitAtLevel(payload[1..^1]))
             {
-                if (payload[iterator] == ']')
-                {
-                    if (!needsToFindComa)
-                        return throwOnError 
-                            ? throw new UnexpectedJsonEoiException(payload[iterator], new []{ "number", "\"", "true", "false", "null", "]", "[", "{" }, iterator) 
-                            : false;
-                    
-                    return true;
-                }
-
-                if (needsToFindComa && payload[iterator] != ' ' && payload[iterator] != '\r' 
-                    && payload[iterator] != '\n' && payload[iterator] != ',')
-                    return throwOnError
-                        ? throw new UnexpectedJsonEoiException(payload[iterator], ",", iterator)
-                        : false;
+                // TODO: rethink this logic
+                string[] splitKvp = kvp.Split(':');
+                splitKvp = new[] { splitKvp[0], string.Join(':', splitKvp[1..]) };
                 
-                bool exit;
-                switch (payload[iterator])
-                {
-                    case ',':
-                        if (!needsToFindComa)
-                            return throwOnError 
-                                ? throw new UnexpectedJsonEoiException(payload[iterator], new []{ "number", "\"", "true", "false", "null", "]", "[", "{" }, iterator) 
-                                : false;
+                if (CheckPrimitive(splitKvp[0], throwOnError) != PrimitiveType.String)
+                    return FalseOrThrow(throwOnError, "JSON Object keys must be Strings");
 
-                        needsToFindComa = false;
-                        continue;
-                    case ' ':
-                        continue;
-                    case '{':
-                        exit = CheckObject(ref payload, ref iterator, throwOnError);
-                        needsToFindComa = true;
-                        break;
-                    case '[':
-                        exit = CheckList(ref payload, ref iterator, throwOnError);
-                        needsToFindComa = true;
-                        break;
-                    default:
-                        exit = CheckPrimitive(ref payload, ref iterator, throwOnError);
-                        needsToFindComa = true;
-                        break;
-                }
-
-                if (!exit)
+                if (!VerifyJson(splitKvp[1], throwOnError))
                     return false;
             }
-            
-            return throwOnError 
-                ? throw new UnexpectedJsonEoiException(' ', "]", payload.Length - 1) 
-                : false;
+
+            return true;
         }
 
-        private static bool CheckPrimitive(ref string payload, ref int iterator, bool throwOnError)
+        private static bool CheckList(string payload, bool throwOnError)
         {
-            string content = string.Empty;
+            payload = payload.Trim();
             
-            for (; iterator < payload.Length; iterator++)
-            {
-                if (payload[iterator] is ':' or ',' or '}' or ']')
-                    break;
+            return !payload.IsEnclosedBy('[', ']') 
+                ? FalseOrThrow(throwOnError, "JSON Lists must start with [ and end with ].") 
+                : SplitAtLevel(payload[1..^1]).All(value => VerifyJson(value, throwOnError));
+        }
 
-                content += payload[iterator];
-            }
-
-            content = content.Trim();
-
-            if (string.IsNullOrEmpty(content))
-                return throwOnError 
-                    ? throw new UnexpectedJsonEoiException(payload[iterator], new []{ "number", "\"", "true", "false", "null" }, iterator) 
-                    : false;
+        private static PrimitiveType? CheckPrimitive(string payload, bool throwOnError)
+        {
+            InvalidJsonConstraintException unsupportedTypeException
+                = new("Supported JSON primitive types are String, Number and Null.");
             
-            if (content is "true" or "false")
-                return true;
+            payload = payload.Trim();
 
-            if (content == "null")
-                return true;
-            
-            if (content.IsEnclosedWithSameOf('"'))
-            {
-                for (int i = 1; i < content.Length - 1; i++)
-                    if (content[i] == '"' && (content[i - 1] != '\\' || (i > 1 && content[i - 2] != '\\')))
-                        return throwOnError 
-                                ? throw new UnexpectedJsonEoiException(payload[iterator], ",", iterator)
-                                : false;
-                
-                return true;
-            }
-                
+            if (payload.IsEnclosedWithSameOf('"'))
+                return PrimitiveType.String;
 
-            if (double.TryParse(content, out _))
-                return true;
+            if (payload.Split(' ').Length != 1)
+                return throwOnError
+                    ? throw unsupportedTypeException
+                    : null;
+
+            if (double.TryParse(payload, null, out _))
+                return PrimitiveType.Number;
+
+            if (bool.TryParse(payload, out _))
+                return PrimitiveType.Boolean;
+
+            if (payload == "null")
+                return PrimitiveType.Null;
 
             return throwOnError 
-                ? throw new InvalidJsonConstraintException($"Symbol not recognized \"{content}\"") 
-                : false;
+                ? throw unsupportedTypeException
+                : null;
         }
+
+        private static bool FalseOrThrow(bool throwOnError, string error)
+            => throwOnError
+                ? throw new InvalidJsonConstraintException(error)
+                : false;
     }
 
     public static string PrettifyJson(string json, int level)
@@ -357,12 +181,53 @@ internal static class JsonTokenHandler
         return json.Aggregate(string.Empty, (current, character) => current + character switch
         {
             ':' => $"{character} ",
-            '{' => $"{character}\n{" ".Repeat(indent += level)}",
-            '[' => $"{character}\n{" ".Repeat(indent += level)}",
-            '}' or ']' => $"\n{" ".Repeat(indent -= level)}{character}",
-            ',' => $"{character}\n{" ".Repeat(indent)}",
+            '{' => $"{character}\n{new string(' ', indent += level)}",
+            '[' => $"{character}\n{new string(' ', indent += level)}",
+            '}' or ']' => $"\n{new string(' ', indent -= level)}{character}",
+            ',' => $"{character}\n{new string(' ', indent)}",
             _ => character
         });
+    }
+    
+    private static List<string> SplitAtLevel(string payload)
+    {
+        List<string> result = new();
+        bool insideSquareBrackets = false;
+        bool insideCurlyBraces = false;
+        int startIndex = 0;
+
+        for (int i = 0; i < payload.Length; i++)
+        {
+            switch (payload[i])
+            {
+                case '[':
+                    insideSquareBrackets = true;
+                    break;
+                case ']':
+                    insideSquareBrackets = false;
+                    break;
+                case '{':
+                    insideCurlyBraces = true;
+                    break;
+                case '}':
+                    insideCurlyBraces = false;
+                    break;
+                case ',' when !insideSquareBrackets && !insideCurlyBraces:
+                {
+                    string substring = payload.Substring(startIndex, i - startIndex).Trim();
+                    result.Add(substring);
+                    startIndex = i + 1;
+                    break;
+                }
+            }
+        }
+
+        string lastSubstring = payload[startIndex..].Trim();
+            
+        if (!string.IsNullOrEmpty(lastSubstring)) 
+            result.Add(lastSubstring);
+
+        return result;
     }
 }
 

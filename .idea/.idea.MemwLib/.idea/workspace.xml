@@ -5,28 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4cc06ee4-83f2-4050-8377-acb1506728bc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/MemwLib.2.2.3.nuspec" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MemwLib/obj/Release/MemwLib.2.2.2.nuspec" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.MemwLib/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.MemwLib/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib.sln.DotSettings.user" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/Http/HttpServer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Http/HttpServer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/MemwLib.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/MemwLib.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/Data/Json/Exceptions/UnexpectedJsonEoiException.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/Data/Json/JsonTokenHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/Data/Json/JsonTokenHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/MemwLib.2.2.3.nuspec" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/MemwLib.2.2.3.nuspec" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.AssemblyInfoInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.sourcelink.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/MemwLib.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/ref/MemwLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/ref/MemwLib.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/refint/MemwLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Debug/net7.0/refint/MemwLib.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/MemwLib.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/MemwLib.csproj.nuget.dgspec.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/MemwLib.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/ref/MemwLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/ref/MemwLib.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/refint/MemwLib.dll" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/Release/net7.0/refint/MemwLib.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Http.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Http.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MemwLib/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/MemwLib/obj/rider.project.restore.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.AssemblyInfoInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/Tests.csproj.AssemblyReference.cache" afterDir="false" />
@@ -37,12 +37,11 @@
       <change beforePath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/refint/Tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Debug/net7.0/refint/Tests.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.sourcelink.json" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/Tests.sourcelink.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/obj/Release/net7.0/ref/Tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/ref/Tests.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/obj/Release/net7.0/refint/Tests.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Release/net7.0/refint/Tests.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/Tests.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/Tests.csproj.nuget.dgspec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/project.assets.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/project.nuget.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/rider.project.model.nuget.info" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/rider.project.model.nuget.info" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/obj/rider.project.restore.info" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/obj/rider.project.restore.info" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,10 +52,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/97dece63fa30c07831bb74be7a5a486e6b46da4e5255556f9a161bb51d9b777/Boolean.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -81,6 +77,8 @@
   "keyToString": {
     "228ee118-0669-4cc6-8942-28111318e5fa.executor": "Debug",
     "44bffaae-e5b0-4409-8d45-a15f99d4cdf1.executor": "Debug",
+    "51368a32-823d-47d1-afb9-54c5e1d772a5.executor": "Debug",
+    "67bae0b3-ae80-4b04-a255-832562288465.executor": "Debug",
     "6980b5fb-4837-4c8f-aae0-eb1630b010ce.executor": "Debug",
     "6c9ac85d-7a8a-48af-b03d-5738a2a366c3.executor": "Debug",
     "7d8267c8-52d7-4965-885b-37dafd2680ba.executor": "Debug",
@@ -224,7 +222,9 @@
       <workItem from="1708550903472" duration="4000" />
       <workItem from="1708608227047" duration="828000" />
       <workItem from="1708887763481" duration="8899000" />
-      <workItem from="1708900589163" duration="2017000" />
+      <workItem from="1708900589163" duration="2998000" />
+      <workItem from="1709641025524" duration="625000" />
+      <workItem from="1710119249510" duration="3586000" />
     </task>
     <servers />
   </component>
@@ -319,6 +319,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/MemwLib/Data/Json/JsonTokenHandler.cs</url>
+          <line>120</line>
+          <properties documentPath="$PROJECT_DIR$/MemwLib/Data/Json/JsonTokenHandler.cs" initialLine="120" containingFunctionPresentation="Method 'CheckObject'">
+            <startOffsets>
+              <option value="3899" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3971" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
