@@ -6,3 +6,8 @@ bin
 /packages/
 ./riderModule.iml
 /_ReSharper.Caches/
+
+.idea/.idea.MemwLib/.idea/workspace.xml
+
+MemwLib/obj
+Tests/obj
