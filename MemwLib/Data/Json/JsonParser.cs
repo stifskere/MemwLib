@@ -9,8 +9,6 @@ using MemwLib.Data.Json.Attributes;
 using MemwLib.Data.Json.Enums;
 using MemwLib.Data.Json.Exceptions;
 
-
-
 namespace MemwLib.Data.Json;
 
 /// <summary>A class that defines utilities for working with the JSON data type.</summary>
@@ -72,14 +70,19 @@ public static class JsonParser
     /// <summary>Simply checks if a JSON payload is valid or invalid.</summary>
     /// <param name="payload">the JSON payload to check.</param>
     /// <returns>Whether the payload is valid or invalid.</returns>
+    /// <remarks>
+    /// This is ONLY designed to check whether the JSON is valid or not,
+    /// it will not check type matching, to validate type matching, you can
+    /// use JsonParser.Deserialize and catch a InvalidJsonTargetTypeException.
+    /// </remarks>
     public static bool IsValidJson(string payload)
         => JsonTokenHandler.Validators.VerifyJson(payload, false);
 
-    /// <summary>Converts an object to a string JSON object as JavaScript's JSON.stringify.</summary>
-    /// <param name="payload"></param>
-    /// <param name="indentation"></param>
+    /// <summary>Converts an object to a string JSON object as JavaScript's JSON.stringify does.</summary>
+    /// <param name="payload">The Object to convert.</param>
+    /// <param name="indentation">The indentation depth.</param>
     /// <exception cref="InvalidJsonConstraintException">Supplied dictionary keys aren't strings.</exception>
-    /// <returns></returns>
+    /// <returns>a string representing your object in JSON.</returns>
     public static string Serialize(object? payload, int indentation = 0)
     {
         if (payload is null)

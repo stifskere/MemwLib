@@ -109,16 +109,17 @@ internal static class JsonTokenHandler
             payload = payload.Trim();
             
             if (!payload.IsEnclosedBy('{', '}'))
-                return FalseOrThrow(throwOnError, "JSON Objects must start with { and end with }.");
+                return ResultOrThrow(throwOnError, "JSON Objects must start with { and end with }.", false);
 
             foreach (string kvp in SplitAtLevel(payload[1..^1]))
             {
-                // TODO: rethink this logic
-                string[] splitKvp = kvp.Split(':');
-                splitKvp = new[] { splitKvp[0], string.Join(':', splitKvp[1..]) };
+                List<string> splitKvp = SplitAtLevel(kvp, ':');
+
+                if (splitKvp.Count != 2)
+                    return ResultOrThrow(throwOnError, "Invalid JSON key-value-pair.", false);
                 
                 if (CheckPrimitive(splitKvp[0], throwOnError) != PrimitiveType.String)
-                    return FalseOrThrow(throwOnError, "JSON Object keys must be Strings");
+                    return ResultOrThrow(throwOnError, "JSON Object keys must be Strings.", false);
 
                 if (!VerifyJson(splitKvp[1], throwOnError))
                     return false;
@@ -132,14 +133,13 @@ internal static class JsonTokenHandler
             payload = payload.Trim();
             
             return !payload.IsEnclosedBy('[', ']') 
-                ? FalseOrThrow(throwOnError, "JSON Lists must start with [ and end with ].") 
+                ? ResultOrThrow(throwOnError, "JSON Lists must start with [ and end with ].", false) 
                 : SplitAtLevel(payload[1..^1]).All(value => VerifyJson(value, throwOnError));
         }
 
         private static PrimitiveType? CheckPrimitive(string payload, bool throwOnError)
         {
-            InvalidJsonConstraintException unsupportedTypeException
-                = new("Supported JSON primitive types are String, Number and Null.");
+            string possibleErrorMessage = "Supported JSON primitive types are String, Number and Null.";
             
             payload = payload.Trim();
 
@@ -147,9 +147,7 @@ internal static class JsonTokenHandler
                 return PrimitiveType.String;
 
             if (payload.Split(' ').Length != 1)
-                return throwOnError
-                    ? throw unsupportedTypeException
-                    : null;
+                return ResultOrThrow<PrimitiveType?>(throwOnError, possibleErrorMessage, null);
 
             if (double.TryParse(payload, null, out _))
                 return PrimitiveType.Number;
@@ -160,15 +158,13 @@ internal static class JsonTokenHandler
             if (payload == "null")
                 return PrimitiveType.Null;
 
-            return throwOnError 
-                ? throw unsupportedTypeException
-                : null;
+            return ResultOrThrow<PrimitiveType?>(throwOnError, possibleErrorMessage, null);
         }
 
-        private static bool FalseOrThrow(bool throwOnError, string error)
+        private static TReturn ResultOrThrow<TReturn>(bool throwOnError, string error, TReturn result)
             => throwOnError
                 ? throw new InvalidJsonConstraintException(error)
-                : false;
+                : result;
     }
 
     public static string PrettifyJson(string json, int level)
@@ -189,34 +185,42 @@ internal static class JsonTokenHandler
         });
     }
     
-    private static List<string> SplitAtLevel(string payload)
+    private static List<string> SplitAtLevel(string payload, char splitBy = ',')
     {
         List<string> result = new();
         bool insideSquareBrackets = false;
         bool insideCurlyBraces = false;
+        bool insideString = false;
         int startIndex = 0;
 
         for (int i = 0; i < payload.Length; i++)
         {
             switch (payload[i])
             {
-                case '[':
+                case '"' when i <= 0 || payload[i - 1] != '\\':
+                    insideString = !insideString;
+                    break;
+                case '[' when !insideString:
                     insideSquareBrackets = true;
                     break;
-                case ']':
+                case ']' when !insideString:
                     insideSquareBrackets = false;
                     break;
-                case '{':
+                case '{' when !insideString:
                     insideCurlyBraces = true;
                     break;
-                case '}':
+                case '}' when !insideString:
                     insideCurlyBraces = false;
                     break;
-                case ',' when !insideSquareBrackets && !insideCurlyBraces:
+                default:
                 {
+                    if (payload[i] != splitBy || insideSquareBrackets || insideCurlyBraces || insideString)
+                        break;
+                    
                     string substring = payload.Substring(startIndex, i - startIndex).Trim();
                     result.Add(substring);
                     startIndex = i + 1;
+                    
                     break;
                 }
             }

@@ -90,7 +90,7 @@ public class Http : IDisposable
         Assert.Multiple(() =>
         {
             Assert.That(response.ResponseCode, Is.EqualTo(ResponseCodes.Ok));
-            Assert.That(response.Body.RawBody, Is.EqualTo("hello"));
+            Assert.That(response.Body.Body, Is.EqualTo("hello"));
         });
         
         Assert.That(response.Headers.Contains("Access-Control-Allow-Origin"), Is.True);

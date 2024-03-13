@@ -14,16 +14,16 @@ public class BodyConverter
     public string ContentType { get; }
     
     /// <summary>The raw body contained by this converter.</summary>
-    public string? RawBody { get; }
+    public Stream? Body { get; }
 
     /// <summary>Whether the current body is empty or not.</summary>
-    public bool IsEmpty => string.IsNullOrEmpty(RawBody);
+    public bool IsEmpty => Body is null || Body.Length == 0;
 
     /// <summary>Gets the length of the body in a raw format.</summary>
-    public int Length => RawBody?.Length ?? 0;
+    public long Length => Body?.Length ?? 0L;
 
     /// <summary>Returns an empty instance of a BodyConverter.</summary>
-    public static BodyConverter Empty => new(string.Empty);
+    public static BodyConverter Empty => new(Array.Empty<byte>());
     
     // TODO: must read stream instead of string, I'm thinking of reading it till Content-Length or end of stream data.
     
@@ -32,10 +32,15 @@ public class BodyConverter
     /// initializes this instance from a raw string.
     /// </summary>
     /// <param name="raw">The string that contains the body content.</param>
-    public BodyConverter(string? raw)
+    public BodyConverter(Stream? raw)
     {
-        RawBody = raw;
+        Body = raw;
         ContentType = IsEmpty ? "none/none" : "text/plain";
+    }
+
+    public BodyConverter(byte[]? raw)
+    {
+        Stream stream = new MemoryStream();
     }
 
     /// <summary>
@@ -45,7 +50,7 @@ public class BodyConverter
     /// <param name="body">The body to convert from.</param>
     public BodyConverter(IBody? body)
     {
-        RawBody = body?.ToRaw() ?? string.Empty;
+        Body = body?.ToRaw() ?? string.Empty;
         ContentType = body?.ContentType ?? "none/none";
     }
     
@@ -56,7 +61,7 @@ public class BodyConverter
     /// raw string or null if there was no body in the first place.
     /// </returns>
     public TBody? ReadAs<TBody>() where TBody : IBody 
-        => RawBody is not null ? IBody.Parse<TBody>(RawBody) : default;
+        => Body is not null ? IBody.Parse<TBody>(Body) : default;
 
     /// <summary>Tries to read the current body converter instance as a body instance.</summary>
     /// <param name="body">The result of this conversion.</param>
@@ -64,8 +69,8 @@ public class BodyConverter
     /// <returns>A boolean instance whether the body could be converted or not.</returns>
     public bool TryReadAs<TBody>([NotNullWhen(true)] out TBody? body) where TBody : IBody
     {
-        if (RawBody is not null) 
-            return IBody.TryParse(RawBody, out body);
+        if (Body is not null) 
+            return IBody.TryParse(Body, out body);
         
         body = default;
         return false;
@@ -73,5 +78,5 @@ public class BodyConverter
 
     /// <inheritdoc cref="Object.ToString"/>
     public override string ToString() 
-        => RawBody ?? string.Empty;
+        => Body ?? string.Empty;
 }

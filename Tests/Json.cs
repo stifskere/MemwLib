@@ -29,6 +29,8 @@ public class Json
     private const string PayloadWithoutFormat = """{"name":"John Doe","age":35,"is_sane":true,"children":[{"name":"Uganda Doe","age":12,"is_sane":true,"children":null}]}""";
     
     private const string InvalidJson = """{"hello": bye, 1: "yes"}""";
+
+    private const string WeirdJson = """{"h:b,a:d": "c{}dx[]sss,,..::", "a:v": 123, "ddd": false}""";
     
     [Test]
     public void Serialize()
@@ -92,6 +94,7 @@ public class Json
         {
             Assert.That(JsonParser.IsValidJson(InvalidJson), Is.False);
             Assert.That(JsonParser.IsValidJson(PayloadWithoutFormat), Is.True);
+            Assert.That(JsonParser.IsValidJson(WeirdJson), Is.True);
         });
     }
 }
