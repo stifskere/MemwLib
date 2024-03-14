@@ -1,5 +1,3 @@
-#if DEBUG
-
 using MemwLib.CoreUtils;
 using MemwLib.Data.Json.Exceptions;
 
@@ -234,5 +232,3 @@ internal static class JsonTokenHandler
         return result;
     }
 }
-
-#endif

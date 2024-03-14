@@ -1,5 +1,3 @@
-#if DEBUG
-
 using System.Collections;
 using System.Globalization;
 using System.Reflection;
@@ -149,5 +147,3 @@ public static class JsonParser
             : result;
     }
 }
-
-#endif

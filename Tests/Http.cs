@@ -52,11 +52,11 @@ public class Http : IDisposable
                 Assert.That(auth[1], Is.EqualTo("1234"));
             });
             
-            return new ResponseEntity(ResponseCodes.Ok, new RawBody("hello"));
+            return new ResponseEntity(ResponseCodes.Ok, new StringBody("hello"));
         });
 
         _server.AddEndpoint(RequestMethodType.Put, "/users", request => {
-            UrlEncodedBody? body = request.Body.ReadAs<UrlEncodedBody>();
+            UrlEncodedBody body = request.Body.ReadAs<UrlEncodedBody>();
             
             Assert.Multiple(() =>
             {
@@ -65,7 +65,7 @@ public class Http : IDisposable
                 Assert.That(request.Path.Parameters["admin"], Is.EqualTo("true"));
                 
                 Assert.That(body, Is.Not.Null);
-                Assert.That(body!["name"], Is.EqualTo("john"));
+                Assert.That(body["name"], Is.EqualTo("john"));
                 Assert.That(body["pass"], Is.EqualTo("1234"));
             });
             
@@ -90,7 +90,7 @@ public class Http : IDisposable
         Assert.Multiple(() =>
         {
             Assert.That(response.ResponseCode, Is.EqualTo(ResponseCodes.Ok));
-            Assert.That(response.Body.Body, Is.EqualTo("hello"));
+            Assert.That(response.Body.ReadAs<StringBody>().ToString(), Is.EqualTo("hello"));
         });
         
         Assert.That(response.Headers.Contains("Access-Control-Allow-Origin"), Is.True);

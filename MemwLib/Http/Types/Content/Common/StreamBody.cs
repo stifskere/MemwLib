@@ -1,4 +1,3 @@
-using System.Text;
 using JetBrains.Annotations;
 
 namespace MemwLib.Http.Types.Content.Implementations;
@@ -10,14 +9,14 @@ public class StreamBody : IBody, IDisposable
     /// <inheritdoc cref="IBody.ContentType"/>
     public string ContentType { get; }
 
-    private Stream _stream;
+    private MemoryStream _stream;
     private bool _closeOnFinish;
 
     /// <summary>Create a new instance of Stream body</summary>
     /// <param name="stream">The stream to handle.</param>
     /// <param name="contentType">The stream mime type.</param>
     /// <param name="closeOnFinish">Whether to close or not on dispose this instance.</param>
-    public StreamBody(Stream stream, string contentType, bool closeOnFinish = false)
+    public StreamBody(MemoryStream stream, string contentType, bool closeOnFinish = false)
     {
         _stream = stream;
         _closeOnFinish = closeOnFinish;
@@ -27,18 +26,18 @@ public class StreamBody : IBody, IDisposable
     /// <summary>Create a new instance of Stream body</summary>
     /// <param name="stream">The stream to handle.</param>
     /// <param name="closeOnFinish">Whether to close or not on dispose this instance.</param>
-    public StreamBody(Stream stream, bool closeOnFinish = false) : this(stream, "application/octet-stream", closeOnFinish) { }
+    public StreamBody(MemoryStream stream, bool closeOnFinish = false) : this(stream, "application/octet-stream", closeOnFinish) { }
 
     /// <inheritdoc cref="IBody.ParseImpl"/>
-    public static IBody ParseImpl(string content) 
-        => new StreamBody(new MemoryStream(Encoding.UTF8.GetBytes(content)));
+    public static IBody ParseImpl(MemoryStream content) 
+        => new StreamBody(content, true);
 
-    /// <inheritdoc cref="IBody.ToRaw"/>
-    public string ToRaw()
+    /// <inheritdoc cref="IBody.ToArray"/>
+    public byte[] ToArray()
     {
-        _stream.Seek(0, SeekOrigin.Begin);
-        using StreamReader reader = new(_stream, Encoding.UTF8);
-        return reader.ReadToEnd();
+        byte[] result = new byte[_stream.Length];
+        _ = _stream.Read(result, 0, result.Length);
+        return result;
     }
 
     /// <inheritdoc cref="IDisposable.Dispose"/>

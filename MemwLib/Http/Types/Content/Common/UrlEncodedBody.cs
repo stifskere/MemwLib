@@ -1,5 +1,7 @@
 using System.Data;
+using System.Text;
 using JetBrains.Annotations;
+using MemwLib.CoreUtils;
 using MemwLib.CoreUtils.Collections;
 using MemwLib.Http.Types.Routes;
 
@@ -22,8 +24,10 @@ public class UrlEncodedBody : BaseIsolatedCollection<string, string>, IBody
     }
     
     /// <inheritdoc cref="IBody.ParseImpl"/>
-    public static IBody ParseImpl(string content)
+    public static IBody ParseImpl(MemoryStream streamContent)
     {
+        string content = streamContent.GetRaw();
+        
         if (string.IsNullOrEmpty(content))
             return new UrlEncodedBody();
         
@@ -44,14 +48,14 @@ public class UrlEncodedBody : BaseIsolatedCollection<string, string>, IBody
         return new UrlEncodedBody(pairs);
     }
 
-    /// <inheritdoc cref="IBody.ToRaw"/>
-    public string ToRaw()
+    /// <inheritdoc cref="IBody.ToArray"/>
+    public byte[] ToArray()
     {
         string result = string.Empty;
 
         foreach ((string key, string value) in this)
             result += $"{UriHelpers.EncodeUriComponent(key)}={UriHelpers.EncodeUriComponent(value)}&";
 
-        return result[..^1];
+        return Encoding.ASCII.GetBytes(result[..^1]);
     }
 }

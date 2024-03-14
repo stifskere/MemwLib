@@ -1,6 +1,4 @@
-#if DEBUG
 using JetBrains.Annotations;
-
 
 namespace MemwLib.Data.Json.Enums;
 
@@ -26,5 +24,3 @@ public enum JsonObjectBehavior
     /// </remarks>
     AllProperties = 1 << 1
 }
-
-#endif

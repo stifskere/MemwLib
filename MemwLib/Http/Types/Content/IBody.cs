@@ -19,11 +19,11 @@ public interface IBody
     /// An instance of the current body
     /// implementation based on the provided string content.
     /// </returns>
-    protected static abstract IBody ParseImpl(string content);
+    protected static abstract IBody ParseImpl(MemoryStream content);
 
     /// <summary>Convert the current body implementation to a raw string.</summary>
     /// <returns>A raw string representing the current body implementation.</returns>
-    public string ToRaw();
+    public byte[] ToArray();
     
     /// <summary>Parse some string to a body of the defined type.</summary>
     /// <param name="content">The raw content to parse from.</param>
@@ -32,7 +32,7 @@ public interface IBody
     /// An instance of the target type based in the
     /// provided raw string content.
     /// </returns>
-    public static TBody Parse<TBody>(string content) where TBody : IBody 
+    public static TBody Parse<TBody>(MemoryStream content) where TBody : IBody 
         => (TBody)TBody.ParseImpl(content);
 
     /// <summary>Tries to parse a raw string to a body.</summary>
@@ -40,7 +40,7 @@ public interface IBody
     /// <param name="body">The conversion result, null if couldn't convert.</param>
     /// <typeparam name="TBody">The type of body to convert to.</typeparam>
     /// <returns>A boolean instance whether the conversion was successful or not.</returns>
-    public static bool TryParse<TBody>(string content, [NotNullWhen(true)] out TBody? body) where TBody : IBody
+    public static bool TryParse<TBody>(MemoryStream content, [NotNullWhen(true)] out TBody? body) where TBody : IBody
     {
         try
         {

@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace MemwLib.CoreUtils;
 
 internal static class StringUtils
@@ -43,5 +45,12 @@ internal static class StringUtils
             result += instance;
 
         return result;
+    }
+
+    public static string GetRaw(this MemoryStream instance, int? length = null)
+    {
+        byte[] array = new byte[length ?? instance.Length];
+        _ = instance.Read(array, 0, length ?? array.Length);
+        return Encoding.ASCII.GetString(array);
     }
 }

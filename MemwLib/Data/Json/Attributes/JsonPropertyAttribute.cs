@@ -1,6 +1,4 @@
-#if DEBUG
 using JetBrains.Annotations;
-
 
 namespace MemwLib.Data.Json.Attributes;
 
@@ -30,5 +28,3 @@ public class JsonPropertyAttribute : Attribute
         Name = name;
     }
 }
-
-#endif

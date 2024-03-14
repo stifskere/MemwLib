@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <DefineConstants Condition="@(ViewsFolder) != ''">
+            ${DefineConstants};MEMWLIB_VIEWS_DO_EXIST
+        </DefineConstants>
+    </PropertyGroup>
+    
+    <Target Name="MoveFiles" AfterTargets="Build">
+        <Message Text="A views folder was found, moving." Condition="$(ViewsFolder) != ''" />
+        <Message Text="A views folder was not found, skipping." Condition="$(ViewFolder) == ''" />
+        <ItemGroup Condition="$(ViewsFolder) != ''">
+            <Content Include="$(ViewsFolder)/*">
+                <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+            </Content>
+        </ItemGroup>
+    </Target>
+</Project>

@@ -68,13 +68,12 @@ public sealed class RequestEntity : BaseEntity
     /// <param name="body">The body for this entity.</param>
     public RequestEntity(RequestMethodType method, PartialUri path, IBody? body = null) : this(method, path, "HTTP/1.1", body) {}
     
+#pragma warning disable CS1573
     /// <inheritdoc cref="RequestEntity(RequestMethodType, PartialUri, IBody?)"/>
     /// <param name="version">the version of the standard this request follows.</param>
     /// <exception cref="FormatException">The HTTP version is invalid.</exception>
     /// <remarks>The version doesn't change the functionality, it's just parsed as string to be sent with the entity.</remarks>
-#pragma warning disable CS1573
     public RequestEntity(RequestMethodType method, PartialUri path, string version, IBody? body = null)
-#pragma warning restore CS1573
     {
         RequestMethod = method;
         
@@ -85,8 +84,10 @@ public sealed class RequestEntity : BaseEntity
 
         HttpVersion = version;
         
-        Body = new BodyConverter(body);
+        if (body is not null)
+            Body = new BodyConverter(body);
     }
+#pragma warning restore CS1573
     
     /// <inheritdoc cref="BaseEntity.BuildStart"/>
     protected override string BuildStart() 

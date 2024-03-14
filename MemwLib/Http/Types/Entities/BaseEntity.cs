@@ -107,7 +107,7 @@ public abstract partial class BaseEntity
             body[index++] = (byte)read;
         }
 
-        Body = new BodyConverter(Encoding.ASCII.GetString(body));
+        Body = new BodyConverter(body);
 
         return top;
     }
