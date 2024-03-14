@@ -1,17 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <DefineConstants Condition="@(ViewsFolder) != ''">
-            ${DefineConstants};MEMWLIB_VIEWS_DO_EXIST
-        </DefineConstants>
-    </PropertyGroup>
-    
     <Target Name="MoveFiles" AfterTargets="Build">
-        <Message Text="A views folder was found, moving." Condition="$(ViewsFolder) != ''" />
-        <Message Text="A views folder was not found, skipping." Condition="$(ViewFolder) == ''" />
-        <ItemGroup Condition="$(ViewsFolder) != ''">
-            <Content Include="$(ViewsFolder)/*">
-                <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-            </Content>
-        </ItemGroup>
+        <Message Text="A views folder was found, adding..." Condition="$(ViewsFolder) != ''" />
+        <Message Text="A views folder was not found, skipping..." Condition="$(ViewFolder) == ''" />
     </Target>
+
+    <PropertyGroup Condition="$(ViewsFolder) != ''">
+        <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
+            <Copy SourceFiles="$(ViewsFolder)/**" DestinationFolder="$(OutDir)/views" />
+        </Target>
+        <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
+            <Copy SourceFiles="$(ViewsFolder)/**" DestinationFolder="$(PublishDir)/views" />
+        </Target>
+    </PropertyGroup>
 </Project>

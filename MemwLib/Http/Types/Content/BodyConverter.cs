@@ -2,6 +2,8 @@ using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 using MemwLib.CoreUtils;
 
+// TODO: make a dispose pattern for streams.
+
 namespace MemwLib.Http.Types.Content;
 
 /// <summary>

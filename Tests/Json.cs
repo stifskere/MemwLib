@@ -1,5 +1,3 @@
-#if DEBUG
-
 using MemwLib.Data.Json;
 using MemwLib.Data.Json.Attributes;
 using MemwLib.Data.Json.Enums;
@@ -112,5 +110,3 @@ file class Person
 
     [JsonProperty("children")] public Person[]? Children { get; set; }
 }
-
-#endif
