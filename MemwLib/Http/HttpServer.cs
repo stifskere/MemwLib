@@ -11,7 +11,6 @@ using MemwLib.Http.Types;
 using MemwLib.Http.Types.Attributes;
 using MemwLib.Http.Types.Collections;
 using MemwLib.Http.Types.Configuration;
-using MemwLib.Http.Types.Content.Implementations;
 using MemwLib.Http.Types.Entities;
 using MemwLib.Http.Types.Identifiers;
 using MemwLib.Http.Types.Logging;

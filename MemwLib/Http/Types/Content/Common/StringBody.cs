@@ -2,7 +2,7 @@ using System.Text;
 using JetBrains.Annotations;
 using MemwLib.CoreUtils;
 
-namespace MemwLib.Http.Types.Content.Implementations;
+namespace MemwLib.Http.Types.Content.Common;
 
 /// <summary>Body implementation for raw string body.</summary>
 [PublicAPI]

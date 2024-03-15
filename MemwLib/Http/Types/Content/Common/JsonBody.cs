@@ -3,7 +3,7 @@ using JetBrains.Annotations;
 using MemwLib.CoreUtils;
 using MemwLib.Data.Json;
 
-namespace MemwLib.Http.Types.Content.Implementations;
+namespace MemwLib.Http.Types.Content.Common;
 
 /// <summary>JsonBody handles JSON and lets you cast to any type.</summary>
 /// <remarks>

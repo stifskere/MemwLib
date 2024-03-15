@@ -1,6 +1,6 @@
 using JetBrains.Annotations;
 
-namespace MemwLib.Http.Types.Content.Implementations;
+namespace MemwLib.Http.Types.Content.Common;
 
 /// <summary>Read a body as a stream</summary>
 [PublicAPI]

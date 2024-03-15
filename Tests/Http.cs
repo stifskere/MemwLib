@@ -5,7 +5,7 @@ using MemwLib.Http;
 using MemwLib.Http.Types;
 using MemwLib.Http.Types.Attributes;
 using MemwLib.Http.Types.Configuration;
-using MemwLib.Http.Types.Content.Implementations;
+using MemwLib.Http.Types.Content.Common;
 using MemwLib.Http.Types.Entities;
 using MemwLib.Http.Types.Logging;
 using MemwLib.Http.Types.SSL;

@@ -5,7 +5,7 @@ using MemwLib.CoreUtils;
 using MemwLib.CoreUtils.Collections;
 using MemwLib.Http.Types.Routes;
 
-namespace MemwLib.Http.Types.Content.Implementations;
+namespace MemwLib.Http.Types.Content.Common;
 
 /// <summary>Reads and parses a post x-www-form-urlencoded body.</summary>
 /// <example>name=john&amp;age=20</example>

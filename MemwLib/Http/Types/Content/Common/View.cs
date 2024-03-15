@@ -62,12 +62,12 @@ public static class Views
     /// <para/>
     /// @if() - takes a boolean, you can make simple expressions such as $var1 > $var2.
     /// The following operators are available: ==, !=, &lt;, &gt;, &lt;=, &gt;=. And it
-    /// must proceed with a @endif or @else or @elif() statement. Boolean variables are
+    /// must proceed with a @endif or @else statement. Boolean variables are
     /// also admitted as a valid expression, no TRUE or FALSE literals are available. 
     /// <para/>
     /// @foreach($item in $iterator) - foreach must reference a variable, you cannot
     /// create array literals, and string literals are not iterable, inside the statement 
-    /// you can reference ${item} or whatever you named your item variable. This statement
+    /// you can reference $item or whatever you named your item variable. This statement
     /// must proceed with a @endforeach statement
     /// </example>
     /// <remarks>
@@ -81,10 +81,14 @@ public static class Views
             throw new InvalidOperationException("You tried to access a view whose name contained a reserved word.");
                 
         references ??= new Dictionary<string, object?>();
-
-        // "admin.index"
+        
         string content = File.ReadAllText($"./views/{location.Replace('.', '/')}.view.html");
 
+        foreach ((string key, object? value) in references)
+        {
+            
+        }
+        
         // \@(?:if|elif)\((?<condition>[^\)]*)\)(?<content>(?=(@elif|@endif))|.)+
         
         return new View(content);
