@@ -11,6 +11,7 @@ using MemwLib.Http.Types;
 using MemwLib.Http.Types.Attributes;
 using MemwLib.Http.Types.Collections;
 using MemwLib.Http.Types.Configuration;
+using MemwLib.Http.Types.Content.Common;
 using MemwLib.Http.Types.Entities;
 using MemwLib.Http.Types.Identifiers;
 using MemwLib.Http.Types.Logging;
@@ -163,8 +164,16 @@ public sealed class HttpServer : IDisposable
                     
                     if ((identifier.RequestMethod & parsedRequest.RequestMethod) != parsedRequest.RequestMethod)
                     {
-                        responseEntity = new ResponseEntity(ResponseCodes.MethodNotAllowed, 
-                            new MethodNotAllowedBody(parsedRequest.RequestMethod, parsedRequest.Path.Route));
+                        responseEntity = new ResponseEntity(
+                            ResponseCodes.MethodNotAllowed, 
+                            Views.Render(
+                                "memwlib_method_not_allowed",
+                                new Dictionary<string, object?>
+                                {
+                                    ["request"] = parsedRequest
+                                }
+                            )
+                        );
                         
                         continue;
                     }
@@ -230,8 +239,23 @@ public sealed class HttpServer : IDisposable
                 }
                 catch (Exception error)
                 {
-                    responseEntity = new ResponseEntity(ResponseCodes.InternalServerError, new ExceptionBody(error, State == ServerStates.Development));
-                    OnLog(new LogMessage(LogType.Error, $"Exception thrown: {error.Message}{(error.Source != null ? $":{error.Source}" : string.Empty)}"));
+                    responseEntity 
+                        = new ResponseEntity(
+                            ResponseCodes.InternalServerError,
+                            Views.Render("memwlib_exception", 
+                                new Dictionary<string, object?>
+                                {
+                                    ["isDevelopment"] = State == ServerStates.Development,
+                                    ["exception"] = error
+                                }
+                            )
+                        );
+                    OnLog(
+                        new LogMessage(
+                            LogType.Error, 
+                            $"Exception thrown: {error.Message}{(error.Source != null ? $":{error.Source}" : string.Empty)}"
+                        )
+                    );
                     break;
                 }
             }
