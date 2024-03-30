@@ -9,14 +9,14 @@ public class StreamBody : IBody, IDisposable
     /// <inheritdoc cref="IBody.ContentType"/>
     public string ContentType { get; }
 
-    private MemoryStream _stream;
+    private Stream _stream;
     private bool _closeOnFinish;
 
     /// <summary>Create a new instance of Stream body</summary>
     /// <param name="stream">The stream to handle.</param>
     /// <param name="contentType">The stream mime type.</param>
     /// <param name="closeOnFinish">Whether to close or not on dispose this instance.</param>
-    public StreamBody(MemoryStream stream, string contentType, bool closeOnFinish = false)
+    public StreamBody(Stream stream, string contentType, bool closeOnFinish = false)
     {
         _stream = stream;
         _closeOnFinish = closeOnFinish;
@@ -26,7 +26,7 @@ public class StreamBody : IBody, IDisposable
     /// <summary>Create a new instance of Stream body</summary>
     /// <param name="stream">The stream to handle.</param>
     /// <param name="closeOnFinish">Whether to close or not on dispose this instance.</param>
-    public StreamBody(MemoryStream stream, bool closeOnFinish = false) : this(stream, "application/octet-stream", closeOnFinish) { }
+    public StreamBody(Stream stream, bool closeOnFinish = false) : this(stream, "application/octet-stream", closeOnFinish) { }
 
     /// <inheritdoc cref="IBody.ParseImpl"/>
     public static IBody ParseImpl(MemoryStream content) 
@@ -35,6 +35,7 @@ public class StreamBody : IBody, IDisposable
     /// <inheritdoc cref="IBody.ToArray"/>
     public byte[] ToArray()
     {
+        _stream.Seek(0, SeekOrigin.Begin);
         byte[] result = new byte[_stream.Length];
         _ = _stream.Read(result, 0, result.Length);
         return result;

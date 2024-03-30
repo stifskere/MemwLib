@@ -285,7 +285,6 @@ public sealed class HttpServer : IDisposable
                 : LogType.FailedRequest, 
                 $"{parsedRequest.Path.Route} returned {responseEntity.ResponseCode.GetCode()} {responseEntity.ResponseCode.GetName()}"));
             
-            
             continue;
 
             void WriteAndClose(ResponseEntity entity)
