@@ -1,15 +1,33 @@
 # MemwLib
 
-This library was made with the intention of making some of the pre-implemented features in the language more handful.
+MemwLib is meant for these who want a fast and reliable HTTP server environment. Taking the best from all the HTTP libraries out there, MemwLib offers you utilities like Json parsing, Environment variable parsing... And more.
 
-# Documentation
+## Getting Started
 
-The documentation is being developed in my [portfolio site](https://memw.es), expect to find tutorials and XML maps there soon.
+The documentation for this library is being built in my documentation site (wip), meanwhile you can rely on the XML documentation this library provides.
 
-# Contributing
+Since this library is very big it's still work in progress and it will accept any contribution.
 
-Please make a pull request and it will be reviewed as soon as possible.
+### Prerequisites
 
-# Downloading
+All you need to install this library you need a .NET `>= 7.0` solution.
 
-This library is available in [NuGet as MemwLib](https://www.nuget.org/packages/MemwLib), or you can download the assembly in the releases section of this github repository (may be outdated)
+### Installation
+
+You can get this library from NuGet under `MemwLib`, so the installation steps are the following
+
+```bash
+dotnet add package MemwLib
+```
+
+## Repository structure
+
+This repository is based on a simple structure, when you make your PR you want to merge it to the dev branch,
+that branch is the one that's active on development and testing, when your PR is merged it will be tested and
+merged to main. When anything gets merged to main it automatically deploys to NuGet trough a github action and
+a release is created.
+
+### Branches
+
+* Main: Deployment branch, everything in here will be released.
+* Dev: Active development and testing branch.

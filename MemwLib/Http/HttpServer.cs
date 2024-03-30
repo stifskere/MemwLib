@@ -166,13 +166,8 @@ public sealed class HttpServer : IDisposable
                     {
                         responseEntity = new ResponseEntity(
                             ResponseCodes.MethodNotAllowed, 
-                            Views.Render(
-                                "memwlib_method_not_allowed",
-                                new Dictionary<string, object?>
-                                {
-                                    ["request"] = parsedRequest
-                                }
-                            )
+                            new JsonBody(new DefaultErrorResponse($"Cannot {parsedRequest.RequestMethod} " +
+                                                                  $"on {parsedRequest.Path}"))
                         );
                         
                         continue;
@@ -242,12 +237,13 @@ public sealed class HttpServer : IDisposable
                     responseEntity 
                         = new ResponseEntity(
                             ResponseCodes.InternalServerError,
-                            Views.Render("memwlib_exception", 
-                                new Dictionary<string, object?>
-                                {
-                                    ["isDevelopment"] = State == ServerStates.Development,
-                                    ["exception"] = error
-                                }
+                            new JsonBody(
+                                new DefaultErrorResponse(
+                                    "An exception was thrown by a controller", 
+                                    State == ServerStates.Development
+                                        ? error
+                                        : null
+                                )
                             )
                         );
                     OnLog(

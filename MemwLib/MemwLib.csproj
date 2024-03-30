@@ -6,7 +6,7 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         
-        <Version>2.2.3</Version>
+        <Version>3.0.0</Version>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>MemwLib</Title>
         <Authors>Memw1</Authors>
@@ -30,15 +30,4 @@
     <ItemGroup>
       <PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
     </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="Views\" />
-    </ItemGroup>
-
-    <Target Name="CopyCustomContent" AfterTargets="AfterBuild">
-        <Copy SourceFiles="Views/**" DestinationFolder="$(OutDir)/views" />
-    </Target>
-    <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
-        <Copy SourceFiles="Views/**" DestinationFolder="$(PublishDir)/views" />
-    </Target>
 </Project>

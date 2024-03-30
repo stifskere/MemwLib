@@ -4,7 +4,4 @@ namespace MemwLib.Data.ProgramArguments.Options;
 
 /// <summary>Options for command line argument parsing for typed output.</summary>
 [PublicAPI]
-public sealed class ArgumentParseOptionsTyped : ArgumentParseOptions
-{
-    
-}
+public sealed class ArgumentParseOptionsTyped : ArgumentParseOptions;

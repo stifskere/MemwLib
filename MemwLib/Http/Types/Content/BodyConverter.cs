@@ -2,8 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 using JetBrains.Annotations;
 using MemwLib.CoreUtils;
 
-// TODO: make a dispose pattern for streams.
-
 namespace MemwLib.Http.Types.Content;
 
 /// <summary>
@@ -11,7 +9,7 @@ namespace MemwLib.Http.Types.Content;
 /// between strings and IBody implementations
 /// </summary>
 [PublicAPI]
-public class BodyConverter
+public class BodyConverter : IDisposable
 {
     /// <summary>The content type this BodyConverter is holding.</summary>
     public string ContentType { get; }
@@ -24,9 +22,8 @@ public class BodyConverter
 
     /// <summary>Gets the length of the body in a raw format.</summary>
     public long Length => Stream.Length;
-
-    /// <summary>Returns an empty instance of a BodyConverter.</summary>
-    public static BodyConverter Empty => new(Array.Empty<byte>());
+    
+    internal static BodyConverter Empty => new(Array.Empty<byte>());
     
     internal BodyConverter(byte[] raw)
     {
@@ -34,7 +31,7 @@ public class BodyConverter
         ContentType = IsEmpty ? "none/none" : "text/plain";
     }
 
-    internal BodyConverter(IBody body) : this(body.ToArray()) {}
+    internal BodyConverter(IBody? body) : this(body?.ToArray() ?? Array.Empty<byte>()) {}
     
     /// <summary>Reads the current BodyConverter instance as a body instance.</summary>
     /// <typeparam name="TBody">The type of body to convert to.</typeparam>
@@ -55,4 +52,11 @@ public class BodyConverter
     /// <inheritdoc cref="Object.ToString"/>
     public override string ToString()
         => Stream.GetRaw();
+
+    /// <inheritdoc cref="IDisposable.Dispose"/>
+    public void Dispose()
+    {
+        GC.SuppressFinalize(this);
+        Stream.Dispose();
+    }
 }
