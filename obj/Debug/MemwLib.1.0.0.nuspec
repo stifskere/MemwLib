@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>MemwLib</id>
+    <version>1.0.0</version>
+    <authors>MemwLib</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="357b567f35cfd49e132a576c1376b441279f3eb6" />
+    <dependencies>
+      <group targetFramework="net7.0">
+        <dependency id="JetBrains.Annotations" version="2023.2.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="/home/memw/Desktop/ProjectsRider/MemwLib/bin/Debug/net7.0/MemwLib.dll" target="lib/net7.0/MemwLib.dll" />
+    <file src="/home/memw/Desktop/ProjectsRider/MemwLib/bin/Debug/net7.0/MemwLib.xml" target="lib/net7.0/MemwLib.xml" />
+  </files>
+</package>

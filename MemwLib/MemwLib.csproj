@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        
+        <Version>3.0.0</Version>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>MemwLib</Title>
+        <Authors>Memw1</Authors>
+        <RepositoryUrl>https://github.com/stifskere/MemwLib</RepositoryUrl>
+        <RepositoryType>Git</RepositoryType>
+        <Description>This is a library made for convenient implementations that microsoft did not add to C#, or are not good enough.</Description>
+        <PackageTags>Utils HTTP HTTPS Data Colors Strings</PackageTags>
+        <PackageIcon>icon.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        
+        <OutputPath>$(SolutionDir)/bin/$(Platform)_$(Configuration)/$(MSBuildProjectName)</OutputPath>
+        
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <None Include="../icon.png" Pack="true"  PackagePath="/" />
+        <None Include="../README.md" Pack="true" PackagePath="/" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
+    </ItemGroup>
+</Project>
