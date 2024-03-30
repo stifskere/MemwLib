@@ -31,7 +31,10 @@ public class BodyConverter : IDisposable
         ContentType = IsEmpty ? "none/none" : "text/plain";
     }
 
-    internal BodyConverter(IBody? body) : this(body?.ToArray() ?? Array.Empty<byte>()) {}
+    internal BodyConverter(IBody? body) : this(body?.ToArray() ?? Array.Empty<byte>())
+    {
+        ContentType = body?.ContentType ?? "none/none";
+    }
     
     /// <summary>Reads the current BodyConverter instance as a body instance.</summary>
     /// <typeparam name="TBody">The type of body to convert to.</typeparam>
@@ -53,6 +56,16 @@ public class BodyConverter : IDisposable
     public override string ToString()
         => Stream.GetRaw();
 
+    /// <summary>Get the body contained in this converter as an array.</summary>
+    /// <returns>The converted inner body.</returns>
+    public byte[] ToArray()
+    {
+        byte[] result = new byte[Length];
+        Stream.Seek(0, SeekOrigin.Begin);
+        _ = Stream.Read(result, 0, (int)Length);
+        return result;
+    }
+    
     /// <inheritdoc cref="IDisposable.Dispose"/>
     public void Dispose()
     {

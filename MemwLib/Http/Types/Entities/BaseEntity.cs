@@ -34,7 +34,10 @@ public abstract partial class BaseEntity
     /// <summary>Builds a Byte[] from the String version of the entity prepared for streams.</summary>
     /// <returns>The entity as a Byte[] prepared to be sent in a TCP stream.</returns>
     public byte[] ToArray() 
-        => Encoding.ASCII.GetBytes(ToString());
+        => [
+            ..Encoding.ASCII.GetBytes($"{Start}\r\n{(string)Headers}\r\n"),
+            ..Body.ToArray()
+        ];
     
     /// <summary>Runs the ToString() method of the specified instance.</summary>
     /// <param name="instance">The instance to run the method on.</param>
