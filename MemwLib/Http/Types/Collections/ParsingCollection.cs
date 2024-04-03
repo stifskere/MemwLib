@@ -11,7 +11,7 @@ namespace MemwLib.Http.Types.Collections;
 /// Headers in HTTP requests/responses need to be
 /// parsed from "Key: value" to an actual collection
 /// </example>
-public abstract class ParsingCollection : BaseIsolatedCollection<string, string?>
+public abstract class ParsingCollection : BaseIsolatedCollection<string, string>
 {
     /// <summary>Abstract override ToString() method to prepare the instance for a body.</summary>
     /// <returns>The prepared string for an HTTP body.</returns>
@@ -34,18 +34,14 @@ public abstract class ParsingCollection : BaseIsolatedCollection<string, string?
     /// <summary>Key indexer for a collection.</summary>
     /// <param name="key">The key assigned to the desired value.</param>
     /// <exception cref="ArgumentException">The value set is null.</exception>
-    public override string? this[string key]
+    public override string[] this[string key]
     {
-        get => Contains(key) ? Variables[key] : null;
         set
         {
-            if (value is null)
-                throw new ArgumentException("The value set cannot be null.", nameof(value));
-            
-            if (!Verify(key, value))
+            if (value.Any(toVerify => !Verify(key, toVerify)))
                 throw new FormatException("key or value contain invalid format.");
-            
-            Variables[key] = value;
+
+            base[key] = value;
         }
     }
 }

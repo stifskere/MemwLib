@@ -1,8 +1,9 @@
 using System.Data;
 using JetBrains.Annotations;
+using MemwLib.Http.Extensions.Cookies.Exceptions;
 using MemwLib.Http.Types.Routes;
 
-namespace MemwLib.Http.Extensions.Cookies.Types;
+namespace MemwLib.Http.Extensions.Cookies;
 
 /// <summary>
 /// Represents a browser cookie, used to parameterize
@@ -65,7 +66,7 @@ public struct Cookie()
     /// <param name="cookie">The raw string to convert.</param>
     /// <param name="decode">Whether to lazily UriDecode the cookie.</param>
     /// <returns>A parsed cookie instance.</returns>
-    /// <exception cref="ConstraintException">
+    /// <exception cref="CookieConstraintException">
     /// The raw string doesn't follow the RFC 2625 specification for cookies.
     /// </exception>
     public static Cookie Parse(string cookie, bool decode)
@@ -81,42 +82,34 @@ public struct Cookie()
             throw new ConstraintException("Cookies must start with the name and value.");
 
         string[] nameAndValue = split[0].Split('=');
-
-        Cookie instance = new()
+        
+        return new Cookie
         {
             Name = nameAndValue[0],
             Value = string.Join('=', nameAndValue[1..]),
             HttpOnly = split.Contains("HttpOnly"),
-            Secure = split.Contains("Secure")
+            Secure = split.Contains("Secure"),
+            Domain = SetIfExists("Domain"),
+            Path = SetIfExists("Path")
         };
-
-        string? domain = null;
-        SetIfExists("Domain", ref domain);
-        instance.Domain = domain;
-
-        string? path = null;
-        SetIfExists("Path", ref path);
-        instance.Path = path;
-
-        return instance;
-
-        void SetIfExists(string toFind, ref string? toSet)
+        
+        string? SetIfExists(string toFind)
         {
             string? found = split.FirstOrDefault(s => s.StartsWith(toFind));
 
             if (found is null)
-                return;
+                return null;
 
             string[] splitFound = found.Split('=');
 
             if (splitFound.Length != 2)
-                throw new ConstraintException($"Invalid value for {toFind} in a cookie.");
+                throw new CookieConstraintException($"Invalid value for {toFind} in a cookie.");
 
-            toSet = split[1];
+            return split[1];
         }
     }
     
-    /// <inheritdoc cref="Object.ToString"/>
+    /// <inheritdoc />
     public override string ToString()
     {
         string result = $"""
@@ -136,4 +129,8 @@ public struct Cookie()
         return result[..^1]
             .Replace(";", "; ");
     }
+    
+    /// <inheritdoc cref="Object.ToString" />
+    public static implicit operator string(Cookie cookie) 
+        => cookie.ToString();
 }

@@ -1,4 +1,4 @@
-namespace MemwLib.Http.Extensions.Cookies.Types;
+namespace MemwLib.Http.Extensions.Cookies;
 
 /// <summary>Valid values for the SamSite attribute in a cookie.</summary>
 public enum SameSiteType
