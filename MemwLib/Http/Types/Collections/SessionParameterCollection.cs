@@ -10,14 +10,12 @@ public sealed class SessionParameterCollection : BaseIsolatedCollection<string, 
 {
     internal SessionParameterCollection() {}
     
-    internal SessionParameterCollection(SessionParameterCollection collection) : base(collection) {}
+    internal SessionParameterCollection(SessionParameterCollection collection) : base(collection) { }
 
     /// <inheritdoc cref="BaseIsolatedCollection{TKey,TValue}.Get(TKey)"/>
     /// <typeparam name="TValue">The type of the value that is referenced by the key.</typeparam>
-    public TValue[] Get<TValue>(string key)
+    public TValue? Get<TValue>(string key)
     {
-        return base.Get(key)
-            .Cast<TValue>()
-            .ToArray();
+        return (TValue?)base.Get(key);
     }
 }

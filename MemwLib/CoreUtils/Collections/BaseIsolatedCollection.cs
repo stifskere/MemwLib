@@ -3,9 +3,6 @@ using JetBrains.Annotations;
 
 namespace MemwLib.CoreUtils.Collections;
 
-// TODO: rewrite XML
-// TODO: limit the parameter number for possible single key value map implementations.
-
 /// <summary>Abstract class to define isolated implementations.</summary>
 /// <typeparam name="TKey">The type of the keys for this collection instance.</typeparam>
 /// <typeparam name="TValue">The type of the values for this collection instance.</typeparam>
@@ -15,19 +12,14 @@ public abstract class BaseIsolatedCollection<TKey, TValue> : IEnumerable<KeyValu
 {
     /// <summary>Collection default dictionary</summary>
     /// <remarks>This should not be exposed.</remarks>
-    protected readonly List<KeyValuePair<TKey, TValue>> Variables = [];
+    protected readonly Dictionary<TKey, TValue> Variables = new();
     
     /// <summary>How many variables exist in this collection.</summary>
     public virtual int Length => Variables.Count;
 
-    /// <inheritdoc />
+    /// <inheritdoc cref="ICountable.IsEmpty"/>
     public virtual bool IsEmpty => Length == 0;
 
-    private ILookup<TKey, TValue> AsLookup => Variables.ToLookup(
-        pair => pair.Key,
-        pair => pair.Value
-    );
-    
     /// <summary>Initializes an empty instance.</summary>
     protected BaseIsolatedCollection() {}
     
@@ -36,25 +28,23 @@ public abstract class BaseIsolatedCollection<TKey, TValue> : IEnumerable<KeyValu
     protected BaseIsolatedCollection(BaseIsolatedCollection<TKey, TValue> collection)
     {
         foreach ((TKey key, TValue value) in collection)
-            Variables.Add(new KeyValuePair<TKey, TValue>(key, value));
+            Variables[key] = value;
     }
     
     /// <summary>Checks if there is a variable with the specified key.</summary>
     /// <param name="key">The key to check</param>
     /// <returns>true if the variable exists, otherwise false.</returns>
     public virtual bool Contains(TKey key)
-        => AsLookup.Contains(key);
+        => Variables.ContainsKey(key);
 
     /// <summary>Sets a value in this collection.</summary>
     /// <param name="key">The key that references the object.</param>
-    /// <param name="values">The value itself.</param>
+    /// <param name="value">The value itself.</param>
     /// <remarks>If the value already existed in that key it will be replaced.</remarks>
     /// <returns>The same instance to act as a constructor.</returns>
-    public virtual BaseIsolatedCollection<TKey, TValue> Set(TKey key, params TValue[] values)
+    public virtual BaseIsolatedCollection<TKey, TValue> Set(TKey key, TValue value)
     {
-        foreach (TValue value in values)
-            Variables.Add(new KeyValuePair<TKey, TValue>(key, value));
-        
+        Variables[key] = value;
         return this;
     }
 
@@ -85,23 +75,18 @@ public abstract class BaseIsolatedCollection<TKey, TValue> : IEnumerable<KeyValu
     /// <summary>Gets a value from this collection.</summary>
     /// <param name="key">The key that references the object.</param>
     /// <returns>The value that was referenced by the key, or null if it did not exist.</returns>
-    public virtual TValue[] Get(TKey key)
-        => Variables
-            .Where(pair => pair.Key.Equals(key))
-            .Select(pair => pair.Value)
-            .ToArray();
+    public virtual TValue? Get(TKey key)
+        => Variables.GetValueOrDefault(key);
 
     /// <inheritdoc cref="Dictionary{TKey, TValue}.Remove(TKey)"/>
     public virtual void Remove(TKey key)
     {
-        Variables
-            .RemoveAll(pair => pair.Key.Equals(key));
+        Variables.Remove(key);
     }
 
     /// <inheritdoc cref="Dictionary{TKey,TValue}.this[TKey]"/>
-    public virtual TValue[] this[TKey key]
-    {
-        get => Get(key);
+    public virtual TValue this[TKey key] {
+        get => Variables[key];
         set => Set(key, value);
     }
     
