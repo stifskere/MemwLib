@@ -1,6 +1,7 @@
 using System.Data;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
+using MemwLib.CoreUtils.Collections;
 
 namespace MemwLib.Http.Types.Collections;
 

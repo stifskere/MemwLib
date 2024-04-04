@@ -3,16 +3,16 @@ using JetBrains.Annotations;
 
 namespace MemwLib.CoreUtils.Collections;
 
-/// <summary>Abstract class to define isolated implementations.</summary>
+/// <summary>Abstract class to define isolated map implementations.</summary>
 /// <typeparam name="TKey">The type of the keys for this collection instance.</typeparam>
 /// <typeparam name="TValue">The type of the values for this collection instance.</typeparam>
 [PublicAPI]
-public abstract class BaseIsolatedCollection<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>, ICountable 
+public abstract class BaseIsolatedMap<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>, ICountable 
     where TKey : notnull
 {
     /// <summary>Collection default dictionary</summary>
     /// <remarks>This should not be exposed.</remarks>
-    protected readonly Dictionary<TKey, TValue> Variables = new();
+    protected readonly Dictionary<TKey, TValue> Variables = [];
     
     /// <summary>How many variables exist in this collection.</summary>
     public virtual int Length => Variables.Count;
@@ -21,11 +21,11 @@ public abstract class BaseIsolatedCollection<TKey, TValue> : IEnumerable<KeyValu
     public virtual bool IsEmpty => Length == 0;
 
     /// <summary>Initializes an empty instance.</summary>
-    protected BaseIsolatedCollection() {}
+    protected BaseIsolatedMap() {}
     
     /// <summary>Initializes a collection instance with another collection's items.</summary>
     /// <param name="collection">The collection to get the items from.</param>
-    protected BaseIsolatedCollection(BaseIsolatedCollection<TKey, TValue> collection)
+    protected BaseIsolatedMap(BaseIsolatedMap<TKey, TValue> collection)
     {
         foreach ((TKey key, TValue value) in collection)
             Variables[key] = value;
@@ -42,7 +42,7 @@ public abstract class BaseIsolatedCollection<TKey, TValue> : IEnumerable<KeyValu
     /// <param name="value">The value itself.</param>
     /// <remarks>If the value already existed in that key it will be replaced.</remarks>
     /// <returns>The same instance to act as a constructor.</returns>
-    public virtual BaseIsolatedCollection<TKey, TValue> Set(TKey key, TValue value)
+    public virtual BaseIsolatedMap<TKey, TValue> Set(TKey key, TValue value)
     {
         Variables[key] = value;
         return this;
@@ -52,7 +52,7 @@ public abstract class BaseIsolatedCollection<TKey, TValue> : IEnumerable<KeyValu
     /// <param name="other">The other collection</param>
     /// <remarks>If the value already existed in that key it will be replaced.</remarks>
     /// <returns>The same instance to act as a constructor.</returns>
-    public virtual BaseIsolatedCollection<TKey, TValue> Add(BaseIsolatedCollection<TKey, TValue> other)
+    public virtual BaseIsolatedMap<TKey, TValue> Add(BaseIsolatedMap<TKey, TValue> other)
     {
         foreach ((TKey key, TValue value) in other)
             Set(key, value);
@@ -64,7 +64,7 @@ public abstract class BaseIsolatedCollection<TKey, TValue> : IEnumerable<KeyValu
     /// <param name="other">The other collection</param>
     /// <remarks>If the value already existed in that key it will be replaced.</remarks>
     /// <returns>The same instance to act as a constructor.</returns>
-    public virtual BaseIsolatedCollection<TKey, TValue> Add(Dictionary<TKey, TValue> other)
+    public virtual BaseIsolatedMap<TKey, TValue> Add(Dictionary<TKey, TValue> other)
     {
         foreach ((TKey key, TValue value) in other)
             Set(key, value);

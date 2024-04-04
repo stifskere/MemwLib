@@ -1,7 +1,4 @@
-
-using MemwLib.CoreUtils.Collections;
-
-namespace MemwLib.Http.Types.Collections;
+namespace MemwLib.CoreUtils.Collections;
 
 /// <summary>
 /// Abstract class for collections that need to be parsed,
@@ -9,9 +6,10 @@ namespace MemwLib.Http.Types.Collections;
 /// </summary>
 /// <example>
 /// Headers in HTTP requests/responses need to be
-/// parsed from "Key: value" to an actual collection
+/// parsed from "Key: value" to an actual collection,
+/// in this case being a multiple key-value map.
 /// </example>
-public abstract class ParsingCollection : BaseIsolatedCollection<string, string?>
+public abstract class MultipleParsingCollection : BaseMultipleIsolatedMap<string, string>
 {
     /// <summary>Abstract override ToString() method to prepare the instance for a body.</summary>
     /// <returns>The prepared string for an HTTP body.</returns>
@@ -28,15 +26,15 @@ public abstract class ParsingCollection : BaseIsolatedCollection<string, string?
     /// <summary>Runs the ToString() method of the specified instance.</summary>
     /// <param name="instance">The instance to run the method on.</param>
     /// <returns>The result of the ToString() call in the instance.</returns>
-    public static explicit operator string(ParsingCollection instance)
+    public static explicit operator string(MultipleParsingCollection instance)
         => instance.ToString();
-
+    
     /// <summary>Key indexer for a collection.</summary>
     /// <param name="key">The key assigned to the desired value.</param>
     /// <exception cref="ArgumentException">The value set is null.</exception>
-    public override string? this[string key]
+    public new string[]? this[string key]
     {
-        get => Contains(key) ? Variables[key] : null;
+        get => Contains(key) ? Get(key) : null;
         set
         {
             if (value is null)
