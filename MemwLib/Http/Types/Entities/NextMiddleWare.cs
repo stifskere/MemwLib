@@ -13,7 +13,7 @@ public sealed class NextMiddleWare : IResponsible
     /// <inheritdoc cref="IResponsible.WithHeader"/>
     public NextMiddleWare WithHeader(string key, string value)
     {
-        Headers.Set(key, value);
+        Headers.Add(key, value);
         return this;
     }
 
@@ -23,7 +23,7 @@ public sealed class NextMiddleWare : IResponsible
     /// <inheritdoc cref="IResponsible.WithHeaders(Dictionary{string, string})"/>
     public NextMiddleWare WithHeaders(Dictionary<string, string> headers)
     {
-        Headers.Add(headers!);
+        Headers.Add(headers);
         return this;
     }
 
@@ -36,6 +36,7 @@ public sealed class NextMiddleWare : IResponsible
         Headers.Add(headers);
         return this;
     }
+    
     IResponsible IResponsible.WithHeaders(HeaderCollection headers)
         => WithHeaders(headers);
 }

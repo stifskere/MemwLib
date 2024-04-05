@@ -289,8 +289,8 @@ public sealed class HttpServer : IDisposable
 
             void WriteAndClose(ResponseEntity entity)
             {
-                entity.Headers["Content-Length"] ??= entity.Body.Length.ToString();
-                entity.Headers["Content-Type"] ??= entity.Body.ContentType;
+                entity.Headers["Content-Length"] ??= [entity.Body.Length.ToString()];
+                entity.Headers["Content-Type"] ??= [entity.Body.ContentType];
                 _ = entity.IsSuccessfulResponse ? SuccessfulRequests++ : FailedRequests++;
                 incomingStream.Write(entity.ToArray());
                 incomingStream.Close();

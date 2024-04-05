@@ -2,6 +2,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using MemwLib.Http;
+using MemwLib.Http.Extensions.Cookies;
 using MemwLib.Http.Types;
 using MemwLib.Http.Types.Attributes;
 using MemwLib.Http.Types.Configuration;
@@ -43,7 +44,7 @@ public class Http : IDisposable
             });
 
             string[] auth = Encoding.ASCII
-                    .GetString(Convert.FromBase64String(request.Headers["Authorization"]!.Split(' ')[1]))
+                    .GetString(Convert.FromBase64String(request.Headers["Authorization"]![0].Split(' ')[1]))
                     .Split(':');
             
             Assert.Multiple(() =>
@@ -71,6 +72,20 @@ public class Http : IDisposable
             
             return new ResponseEntity(ResponseCodes.Created);
         });
+
+        _server.AddEndpoint(RequestMethodType.Get, "/cookies", _ 
+            => new ResponseEntity(ResponseCodes.Ok)
+                    .WithCookie(new Cookie
+                    {
+                        Name = "Name",
+                        Value = "Value",
+                        Domain = "example.com",
+                        Path = "/",
+                        Secure = true,
+                        HttpOnly = true,
+                        SameSite = SameSiteType.None
+                    })
+        );
 
         _server.AddGroup<RoutesFromClass>();
 
@@ -130,8 +145,8 @@ public class Http : IDisposable
             Assert.That(response.Headers.Contains("My-Header-From-Middleware"), Is.True);
             Assert.That(response.Headers.Contains("My-Header-From-Handler"), Is.True);
                 
-            Assert.That(response.Headers["My-Header-From-Middleware"], Is.EqualTo("true"));
-            Assert.That(response.Headers["My-Header-From-Handler"], Is.EqualTo("true"));
+            Assert.That(response.Headers["My-Header-From-Middleware"]?[0], Is.EqualTo("true"));
+            Assert.That(response.Headers["My-Header-From-Handler"]?[0], Is.EqualTo("true"));
         });
         
         Assert.That(response.Headers.Contains("Access-Control-Allow-Origin"), Is.True);
@@ -153,6 +168,28 @@ public class Http : IDisposable
         });
     }
 
+    [Test]
+    public async Task Cookies()
+    {
+        ResponseEntity response = await HttpRequests.CreateRequest(new HttpRequestConfig
+        {
+            Url = "http://localhost:8080/cookies",
+        });
+        
+        Assert.That(response.Headers, Contains.Key("Set-Cookie"));
+        Cookie responseCookie = Cookie.Parse(response.Headers["Set-Cookie"]![0]);
+        
+        Assert.That(responseCookie is {
+            Name: "Name",
+            Value: "Value",
+            Domain: "example.com",
+            Path: "/",
+            Secure: true,
+            HttpOnly: true,
+            SameSite: SameSiteType.None
+        });
+    }
+    
     public void Dispose()
     {
         GC.SuppressFinalize(this);

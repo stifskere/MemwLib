@@ -85,9 +85,15 @@ public abstract class BaseIsolatedMap<TKey, TValue> : IEnumerable<KeyValuePair<T
     }
 
     /// <inheritdoc cref="Dictionary{TKey,TValue}.this[TKey]"/>
-    public virtual TValue this[TKey key] {
+    public virtual TValue? this[TKey key] {
         get => Variables[key];
-        set => Set(key, value);
+        set
+        {
+            if (value is not null) 
+                Set(key, value);
+            else
+                Remove(key);
+        }
     }
     
     /// <inheritdoc cref="IEnumerable{T}.GetEnumerator()"/>

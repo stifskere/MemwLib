@@ -30,20 +30,19 @@ public abstract class MultipleParsingCollection : BaseMultipleIsolatedMap<string
         => instance.ToString();
     
     /// <summary>Key indexer for a collection.</summary>
-    /// <param name="key">The key assigned to the desired value.</param>
-    /// <exception cref="ArgumentException">The value set is null.</exception>
+    /// <param name="key">
+    /// The key assigned to the desired value.
+    /// If null will remove all the values mapped to that key.
+    /// </param>
     public new string[]? this[string key]
     {
         get => Contains(key) ? Get(key) : null;
         set
         {
-            if (value is null)
-                throw new ArgumentException("The value set cannot be null.", nameof(value));
-            
-            if (!Verify(key, value))
+            if (value is not null && value.Any(val => !Verify(key, val)))
                 throw new FormatException("key or value contain invalid format.");
             
-            Variables[key] = value;
+            base[key] = value;
         }
     }
 }

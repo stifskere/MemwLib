@@ -30,13 +30,15 @@ public static class HttpRequests
         };
 
         if (target is { User: not null, Password: not null })
-            request.Headers["Authorization"] 
-                = $"Basic {Convert.ToBase64String(Encoding.ASCII.GetBytes($"{target.User}:{target.Password}"))}";
-        
+            request.Headers.Add(
+                "Authorization",
+                $"Basic {Convert.ToBase64String(Encoding.ASCII.GetBytes($"{target.User}:{target.Password}"))}"
+            );
+
         if (!request.Headers.Contains("Content-Length"))
-            request.Headers["Content-Length"] = request.Body.Length.ToString();
+            request.Headers.Add("Content-Length", request.Body.Length.ToString());
         
-        request.Headers["Host"] = target.HostName;
+        request.Headers.Add("Host", target.HostName);
         using TcpClient client = new(target.HostName, target.Port);
         
         if (target.Protocol == Protocol.Http)

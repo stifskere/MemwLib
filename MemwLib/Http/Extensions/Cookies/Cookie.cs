@@ -69,7 +69,7 @@ public struct Cookie()
     /// <exception cref="CookieConstraintException">
     /// The raw string doesn't follow the RFC 2625 specification for cookies.
     /// </exception>
-    public static Cookie Parse(string cookie, bool decode)
+    public static Cookie Parse(string cookie, bool decode = false)
     {
         if (decode)
             cookie = UriHelpers.DecodeUriComponent(cookie);
@@ -83,6 +83,8 @@ public struct Cookie()
 
         string[] nameAndValue = split[0].Split('=');
         
+        
+        // TODO end this.
         return new Cookie
         {
             Name = nameAndValue[0],
@@ -90,7 +92,8 @@ public struct Cookie()
             HttpOnly = split.Contains("HttpOnly"),
             Secure = split.Contains("Secure"),
             Domain = SetIfExists("Domain"),
-            Path = SetIfExists("Path")
+            Path = SetIfExists("Path"),
+            Expires = DateTime.Parse(SetIfExists("Expires") ?? (DateTime.Now + TimeSpan.FromMinutes(20)).ToShortDateString())
         };
         
         string? SetIfExists(string toFind)

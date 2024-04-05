@@ -31,20 +31,19 @@ public abstract class ParsingCollection : BaseIsolatedMap<string, string>
         => instance.ToString();
 
     /// <summary>Key indexer for a collection.</summary>
-    /// <param name="key">The key assigned to the desired value.</param>
-    /// <exception cref="ArgumentException">The value set is null.</exception>
+    /// <param name="key">
+    /// The key assigned to the desired value,
+    /// if null the key and value will be removed.
+    /// </param>
     public new string? this[string key]
     {
         get => Contains(key) ? Variables[key] : null;
         set
         {
-            if (value is null)
-                throw new ArgumentException("The value set cannot be null.", nameof(value));
-            
-            if (!Verify(key, value))
+            if (value is not null && !Verify(key, value))
                 throw new FormatException("key or value contain invalid format.");
             
-            Variables[key] = value;
+            base[key] = value;
         }
     }
 }
