@@ -9,6 +9,8 @@
         <IsTestProject>true</IsTestProject>
         
         <OutputPath>$(SolutionDir)/bin/$(Platform)_$(Configuration)/$(MSBuildProjectName)</OutputPath>
+        
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

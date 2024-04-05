@@ -10,7 +10,7 @@ namespace MemwLib.Http.Types.Content.Common;
 /// <summary>Reads and parses a post x-www-form-urlencoded body.</summary>
 /// <example>name=john&amp;age=20</example>
 [PublicAPI]
-public class UrlEncodedBody : BaseIsolatedCollection<string, string>, IBody
+public class UrlEncodedBody : BaseIsolatedMap<string, string>, IBody
 {
     /// <inheritdoc cref="IBody.ContentType"/>
     public string ContentType => "application/x-www-form-urlencoded";

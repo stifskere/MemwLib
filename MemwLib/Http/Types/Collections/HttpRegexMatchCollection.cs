@@ -7,7 +7,7 @@ namespace MemwLib.Http.Types.Collections;
 /// <summary>A collection implementation for capturing groups found in URLs in routes.</summary>
 /// <remarks>The constructor for this collection is internal.</remarks>
 [PublicAPI]
-public sealed class HttpRegexGroupCollection : BaseIsolatedCollection<string, string>
+public sealed class HttpRegexGroupCollection : BaseIsolatedMap<string, string>
 {
     internal HttpRegexGroupCollection() {}
     

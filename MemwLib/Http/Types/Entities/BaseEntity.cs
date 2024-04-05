@@ -82,7 +82,7 @@ public abstract partial class BaseEntity
             if (splitTarget.Length != 2)
                 throw new ParseException<RequestEntity>();
 
-            Headers[splitTarget[0]] = splitTarget[1];
+            Headers.Add(splitTarget[0], splitTarget[1]);
         }
         
         if (!Headers.Contains("Content-Length"))
@@ -91,7 +91,7 @@ public abstract partial class BaseEntity
             return top;
         }
 
-        if (!int.TryParse(Headers["Content-Length"], out int bodyLength))
+        if (!int.TryParse(Headers["Content-Length"]?[0], out int bodyLength))
             throw new ParseException<RequestEntity>();
 
         byte[] body = new byte[bodyLength];
@@ -103,7 +103,7 @@ public abstract partial class BaseEntity
 
             if (read == -1)
             {
-                Headers["Content-Length"] = index.ToString();
+                Headers.Add("Content-Length", index.ToString());
                 break;
             }
 

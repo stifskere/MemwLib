@@ -64,7 +64,7 @@ public sealed class ResponseEntity : BaseEntity, IResponsible
     /// <inheritdoc cref="IResponsible.WithHeader" />
     public ResponseEntity WithHeader(string key, string value)
     {
-        Headers.Set(key, value);
+        Headers.Add(key, value);
         return this;
     }
     
@@ -74,7 +74,7 @@ public sealed class ResponseEntity : BaseEntity, IResponsible
     /// <inheritdoc cref="IResponsible.WithHeaders(Dictionary{string, string})" />
     public ResponseEntity WithHeaders(Dictionary<string, string> headers)
     {
-        Headers.Add(headers!); // это никогда не будет нулевым сука
+        Headers.Add(headers); // это никогда не будет нулевым сука
         return this;
     }
     
