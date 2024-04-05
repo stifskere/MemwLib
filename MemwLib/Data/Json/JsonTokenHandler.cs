@@ -175,10 +175,10 @@ internal static class JsonTokenHandler
         return json.Aggregate(string.Empty, (current, character) => current + character switch
         {
             ':' => $"{character} ",
-            '{' => $"{character}\n{new string(' ', indent += level)}",
-            '[' => $"{character}\n{new string(' ', indent += level)}",
-            '}' or ']' => $"\n{new string(' ', indent -= level)}{character}",
-            ',' => $"{character}\n{new string(' ', indent)}",
+            '{' => $"{character}{Environment.NewLine}{new string(' ', indent += level)}",
+            '[' => $"{character}{Environment.NewLine}{new string(' ', indent += level)}",
+            '}' or ']' => $"{Environment.NewLine}{new string(' ', indent -= level)}{character}",
+            ',' => $"{character}{Environment.NewLine}{new string(' ', indent)}",
             _ => character
         });
     }

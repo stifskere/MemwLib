@@ -83,20 +83,25 @@ public struct Cookie()
 
         string[] nameAndValue = split[0].Split('=');
         
-        
-        // TODO end this.
-        return new Cookie
+        Cookie parsed = new Cookie
         {
             Name = nameAndValue[0],
             Value = string.Join('=', nameAndValue[1..]),
             HttpOnly = split.Contains("HttpOnly"),
             Secure = split.Contains("Secure"),
-            Domain = SetIfExists("Domain"),
-            Path = SetIfExists("Path"),
-            Expires = DateTime.Parse(SetIfExists("Expires") ?? (DateTime.Now + TimeSpan.FromMinutes(20)).ToShortDateString())
+            Domain = GetIfExists("Domain"),
+            Path = GetIfExists("Path")
         };
+
+        if (GetIfExists("Expires") is { } expiration)
+            parsed.Expires = DateTime.Parse(expiration);
+
+        if (GetIfExists("SameSite") is { } sameSite)
+            parsed.SameSite = Enum.Parse<SameSiteType>(sameSite);
+
+        return parsed;
         
-        string? SetIfExists(string toFind)
+        string? GetIfExists(string toFind)
         {
             string? found = split.FirstOrDefault(s => s.StartsWith(toFind));
 
@@ -108,7 +113,7 @@ public struct Cookie()
             if (splitFound.Length != 2)
                 throw new CookieConstraintException($"Invalid value for {toFind} in a cookie.");
 
-            return split[1];
+            return splitFound[1];
         }
     }
     
@@ -121,7 +126,7 @@ public struct Cookie()
                          {(Secure ? "Secure;" : string.Empty)}
                          {(HttpOnly ? "HttpOnly;": string.Empty)}
                          SameSite={SameSite.ToString()}; 
-                         """.Replace("\n", string.Empty);
+                         """.Replace(Environment.NewLine, string.Empty);
 
         if (Domain is not null)
             result += $"Domain={Domain};";
