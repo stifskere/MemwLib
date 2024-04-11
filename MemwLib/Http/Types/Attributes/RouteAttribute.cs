@@ -4,7 +4,7 @@ namespace MemwLib.Http.Types.Attributes;
 
 /// <summary>Defines a group member that forms part of a route group.</summary>
 [AttributeUsage(AttributeTargets.Method), UsedImplicitly]
-public sealed class GroupMemberAttribute : Attribute
+public sealed class RouteAttribute : Attribute
 {
     internal string Route { get; }
     
@@ -21,7 +21,7 @@ public sealed class GroupMemberAttribute : Attribute
     /// RouteGroupAttribute, will define the route from root.
     /// BEWARE THE ROUTES SHOULD MATCH, IF THE GROUP MEMBER ENDS WITH / AND THIS STARTS WITH / IT WILL TRY TO MATCH //
     /// </remarks>
-    public GroupMemberAttribute(RequestMethodType requestMethod, string route, bool asRegex = false)
+    public RouteAttribute(RequestMethodType requestMethod, string route, bool asRegex = false)
     {
         RequestMethod = requestMethod;
         Route = route;

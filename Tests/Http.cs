@@ -90,7 +90,7 @@ public class Http : IDisposable
         _server.AddGroup<RoutesFromClass>();
 
         _server.AddEndpoint(RequestMethodType.Options, new Regex(".+"), _ => new ResponseEntity(ResponseCodes.Ok));
-        _server.AddGlobalMiddleware(_ => new NextMiddleWare().WithHeader("Access-Control-Allow-Origin", "*"));
+        _server.AddGlobalMiddleware(_ => Middleware.Next.WithHeader("Access-Control-Allow-Origin", "*"));
     }
     
     [Test]
@@ -197,17 +197,20 @@ public class Http : IDisposable
     }
 }
 
+public class AddHeaderMiddlewareAttribute(string value) : MiddlewareAttribute
+{
+    public override IResponsible Handler(RequestEntity request)
+    {
+        return Middleware.Next
+            .WithHeader("My-Header-From-Middleware", value);
+    }
+}
+
 [RouteGroup("/header-test")]
 public class RoutesFromClass
 {
-    public static IResponsible AddHeaderMiddleware(RequestEntity _)
-    {
-        return new NextMiddleWare()
-            .WithHeader("My-Header-From-Middleware", "true");
-    }
-
-    [UsesMiddleware(typeof(RoutesFromClass), nameof(AddHeaderMiddleware))]
-    [GroupMember(RequestMethodType.Get, "/uhh"), UsedImplicitly]
+    [AddHeaderMiddleware("true")]
+    [Route(RequestMethodType.Get, "/uhh"), UsedImplicitly]
     public static ResponseEntity TestHeader(RequestEntity _)
     {
         return new ResponseEntity(ResponseCodes.Ok)
