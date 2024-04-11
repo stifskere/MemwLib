@@ -5,13 +5,21 @@ namespace MemwLib.Http.Types.Entities;
 
 /// <summary>Tells the server to execute the next middleware piece.</summary>
 [PublicAPI]
-public sealed class NextMiddleWare : IResponsible
+public sealed class Middleware : IResponsible
 {
+    /// <summary>
+    /// Creates a new instance of "Middleware" which lets you
+    /// specify options to pass to the next handler.
+    /// </summary>
+    public static Middleware Next => new();
+    
+    internal Middleware() {}
+    
     /// <inheritdoc cref="IResponsible.Headers"/>
     public HeaderCollection Headers { get; set; } = new();
     
     /// <inheritdoc cref="IResponsible.WithHeader"/>
-    public NextMiddleWare WithHeader(string key, string value)
+    public Middleware WithHeader(string key, string value)
     {
         Headers.Add(key, value);
         return this;
@@ -21,7 +29,7 @@ public sealed class NextMiddleWare : IResponsible
         => WithHeader(key, value);
 
     /// <inheritdoc cref="IResponsible.WithHeaders(Dictionary{string, string})"/>
-    public NextMiddleWare WithHeaders(Dictionary<string, string> headers)
+    public Middleware WithHeaders(Dictionary<string, string> headers)
     {
         Headers.Add(headers);
         return this;
@@ -31,7 +39,7 @@ public sealed class NextMiddleWare : IResponsible
         => WithHeaders(headers);
 
     /// <inheritdoc cref="IResponsible.WithHeaders(HeaderCollection)"/>
-    public NextMiddleWare WithHeaders(HeaderCollection headers)
+    public Middleware WithHeaders(HeaderCollection headers)
     {
         Headers.Add(headers);
         return this;

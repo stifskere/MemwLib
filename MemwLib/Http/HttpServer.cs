@@ -182,8 +182,8 @@ public sealed class HttpServer : IDisposable
                     HeaderCollection headerCache = new();
                     
                     RunMiddleware(_globalMiddleware);
-                    RunMiddlewareFromAttributes(handler.Method.DeclaringType?.GetCustomAttributes<UsesMiddlewareAttribute>());
-                    RunMiddlewareFromAttributes(handler.Method.GetCustomAttributes<UsesMiddlewareAttribute>());
+                    RunMiddlewareFromAttributes(handler.Method.DeclaringType?.GetCustomAttributes<MiddlewareAttribute>());
+                    RunMiddlewareFromAttributes(handler.Method.GetCustomAttributes<MiddlewareAttribute>());
                     
                     responseEntity ??= handler(parsedRequest)
                         .WithHeaders(headerCache);
@@ -211,14 +211,14 @@ public sealed class HttpServer : IDisposable
                         }
                     }
                     
-                    void RunMiddlewareFromAttributes(IEnumerable<UsesMiddlewareAttribute>? middlewarePieces)
+                    void RunMiddlewareFromAttributes(IEnumerable<MiddlewareAttribute>? middlewarePieces)
                     {
                         if (middlewarePieces is null)
                             return; 
                         
-                        foreach (UsesMiddlewareAttribute middleware in middlewarePieces)
+                        foreach (MiddlewareAttribute middleware in middlewarePieces)
                         {
-                            next = middleware.Target(parsedRequest);
+                            next = middleware.Handler(parsedRequest);
 
                             headerCache.Add(next.Headers);
                             
@@ -357,7 +357,7 @@ public sealed class HttpServer : IDisposable
         
         foreach (MethodInfo method in type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.ExactBinding))
         {
-            GroupMemberAttribute? postFix = method.GetCustomAttribute<GroupMemberAttribute>();
+            RouteAttribute? postFix = method.GetCustomAttribute<RouteAttribute>();
 
             if (postFix is null)
                 continue;
