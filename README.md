@@ -1,5 +1,12 @@
 # MemwLib
 
+> [!warning]
+> **This repository is now archived**, I cease the mainteinance of this repository as it hasn't been updated since 2024,
+> I now moved on to rust.
+>
+> This repository is a merge between a utils library and a complete HTTP library, it doesn't support basic stuff such as
+> encoding, I used it to learn how production frameworks worked, even tho it never became one. HTTP is trivial anyways.
+
 MemwLib is meant for these who want a fast and reliable HTTP server environment. Taking the best from all the HTTP libraries out there, MemwLib offers you utilities like Json parsing, Environment variable parsing... And more.
 
 ## Getting Started
